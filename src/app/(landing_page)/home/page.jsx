@@ -17,7 +17,7 @@ export default function Page() {
         <p className={`text-center ${inter.className}`}>Build your own portfolio</p>
 
         <div className='bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative'>
-          <h1 className='md:text-[200px] text-8xl font-bold text-center  tracking-tight'>BuildFolio</h1>
+          <h1 className='md:text-[200px] text-7xl font-bold text-center  tracking-tight'>BuildFolio</h1>
         </div>
       </section>
       <section className={`${inter.className} flex justify-center items-center flex-col gap-4 md:!mt-20 mt-[40px]`}>

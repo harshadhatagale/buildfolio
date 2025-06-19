@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { SignedIn, SignInButton, SignOutButton, SignedOut, UserButton } from '@clerk/nextjs'
 import { Roboto } from 'next/font/google'
 import { Menu } from 'lucide-react'
+import { Button } from '../ui/button'
 
 const roboto = Roboto({
     subsets: ['latin'],
@@ -26,6 +27,11 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <div className='flex justify-center items-center gap-4'>
+                    <SignedIn>
+                        <Button variant={"secondary"} className={"cursor-pointer"} asChild>
+                            <Link href={"/dashboard"} className={`${roboto.className}`}>Dashboard</Link>
+                        </Button>
+                    </SignedIn>
                     <SignedOut>
                         <SignInButton>
                             <button className={`${roboto.className} bg-primary cursor-pointer text-white p-2 px-4 rounded-md hover:bg-primary/80`}>Login</button>
@@ -35,7 +41,7 @@ export default function Navbar() {
                         <UserButton />
                     </SignedIn>
                     <ModeToggle />
-                    <Menu className='block md:hidden' size={25} onClick={()=> setIsNavOpen(!isNavOpen)} />
+                    <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
                 </div>
             </div>
             <div className={`block md:hidden ${isNavOpen ? "h-[70%] flex flex-col justify-center items-center gap-5" : "hidden"}`}>
