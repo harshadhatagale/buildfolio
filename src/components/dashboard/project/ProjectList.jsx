@@ -10,7 +10,7 @@ export default function ProjectList({ user }) {
     // Fetch projects function
     const fetchProjects = async () => {
         if (!user) return;
-        const res = await fetch(`/api/${user}/projects/`);
+        const res = await fetch(`/api/user/${user}/projects/`);
         if (res.ok) {
             const data = await res.json();
             setProjects(data);

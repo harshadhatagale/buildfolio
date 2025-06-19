@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/db";
 import { NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import Project from "../../../../../models/Project";
+import Project from "../../../../../../models/Project";
 
 
 export async function GET(request, { params }) {

@@ -7,15 +7,14 @@ import PropertiesBar from '@/components/dashboard/editor/PropertiesBar'
 import { Provider, useDispatch, useSelector } from 'react-redux'
 import store from '@/app/store'
 import { useParams } from 'next/navigation'
-import { setSections } from '../../../../../../features/portfolio/portfolioSlice'
 export default function EditorLayout({ children }) {
-  const params= useParams()
+  const params = useParams()
   return (
     <>
       <Provider store={store}>
         <Navbar />
         <Toolbar />
-        <Sidebar projectId={params.project}/>
+        <Sidebar projectId={params.project} />
         {children}
         <PropertiesBar />
       </Provider>
