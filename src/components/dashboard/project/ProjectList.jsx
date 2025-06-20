@@ -26,7 +26,7 @@ export default function ProjectList({ user }) {
 
     // Add project and then refresh
     const addProject = async () => {
-        const res = await fetch(`/api/${user}/projects/`, {
+        const res = await fetch(`/api/user/${user}/projects/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

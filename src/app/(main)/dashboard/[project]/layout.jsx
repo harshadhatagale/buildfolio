@@ -4,7 +4,7 @@ import Toolbar from '@/components/dashboard/editor/Toolbar'
 import React from 'react'
 import Sidebar from '@/components/dashboard/editor/Sidebar'
 import PropertiesBar from '@/components/dashboard/editor/PropertiesBar'
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import { Provider} from 'react-redux'
 import store from '@/app/store'
 import { useParams } from 'next/navigation'
 export default function EditorLayout({ children }) {
