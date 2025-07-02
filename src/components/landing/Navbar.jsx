@@ -3,11 +3,16 @@ import React, { useState } from 'react'
 import { ModeToggle } from '../basics/ModeToggle'
 import Link from 'next/link'
 import { SignedIn, SignInButton, SignOutButton, SignedOut, UserButton } from '@clerk/nextjs'
-import { Roboto } from 'next/font/google'
+import { Roboto, Inter } from 'next/font/google'
 import { Menu } from 'lucide-react'
 import { Button } from '../ui/button'
 
 const roboto = Roboto({
+    subsets: ['latin'],
+})
+
+
+const inter = Inter({
     subsets: ['latin'],
 })
 export default function Navbar() {
@@ -16,7 +21,7 @@ export default function Navbar() {
         <nav className={`flex bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? ' h-[100vh] flex-col' : "h-16"}`}>
             <div className={`flex justify-between items-center w-full ${isNavOpen ? "h-16 flex justify-between items-center" : ""}`}>
                 <div className='flex justify-center items-center'>
-                    <Link href={"/"} className='text-xl font-bold'>BuildFolio</Link>
+                    <Link href={"/"} className={`text-xl font-bold`}>BuildFolio</Link>
                 </div>
                 <div className='hidden md:block'>
                     <ul className={`flex justify-center items-center gap-8`}>

@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 
 export const useUpdateSection=()=>{
     const dispatch= useDispatch()
-    const sections= useSelector((state)=> state.portfolio.section)
-    
+    const sections= useSelector((state)=> state.portfolio.present)
+    const handleUpdateSection= async()=>{
+        
+    }
+    return {handleUpdateSection}
 }

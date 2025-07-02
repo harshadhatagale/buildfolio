@@ -1,9 +1,13 @@
 import { Card } from '@/components/ui/card'
-import { Briefcase, Home, Layout, LayoutDashboard, Mountain, Quote, Swords, UserCircle, Zap } from 'lucide-react'
+import { Award, BadgeCheck, Briefcase, FolderKanban, GraduationCap, HelpCircle, Home, Layout, LayoutDashboard, Mountain, Package, Quote, Swords, UserCircle, Zap } from 'lucide-react'
 import React from 'react'
 import { useAddSection } from '@/lib/handlers/handleAddSection'
 
 const sections = [
+  {
+    type: "section",
+    name: "Section"
+  },
   {
     type: "nav",
     name: "Navbar"
@@ -25,16 +29,38 @@ const sections = [
     name: "Experience Section"
   },
   {
-    type: "section",
-    name: "Section"
-  },
-  {
     type: "testimonials",
     name: "Testimonials Section"
+  }
+  ,
+  {
+    type: "projects",
+    name: "Projects"
   },
   {
+    type: "services",
+    name: "Services"
+  },
+  {
+    type: "education",
+    name: "Education"
+  },
+  {
+    type: "certifications",
+    name: "Certifications"
+  },
+  {
+    type: "achievements",
+    name: "Achievements"
+  },
+  {
+    type: "faqs",
+    name: "Faqs"
+  },
+  ,
+  {
     type: "footer",
-    name: "Footer Section"
+    name: "Footer"
   }
 ]
 // 'nav', 'hero', 'about', 'skils', 'experience', 'section', 'testimonials', 'footer'
@@ -54,36 +80,56 @@ export default function SectionList({ projectId }) {
   )
 }
 
+
+
 export const SectionIconRenderer = ({ type }) => {
   const renderSection = () => {
     switch (type) {
       case "nav":
-        return <LayoutDashboard />
+        return <LayoutDashboard className={"cursor-move"} />
         break;
 
       case "hero":
-        return <Mountain />
+        return <Mountain className={"cursor-move"} />
         break
 
       case "about":
-        return <UserCircle />
+        return <UserCircle className={"cursor-move"} />
         break
 
       case "skills":
-        return <Swords/>
+        return <Swords className={"cursor-move"} />
 
       case "experience":
-        return <Briefcase />
+        return <Briefcase className={"cursor-move"} />
 
       case "testimonials":
-        return <Quote />
+        return <Quote className={"cursor-move"} />
         break
 
       case 'section':
-        return <Layout />
+        return <Layout className={"cursor-move"} />
         break
+
+      case "projects":
+        return <FolderKanban className={"cursor-move"} />
+
+      case "services":
+        return <Package className={"cursor-move"} />
+
+      case "education":
+        return <GraduationCap className={"cursor-move"} />
+
+      case "faq":
+        return <HelpCircle className={"cursor-move"} />
+
+      case "certifications":
+        return <BadgeCheck className={"cursor-move"} />
+
+      case "achievements":
+        return <Award className={"cursor-move"} />
       default:
-        return <Layout />
+        return <Layout className={"cursor-move"} />
         break;
     }
   }

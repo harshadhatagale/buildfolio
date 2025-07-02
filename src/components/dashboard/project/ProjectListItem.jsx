@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { EllipsisVertical, Lock, PanelsTopLeft, Plus } from 'lucide-react';
+import { Lock, PanelsTopLeft } from 'lucide-react';
 import ProjectMenu from './ProjectMenu';
 import { usePathname, useRouter } from 'next/navigation';
 export default function ProjectListItem({ id, name }) {
@@ -11,7 +11,7 @@ export default function ProjectListItem({ id, name }) {
     return (
         <>
             <Card className="flex flex-col justify-center items-center w-35 h-45 cursor-pointer hover:border-primary transition-all duration-300 ease-in-out py-2">
-                <div className='h-[170px] justify-between flex flex-col' onClick={()=>router.push(`${path}/${id}`)}>
+                <div className='h-[170px] justify-between flex flex-col' onClick={()=>router.push(`${path}/${id}/edit`)}>
                     <div className={"flex flex-col justify-center items-center py-3 h-20"}>
                         <PanelsTopLeft size={65} />
                     </div>

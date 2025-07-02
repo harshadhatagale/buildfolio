@@ -4,32 +4,47 @@ import Nav from './Nav';
 import AboutSection from './AboutSection';
 import SkillsSection from './SkillsSection';
 import ExperienceSection from './ExperienceSection';
-import TestimonialsSections from './TestimonialsSections';
+import TestimonialsSection from './TestimonialsSection';
 import SimpleSection from './SimpleSection';
 import Footer from './Footer';
 import ProjectsSection from './ProjectsSection';
+import ServicesSection from './ServicesSection';
+import EducationSection from './EducationSection';
+import CertificationsSection from './CertificationsSection';
+import FaqsSection from './FaqsSection';
+import AchievementsSection from './AchievementsSection';
 
 export default function SectionRenderer({ type,content }) {
   const renderSection = () => {
     switch (type) {
       case 'hero':
-        return <HeroSection />;
+        return <HeroSection  content={content}/>;
       case 'nav':
         return <Nav content={content}/>;
       case 'about':
-        return <AboutSection />;
+        return <AboutSection  content={content}/>;
       case 'skills':
-        return <SkillsSection />;
+        return <SkillsSection  content={content}/>;
       case 'experience':
-        return <ExperienceSection />;
+        return <ExperienceSection  content={content}/>;
       case 'testimonials':
-        return <TestimonialsSections />;
+        return <TestimonialsSection content={content}/>;
       case 'footer':
-        return <Footer/>;
+        return <Footer content={content}/>;
       case 'projects':
-        return <ProjectsSection/>;
+        return <ProjectsSection content={content}/>;
+      case "services":
+        return <ServicesSection content={content}/>
+      case "education":
+        return <EducationSection content={content}/>
+      case "certifications":
+        return <CertificationsSection content={content}/>
+      case "faqs":
+        return <FaqsSection content={content}/>
+      case "achievements":
+        return <AchievementsSection content={content}/>
       default:
-        return <SimpleSection />;
+        return <SimpleSection content={content}/>;
     }
   };
 

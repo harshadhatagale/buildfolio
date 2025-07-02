@@ -22,14 +22,14 @@ const Nav = ({ content }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center space-x-6 md:flex">
+        <nav className="hidden md:flex items-center space-x-6">
           {content.links.map((link) => (
             <Link
               key={link.title}
               href={link.link}
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              {link.name}
+              {link.title}
             </Link>
           ))}
         </nav>

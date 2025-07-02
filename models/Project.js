@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 
+const visibillityType = [
+  "public",
+  'private'
+]
 const ProjectSchema = new mongoose.Schema(
   {
     userId: {
@@ -15,6 +19,12 @@ const ProjectSchema = new mongoose.Schema(
     theme:{
         type: mongoose.Schema.Types.Mixed,
         default:{}
+    },
+    visibillity:{
+      type:String,
+      required: true,
+      default:"private",
+      enum: visibillityType
     },
     section: [
       {
