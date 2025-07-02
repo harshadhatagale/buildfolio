@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/db";
-import Section from "../../../../../models/Section";
+import Section from "../../../../models/Section";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
