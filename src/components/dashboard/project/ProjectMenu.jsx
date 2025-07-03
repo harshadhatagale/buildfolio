@@ -11,7 +11,6 @@ import {
 import { EllipsisVertical } from 'lucide-react'
 import {
     Dialog,
-    DialogTrigger,
     DialogContent,
     DialogHeader,
     DialogTitle,
@@ -23,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import toast from 'react-hot-toast'
 export default function ProjectMenu({ projectId }) {
     const [rename, setRename] = useState(false);
+    const [name, setName] = useState("")
     const handleDelete = async () => {
         const res = await fetch(`/api/project/${projectId}/`,
             {
@@ -33,10 +33,26 @@ export default function ProjectMenu({ projectId }) {
             toast.success("Project deleted succesfully !")
             setTimeout(() => {
                 window.location.reload();
-            }, 3000)
+            }, 2500)
         }
         else {
             toast.error("Failed to delete project !")
+        }
+    }
+    const handleRename = async () => {
+        const res = await fetch(`/api/project/${projectId}/rename`,
+            {
+                method: "PATCH",
+                body: JSON.stringify({ name: name }),
+                headers: { "Content-Type": "application/json" }
+            }
+        )
+        const data = await res.json();
+        if (res.ok) {
+            setRename(false)
+            toast.success("Project renamed succesfully!");
+        } else {
+            toast.error(data.message);
         }
     }
     return (
@@ -59,12 +75,14 @@ export default function ProjectMenu({ projectId }) {
                     <input
                         placeholder="New project name"
                         className="w-full border rounded px-2 py-1"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button className={"cursor-pointer"} variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button onClick={() => setRename(false)}>Save</Button>
+                        <Button className={"cursor-pointer"} onClick={handleRename}>Save</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
