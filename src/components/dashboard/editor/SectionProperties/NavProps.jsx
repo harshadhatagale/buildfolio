@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedSection, updateSection } from '../../../../../features/portfolio/portfolioSlice'
 
 export default function NavProps() {
-    const disptach = useDispatch()
+    const dispatch = useDispatch()
     const sections = useSelector((state) => state.portfolio.present)
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
 
@@ -25,8 +25,8 @@ export default function NavProps() {
     const section = sections[index]
     const handleChange = (key) => (e) => {
         const newContent = { ...section.content, [key]: e.target.value }
-        disptach(updateSection({ _id: section._id, content: newContent }))
-        disptach(setSelectedSection(section))
+        dispatch(updateSection({ _id: section._id, content: newContent }))
+        dispatch(setSelectedSection(section))
     }
     if (!selectedSection) {
         return null
@@ -35,7 +35,7 @@ export default function NavProps() {
         <div className='w-full flex flex-col justify-center items-center gap-4'>
             <div className='w-full flex justify-start gap-3 items-center'>
                 <LayoutDashboard />
-                <span>Navbar</span>
+                <span>{section.name}</span>
             </div>
             <div className="grid w-full max-w-sm items-center gap-3">
                 <Label htmlFor="email">Portfolio Name</Label>

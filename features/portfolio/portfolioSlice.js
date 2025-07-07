@@ -42,10 +42,20 @@ export const portfolioSlice = createSlice({
         (section) => section._id === _id
       );
       if (index !== -1) {
-        state.present[index].content ={...state.present.content, ...content}
+        state.present[index].content = { ...state.present.content, ...content }
         state.future = [];
       }
-      console.log(state.present[index])
+    },
+    renameSection: (state, action) => {
+      const { _id, name } = action.payload;
+      state.past.push([...state.present]);
+      const index = state.present.findIndex(
+        (section) => section._id === _id
+      );
+      if (index !== -1) {
+        state.present[index].name =  name 
+        state.future = [];
+      }
     },
     undo: (state) => {
       if (state.past.length > 0) {
@@ -68,14 +78,15 @@ export const portfolioSlice = createSlice({
   }
 });
 
-export const { 
-  addSection, 
-  removeSection, 
+export const {
+  addSection,
+  removeSection,
   setSections,
-  setSelectedSection, 
-  updateSection, 
-  undo, 
-  redo 
+  setSelectedSection,
+  updateSection,
+  renameSection,
+  undo,
+  redo
 } = portfolioSlice.actions;
 
 export default portfolioSlice.reducer;

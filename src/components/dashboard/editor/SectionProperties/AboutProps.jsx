@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateSection, setSelectedSection } from '../../../../../features/portfolio/portfolioSlice'
 export default function AboutProps() {
-    const disptach = useDispatch()
+    const dispatch = useDispatch()
     const sections = useSelector((state) => state.portfolio.present)
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     if (!selectedSection) {
@@ -21,14 +21,14 @@ export default function AboutProps() {
     const section = sections[index]
     const handleChange = (key) => (e) => {
         const newContent = { ...section.content, [key]: e.target.value }
-        disptach(updateSection({ _id: section._id, content: newContent }))
-        disptach(setSelectedSection(section))
+        dispatch(updateSection({ _id: section._id, content: newContent }))
+        dispatch(setSelectedSection(section))
     }
     return (
         <div className='w-full flex flex-col justify-center items-center gap-4'>
             <div className='w-full flex justify-start gap-3 items-center'>
                 <UserCircle />
-                <span>About Section</span>
+                <span>{section.name}</span>
             </div>
             <div className="grid w-full max-w-sm items-center gap-3">
                 <Label htmlFor="email">Avatar link</Label>

@@ -10,7 +10,7 @@ import { setSelectedSection, updateSection } from '../../../../../features/portf
 import { Textarea } from '@/components/ui/textarea'
 
 export default function SkillsProps() {
-    const disptach = useDispatch()
+    const dispatch = useDispatch()
     const sections = useSelector((state) => state.portfolio.present)
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     if (!selectedSection) {
@@ -25,14 +25,14 @@ export default function SkillsProps() {
     const section = sections[index]
     const handleChange = (key) => (e) => {
         const newContent = { ...section.content, [key]: e.target.value }
-        disptach(updateSection({ _id: section._id, content: newContent }))
-        disptach(setSelectedSection(section))
+        dispatch(updateSection({ _id: section._id, content: newContent }))
+        dispatch(setSelectedSection(section))
     }
     return (
         <div className='w-full flex flex-col justify-center items-center gap-4'>
             <div className='w-full flex justify-start gap-3 items-center'>
                 <Swords />
-                <span>Skills</span>
+                <span>{section.name}</span>
             </div>
             <div className="grid w-full max-w-sm items-center gap-3">
                 <Label htmlFor="primary_heading">Primary heading</Label>

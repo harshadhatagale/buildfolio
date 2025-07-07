@@ -1,13 +1,13 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, EllipsisVertical, Trash } from 'lucide-react'
-import React, { act, useState } from 'react'
+import { ChevronLeft, EllipsisVertical, Plus, Trash } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 import SectionList from './SectionList'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Award, BadgeCheck, Briefcase, FolderKanban, GraduationCap, HelpCircle, Home, Layout, LayoutDashboard, Mountain, Package, Quote, Swords, UserCircle, Zap } from 'lucide-react'
-import { setSections, setSelectedSection } from '../../../../features/portfolio/portfolioSlice'
+import { setSections, setSelectedSection, removeSection, renameSection } from '../../../../features/portfolio/portfolioSlice'
 import {
   DndContext,
   closestCenter,
@@ -25,6 +25,7 @@ import {
 
 import { CSS } from '@dnd-kit/utilities';
 import SectionMenu from '../project/section/SectionMenu'
+import { Input } from '@/components/ui/input'
 export default function Sidebar({ projectId }) {
   const [side, setSide] = useState(true)
   const dispatch = useDispatch()
@@ -80,7 +81,7 @@ export default function Sidebar({ projectId }) {
           className="bg-primary dark:bg-primary cursor-pointer hover:bg-primary/50 dark:hover:bg-primary/50 w-full"
           onClick={() => setSide(false)}
         >
-          Add Section
+          <Plus size={20} /><span>Add Section</span>
         </Button>
       </div>
 
@@ -103,20 +104,55 @@ export default function Sidebar({ projectId }) {
 }
 
 const SortableProjectSectionItem = ({ id, section }) => {
-  const {
+  const sectionId = section._id
+  const dispatch = useDispatch()
+  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
 
+  const [isEditing, setIsEditing] = useState(false)
+  const inputRef = React.useRef(null)
+
+  const {
     setNodeRef,
     transform,
     transition,
     isDragging
-  } = useSortable({ id });
+  } = useSortable({ id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition
-  };
-  const dispatch = useDispatch()
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+  }
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [isEditing])
+
+  const handleNameChange = (e) => {
+    const newName = e.target.value
+    dispatch(renameSection({ _id: section._id, name: newName }))
+    dispatch(setSelectedSection({ ...section, name: newName }))
+  }
+
+  const handleDelete = () => {
+    dispatch(removeSection(sectionId))
+  }
+
+  const handleDoubleClick = () => {
+    setIsEditing(true)
+  }
+
+  const handleBlur = () => {
+    setIsEditing(false)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setIsEditing(false)
+    }
+  }
+
   return (
     <Card
       ref={setNodeRef}
@@ -124,17 +160,38 @@ const SortableProjectSectionItem = ({ id, section }) => {
       className={`cn(
         'hover:shadow',
         isDragging && 'opacity-50 border-none'
-      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${selectedSection ? `${selectedSection._id === section._id ? "border-primary/100" : ""}` : ""}`} onClick={() => dispatch(setSelectedSection(section))}>
+      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${selectedSection?._id === section._id ? "border-primary/100" : ""}`}
+      onClick={() => dispatch(setSelectedSection(section))}
+    >
       <div className='flex justify-between items-center w-full h-full px-2'>
-        <div className="flex gap-3">
+        <div className="flex gap-3 justify-between items-center">
           <SectionIconRenderer id={section._id} type={section.type} />
-          <span className='cursor-text'>{section.name}</span>
+          {isEditing ? (
+            <input
+              ref={inputRef}
+              maxLength={20}
+              type="text"
+              value={section.name}
+              onChange={handleNameChange}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
+              className="bg-transparent outline-none w-fit border-none focus:ring-1 rounded-sm text-sm max-w-[100px] p-1"
+            />
+          ) : (
+            <span
+              className="text-sm cursor-pointer"
+              onDoubleClick={handleDoubleClick}
+            >
+              {section.name}
+            </span>
+          )}
         </div>
-        <SectionMenu  section={section}/>
+        <Trash size={15} onClick={handleDelete} />
       </div>
     </Card>
   )
 }
+
 
 
 export const SectionIconRenderer = ({ id, type }) => {
@@ -145,50 +202,50 @@ export const SectionIconRenderer = ({ id, type }) => {
   const renderIcon = () => {
     switch (type) {
       case "nav":
-        return <LayoutDashboard {...attributes} {...listeners} className={"cursor-move border-none"} />
+        return <LayoutDashboard {...attributes} {...listeners} className={"cursor-move order-none"} size={15} />
         break;
 
       case "hero":
-        return <Mountain {...attributes} {...listeners} className={"cursor-move"} />
+        return <Mountain {...attributes} {...listeners} className={"cursor-move"} size={15} />
         break
 
       case "about":
-        return <UserCircle {...attributes} {...listeners} className={"cursor-move"} />
+        return <UserCircle {...attributes} {...listeners} className={"cursor-move"} size={15} />
         break
 
       case "skills":
-        return <Swords {...attributes} {...listeners} className={"cursor-move"} />
+        return <Swords {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "experience":
-        return <Briefcase {...attributes} {...listeners} className={"cursor-move"} />
+        return <Briefcase {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "testimonials":
-        return <Quote {...attributes} {...listeners} className={"cursor-move"} />
+        return <Quote {...attributes} {...listeners} className={"cursor-move"} size={15} />
         break
 
       case 'section':
-        return <Layout {...attributes} {...listeners} className={"cursor-move"} />
+        return <Layout {...attributes} {...listeners} className={"cursor-move"} size={15} />
         break
 
       case "projects":
-        return <FolderKanban {...attributes} {...listeners} className={"cursor-move"} />
+        return <FolderKanban {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "services":
-        return <Package {...attributes} {...listeners} className={"cursor-move"} />
+        return <Package {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "education":
-        return <GraduationCap {...attributes} {...listeners} className={"cursor-move"} />
+        return <GraduationCap {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "faq":
-        return <HelpCircle {...attributes} {...listeners} className={"cursor-move"} />
+        return <HelpCircle {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "certifications":
-        return <BadgeCheck {...attributes} {...listeners} className={"cursor-move"} />
+        return <BadgeCheck {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "achievements":
-        return <Award {...attributes} {...listeners} className={"cursor-move"} />
+        return <Award {...attributes} {...listeners} className={"cursor-move"} size={15} />
       default:
-        return <Layout {...attributes} {...listeners} className={"cursor-move"} />
+        return <Layout {...attributes} {...listeners} className={"cursor-move"} size={15} />
         break;
     }
   }
