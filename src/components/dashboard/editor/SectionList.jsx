@@ -86,50 +86,50 @@ export const SectionIconRenderer = ({ type }) => {
   const renderSection = () => {
     switch (type) {
       case "nav":
-        return <LayoutDashboard className={"cursor-move"} />
+        return <LayoutDashboard />
         break;
 
       case "hero":
-        return <Mountain className={"cursor-move"} />
+        return <Mountain />
         break
 
       case "about":
-        return <UserCircle className={"cursor-move"} />
+        return <UserCircle />
         break
 
       case "skills":
-        return <Swords className={"cursor-move"} />
+        return <Swords />
 
       case "experience":
-        return <Briefcase className={"cursor-move"} />
+        return <Briefcase />
 
       case "testimonials":
-        return <Quote className={"cursor-move"} />
+        return <Quote />
         break
 
       case 'section':
-        return <Layout className={"cursor-move"} />
+        return <Layout />
         break
 
       case "projects":
-        return <FolderKanban className={"cursor-move"} />
+        return <FolderKanban />
 
       case "services":
-        return <Package className={"cursor-move"} />
+        return <Package/>
 
       case "education":
-        return <GraduationCap className={"cursor-move"} />
+        return <GraduationCap />
 
       case "faq":
-        return <HelpCircle className={"cursor-move"} />
+        return <HelpCircle />
 
       case "certifications":
-        return <BadgeCheck className={"cursor-move"} />
+        return <BadgeCheck />
 
       case "achievements":
-        return <Award className={"cursor-move"} />
+        return <Award />
       default:
-        return <Layout className={"cursor-move"} />
+        return <Layout />
         break;
     }
   }

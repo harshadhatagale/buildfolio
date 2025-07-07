@@ -12,14 +12,24 @@ export default function NavProps() {
     const disptach = useDispatch()
     const sections = useSelector((state) => state.portfolio.present)
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+
+    if (!selectedSection) {
+        return null
+    }
     const index = sections.findIndex(
         (section) => section._id === selectedSection._id
     )
-    const section= sections[index]
+    if (index === -1) {
+        return null
+    }
+    const section = sections[index]
     const handleChange = (key) => (e) => {
-        const newContent = { ...section.content, [key]: e.target.value}
+        const newContent = { ...section.content, [key]: e.target.value }
         disptach(updateSection({ _id: section._id, content: newContent }))
         disptach(setSelectedSection(section))
+    }
+    if (!selectedSection) {
+        return null
     }
     return (
         <div className='w-full flex flex-col justify-center items-center gap-4'>

@@ -29,7 +29,6 @@ export default function Sidebar({ projectId }) {
   const [side, setSide] = useState(true)
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
   const sensors = useSensors(
     useSensor(PointerSensor)
   )
@@ -43,8 +42,6 @@ export default function Sidebar({ projectId }) {
       const newIndex = sections.findIndex((i) => i._id === over.id);
 
       const newArray = arrayMove(sections, oldIndex, newIndex);
-
-      // Update the order key based on new index
       const updatedArray = newArray.map((item, index) => ({
         ...item,
         order: index + 1 // or start with 0 based on your logic
@@ -58,7 +55,7 @@ export default function Sidebar({ projectId }) {
     <aside className='z-15 select-none overflow-y-scroll overflow-x-hidden flex flex-col bg-background px-3 w-56 border-r-2 border-muted fixed top-14 left-0 h-[calc(100vh-56px)]'>
       {/* Left Panel: Section List */}
       <div
-        className={`p-3 overflow-x-hidden absolute top-0 left-0 w-full h-full transition-transform duration-300 
+        className={`p-3 overflow-x-hidden overflow-hidden absolute top-0 left-0 w-full h-auto transition-transform duration-300 
         ${side ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <h3 className='text-lg font-bold mb-5'>Sections</h3>
@@ -133,7 +130,7 @@ const SortableProjectSectionItem = ({ id, section }) => {
           <SectionIconRenderer id={section._id} type={section.type} />
           <span className='cursor-text'>{section.name}</span>
         </div>
-        <SectionMenu />
+        <SectionMenu  section={section}/>
       </div>
     </Card>
   )

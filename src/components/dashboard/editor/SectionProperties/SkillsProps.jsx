@@ -13,9 +13,15 @@ export default function SkillsProps() {
     const disptach = useDispatch()
     const sections = useSelector((state) => state.portfolio.present)
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+    if (!selectedSection) {
+        return null
+    }
     const index = sections.findIndex(
         (section) => section._id === selectedSection._id
     )
+    if (index === -1) {
+        return null
+    }
     const section = sections[index]
     const handleChange = (key) => (e) => {
         const newContent = { ...section.content, [key]: e.target.value }
@@ -35,7 +41,7 @@ export default function SkillsProps() {
                 <Textarea name="desc" required type={"text"} placeholder="Enter your Portfolio name" value={section.content.secondaryHeading} onChange={handleChange("secondaryHeading")} />
                 <div className='flex justify-between items-center'>
                     <p className='text-lg'>Skills</p>
-                    <Plus className='text-lg cursor-pointer'/>
+                    <Plus className='text-lg cursor-pointer' />
                 </div>
                 <div className="flex flex-col justify-center gap-4">
                     {section.content.skills.map((skill, index) => (

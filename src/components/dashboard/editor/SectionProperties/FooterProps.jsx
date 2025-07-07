@@ -12,9 +12,15 @@ export default function FooterProps() {
   const disptach = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
   const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-  const index = sections.findIndex(
-    (section) => section._id === selectedSection._id
-  )
+  if (!selectedSection) {
+        return null
+    }
+    const index = sections.findIndex(
+        (section) => section._id === selectedSection._id
+    )
+    if (index === -1) {
+        return null
+    }
   const section = sections[index]
   const handleChange = (key) => (e) => {
     const newContent = { ...section.content, [key]: e.target.value }
@@ -35,7 +41,7 @@ export default function FooterProps() {
         <Label htmlFor="desc">Description</Label>
         <Textarea name="desc" placeholder="I'm a full-stack developer passionate about building interactive websites and mobile apps. I specialize in React, Next.js, and Tailwind CSS." row="5" onChange={handleChange("description")} value={section.content.description || ""} />
       </div>
-      
+
       <div className="grid w-full max-w-sm items-center gap-3">
         <Label htmlFor="email">Important Links</Label>
         <div className='flx flex-wrap space-x-3 space-y-3'>
