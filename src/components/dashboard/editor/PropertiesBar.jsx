@@ -6,6 +6,7 @@ import AboutProps from './SectionProperties/AboutProps'
 import SkillsProps from './SectionProperties/SkillsProps'
 import ExperienceProps from './SectionProperties/ExperienceProps'
 import FooterProps from './SectionProperties/FooterProps'
+import TestimonialsProps from './SectionProperties/TestimonialsProps'
 
 
 export default function PropertiesBar() {
@@ -16,17 +17,19 @@ export default function PropertiesBar() {
     }
     switch (section.type) {
       case "nav":
-        return <NavProps section={section} />;
+        return <NavProps/>;
       case "hero":
-        return <HeroProps section={section} />;
+        return <HeroProps/>;
       case "about":
-        return <AboutProps section={section} />;
+        return <AboutProps/>;
       case "skills":
-        return <SkillsProps section={section} />;
+        return <SkillsProps/>;
       case "experience":
-        return <ExperienceProps section={section} />;
+        return <ExperienceProps/>;
       case "footer":
-        return <FooterProps section={section} />;
+        return <FooterProps />;
+      case "testimonials":
+        return <TestimonialsProps/>
     }
   };
 

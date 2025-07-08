@@ -8,14 +8,17 @@ export const GetDefaultContent = (type) => {
                 portfolioName: "Harsh Tech",
                 links: [
                     {
+                        id: `link-${Date.now()}`,
                         title: "Home",
                         link: "#home"
                     },
                     {
+                        id: `link-${Date.now()}`,
                         title: "About Me",
                         link: "#about"
                     },
                     {
+                        id: `link-${Date.now()}`,
                         title: "Skills",
                         link: "#skills"
                     }
@@ -28,6 +31,32 @@ export const GetDefaultContent = (type) => {
                 type: "hero",
                 primaryHeading: "Hi, I'm Harshad 👋",
                 secondaryHeading: "I'm a full-stack developer passionate about building interactive websites and mobile apps. I specialize in React, Next.js, and Tailwind CSS.",
+            }
+            return content
+            break
+        case "testimonials":
+            content = {
+                heading: "What People Say", // optional heading
+                testimonials: [
+                    {
+                        name: "Ravi Kumar",
+                        role: "CEO, TechCorp",
+                        message: "Harshad did an excellent job. Highly recommended!",
+                        image: "https://example.com/ravi.jpg"
+                    },
+                    {
+                        name: "Anjali Sharma",
+                        role: "Project Manager, InnovateX",
+                        message: "Professional, punctual, and very talented developer.",
+                        image: "https://example.com/anjali.jpg"
+                    },
+                    {
+                        name: "Rahul Verma",
+                        role: "Founder, CodeMasters",
+                        message: "Working with Harshad was a fantastic experience.",
+                        image: "https://example.com/rahul.jpg"
+                    }
+                ]
             }
             return content
             break
