@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from "uuid"
 export const GetDefaultContent = (type) => {
     let content = {}
     switch (type) {
@@ -8,17 +8,17 @@ export const GetDefaultContent = (type) => {
                 portfolioName: "Harsh Tech",
                 links: [
                     {
-                        id: `link-${Date.now()}`,
+                        id: `link-${uuidv4()}`,
                         title: "Home",
                         link: "#home"
                     },
                     {
-                        id: `link-${Date.now()}`,
+                        id: `link-${uuidv4()}`,
                         title: "About Me",
                         link: "#about"
                     },
                     {
-                        id: `link-${Date.now()}`,
+                        id: `link-${uuidv4()}`,
                         title: "Skills",
                         link: "#skills"
                     }
