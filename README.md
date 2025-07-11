@@ -1,8 +1,7 @@
 
 # Buildfolio - Modern Portfolio Builder 🚀
 
-![PortfolioCraft Banner](https://placehold.co/1200x400?text=Buildfolio+Modern+Portfolio+Builder)
-
+![PortfolioCraft Banner](https://buildfolio-three.vercel.app/images/demo1.png)
 A cutting-edge SaaS platform that helps developers, designers, and creatives build beautiful, responsive portfolios with ease. Drag-and-drop interface, AI-powered suggestions, and seamless deployment.
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live-green)](buildfolio-three.vercel.app)
