@@ -1,7 +1,7 @@
 
-# PortfolioCraft - Modern Portfolio Builder 🚀
+# Buildfolio - Modern Portfolio Builder 🚀
 
-![PortfolioCraft Banner](https://placehold.co/1200x400?text=PortfolioCraft+Modern+Portfolio+Builder)
+![PortfolioCraft Banner](https://placehold.co/1200x400?text=Buildfolio+Modern+Portfolio+Builder)
 
 A cutting-edge SaaS platform that helps developers, designers, and creatives build beautiful, responsive portfolios with ease. Drag-and-drop interface, AI-powered suggestions, and seamless deployment.
 
@@ -109,20 +109,3 @@ Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - your.email@example
 Project Link: [https://github.com/yourusername/portfoliocraft](https://github.com/yourusername/portfoliocraft)
 ```
 
-## Customization Tips:
-
-1. **Replace placeholder images** with actual screenshots of your app
-2. **Add badges** for build status, test coverage, etc.
-3. **Include a demo video** link if available
-4. **Add more sections** like:
-   - Roadmap
-   - FAQ
-   - Acknowledgements
-5. **Update the tech stack** to match your actual stack
-6. **Add deployment instructions** if applicable
-
-For the best presentation:
-- Use consistent emojis
-- Keep sections concise
-- Highlight your unique value proposition
-- Include clear calls-to-action (try the demo, contribute, etc.)
