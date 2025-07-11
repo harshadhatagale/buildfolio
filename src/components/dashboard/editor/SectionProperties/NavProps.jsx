@@ -39,7 +39,7 @@ export default function NavProps() {
 
   const handleAddLink = () => {
     // Validate title uniqueness before adding
-    const existingTitles = section.content.links.map((l) => l.title)
+    const existingTitles = section.content.links.map((l) => l.name)
     const untitledCount = section.content.links.filter((l) => l.title.startsWith("Untitled")).length
     const title = `Untitled ${untitledCount + 1}`
 
@@ -52,7 +52,6 @@ export default function NavProps() {
       id: `link-${uuidv4()}`,
       title,
       link: "",
-      section: ""
     }
     const newContent = { ...section.content, links: [...section.content.links, newLink] }
     dispatch(updateSection({ _id: section._id, content: newContent }))
@@ -86,7 +85,7 @@ export default function NavProps() {
 
       <div className="grid w-full max-w-sm items-center gap-3">
         <Label>Links</Label>
-        <div className='flex flex-wrap gap-3'>
+        <div className='flex flex-col gap-3'>
           {section.content.links.map((link, index) => (
             <LinkPopover
               key={link.id}
@@ -104,7 +103,19 @@ export default function NavProps() {
   )
 }
 
+export const slugify = (text) => {
+  return text
+    .toString()                           // Convert to string
+    .toLowerCase()                        // Convert to lowercase
+    .trim()                              // Trim whitespace from both ends
+    .replace(/\s+/g, '-')                // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')            // Remove all non-word chars
+    .replace(/\-\-+/g, '-')              // Replace multiple - with single -
+    .replace(/^-+/, '')                  // Trim - from start of text
+    .replace(/-+$/, '');
+}
 const LinkPopover = ({ link, index, onLinkChange, onLinkDelete, allSections }) => {
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -120,26 +131,22 @@ const LinkPopover = ({ link, index, onLinkChange, onLinkDelete, allSections }) =
           />
         </div>
         <div className="grid gap-2">
-          <Label>Link</Label>
-          <Input
-            type="text"
-            value={link.link}
-            onChange={(e) => onLinkChange(index, "link", e.target.value)}
-          />
-        </div>
-        <div className="grid gap-2">
           <Label>Assign Section</Label>
           <Select
-            value={link.section}
-            onValueChange={(value) => onLinkChange(index, "section", value)}
+            value={link.link}
+            onValueChange={(value) => onLinkChange(index, "link", value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select Section" />
             </SelectTrigger>
             <SelectContent>
-              {allSections.map((sec) => (
-                <SelectItem key={sec._id} value={sec._id}>{sec.name}</SelectItem>
-              ))}
+              {allSections
+                .filter((section) => section.type !== "nav") // Filter out nav sections
+                .map((section) => (
+                  <SelectItem key={section._id} value={`#${slugify(section.name)}`}>
+                    {section.name}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
         </div>

@@ -10,17 +10,17 @@ export const GetDefaultContent = (type) => {
                     {
                         id: `link-${uuidv4()}`,
                         title: "Home",
-                        link: "#home"
+                        link: ""
                     },
                     {
                         id: `link-${uuidv4()}`,
                         title: "About Me",
-                        link: "#about"
+                        link: ""
                     },
                     {
                         id: `link-${uuidv4()}`,
                         title: "Skills",
-                        link: "#skills"
+                        link: ""
                     }
                 ]
             }
@@ -147,7 +147,6 @@ export const GetDefaultContent = (type) => {
             content = {
                 type: "experience",
                 primaryHeading: "Experience",
-                secondaryHeading: "",
                 experiences: [
                     {
                         jobTitle: "Team Lead",

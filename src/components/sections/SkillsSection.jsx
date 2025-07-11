@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 
 export default function SkillsSection({content}) {
   return (
-    <section className="bg-background py-16 px-6">
+    <section className="bg-background py-3 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
           {content.primaryHeading}

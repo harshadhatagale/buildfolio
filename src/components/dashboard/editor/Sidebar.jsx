@@ -103,12 +103,16 @@ export default function Sidebar({ projectId }) {
   )
 }
 
+import toast from 'react-hot-toast';
+
 const SortableProjectSectionItem = ({ id, section }) => {
   const sectionId = section._id
   const dispatch = useDispatch()
   const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+  const sections = useSelector((state) => state.portfolio.present)
 
   const [isEditing, setIsEditing] = useState(false)
+  const [tempName, setTempName] = useState(section.name)
   const inputRef = React.useRef(null)
 
   const {
@@ -130,9 +134,35 @@ const SortableProjectSectionItem = ({ id, section }) => {
   }, [isEditing])
 
   const handleNameChange = (e) => {
-    const newName = e.target.value
-    dispatch(renameSection({ _id: section._id, name: newName }))
-    dispatch(setSelectedSection({ ...section, name: newName }))
+    setTempName(e.target.value)
+  }
+
+  const validateName = (name) => {
+    if (!name.trim()) {
+      toast.error("Section name cannot be empty")
+      return false
+    }
+    
+    const isDuplicate = sections.some(
+      s => s.name.toLowerCase() === name.toLowerCase() && s._id !== section._id
+    )
+    
+    if (isDuplicate) {
+      toast.error("This section name already exists")
+      return false
+    }
+    
+    return true
+  }
+
+  const saveChanges = () => {
+    if (!validateName(tempName)) {
+      return false
+    }
+    
+    dispatch(renameSection({ _id: section._id, name: tempName }))
+    dispatch(setSelectedSection({ ...section, name: tempName }))
+    return true
   }
 
   const handleDelete = () => {
@@ -140,16 +170,24 @@ const SortableProjectSectionItem = ({ id, section }) => {
   }
 
   const handleDoubleClick = () => {
+    setTempName(section.name)
     setIsEditing(true)
   }
 
   const handleBlur = () => {
-    setIsEditing(false)
+    if (saveChanges()) {
+      setIsEditing(false)
+    } else {
+      // Keep focus if validation fails
+      inputRef.current?.focus()
+    }
   }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      setIsEditing(false)
+      if (saveChanges()) {
+        setIsEditing(false)
+      }
     }
   }
 
@@ -160,7 +198,9 @@ const SortableProjectSectionItem = ({ id, section }) => {
       className={`cn(
         'hover:shadow',
         isDragging && 'opacity-50 border-none'
-      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${selectedSection?._id === section._id ? "border-primary/100" : ""}`}
+      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${
+        selectedSection?._id === section._id ? "border-primary/100" : ""
+      }`}
       onClick={() => dispatch(setSelectedSection(section))}
     >
       <div className='flex justify-between items-center w-full h-full px-2'>
@@ -171,11 +211,11 @@ const SortableProjectSectionItem = ({ id, section }) => {
               ref={inputRef}
               maxLength={20}
               type="text"
-              value={section.name}
+              value={tempName}
               onChange={handleNameChange}
               onBlur={handleBlur}
               onKeyDown={handleKeyDown}
-              className="bg-transparent outline-none w-fit border-none focus:ring-1 rounded-sm text-sm max-w-[100px] p-1"
+              className={`bg-transparent outline-none w-fit border-none focus:ring-1 rounded-sm text-sm max-w-[100px] p-1`}
             />
           ) : (
             <span
@@ -191,7 +231,6 @@ const SortableProjectSectionItem = ({ id, section }) => {
     </Card>
   )
 }
-
 
 
 export const SectionIconRenderer = ({ id, type }) => {

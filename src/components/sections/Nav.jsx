@@ -26,7 +26,7 @@ const Nav = ({ content }) => {
           {content.links.map((link) => (
             <Link
               key={link.title}
-              href={link.link}
+              href={link.link || "#"}
               className="text-sm font-medium transition-colors hover:text-primary"
             >
               {link.title}
@@ -50,7 +50,7 @@ const Nav = ({ content }) => {
               {content.links.map((link) => (
                 <Link
                   key={link.title}
-                  href={link.link}
+                  href={link.link || "#"}
                   onClick={() => setIsOpen(false)}
                   className={cn(
                     "py-2 text-lg font-medium transition-colors hover:text-primary",

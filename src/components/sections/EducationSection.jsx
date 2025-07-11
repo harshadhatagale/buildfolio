@@ -49,7 +49,7 @@ export default function EducationSection() {
         ]
     }
     return (
-        <section className="w-full py-4 md:py-4 px-6 bg-background">
+        <section className="w-full py-3 px-6 bg-background">
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

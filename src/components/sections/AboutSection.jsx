@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function AboutSection({content}) {
   return (
-    <section className="py-16 px-5 bg-background">
+    <section className="py-10 px-5 bg-background">
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
         <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">

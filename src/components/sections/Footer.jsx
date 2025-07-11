@@ -69,8 +69,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full border-t bg-background px-6">
-      <div className="container py-10 flex flex-col md:flex-row justify-between gap-6">
+    <footer className="w-full border-t bg-background px-6 py-5">
+      <div className="container py-3 flex flex-col md:flex-row justify-between gap-6">
         {/* Left Side */}
         <div className="space-y-2 text-center md:text-left">
           <h2 className="text-xl font-bold">{content?.portfolioName}</h2>

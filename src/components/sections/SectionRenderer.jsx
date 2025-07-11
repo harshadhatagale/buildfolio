@@ -14,7 +14,7 @@ import CertificationsSection from './CertificationsSection';
 import FaqsSection from './FaqsSection';
 import AchievementsSection from './AchievementsSection';
 
-export default function SectionRenderer({ type,content }) {
+export default function SectionRenderer({ id, type,content }) {
   const renderSection = () => {
     switch (type) {
       case 'hero':
@@ -28,7 +28,7 @@ export default function SectionRenderer({ type,content }) {
       case 'experience':
         return <ExperienceSection  content={content}/>;
       case 'testimonials':
-        return <TestimonialsSection content={content}/>;
+        return <TestimonialsSection id={id} content={content}/>;
       case 'footer':
         return <Footer content={content}/>;
       case 'projects':

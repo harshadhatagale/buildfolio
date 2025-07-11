@@ -8,7 +8,7 @@ export default function PortfolioPreview({ sections }) {
       ${device === "mobile" ? "w-[680px] h-[667px]" : ""}
     ${device === "desktop" ? "min-h-[600px] w-lvw" : ""} rounded-md`}>
             {sections.map((section) => (
-                <SectionRenderer key={section._id} type={section.type} content={section.content} />
+                <SectionRenderer id={section._id} key={section._id} type={section.type} content={section.content} />
             ))}
         </div>
     )

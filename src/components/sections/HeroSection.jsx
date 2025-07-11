@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 
 export default function HeroSection({content}) {
   return (
-    <section className="min-h-[80vh] flex items-center justify-center bg-background px-6 py-12">
+    <section className="py-20 flex items-center justify-center bg-background px-6">
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold text-foreground">
           {content.primaryHeading}

@@ -8,13 +8,21 @@ export const useAddSection = () => {
   const sections = useSelector((state) => state.portfolio.present);
 
   const handleAddSection = async ({ type }) => {
-    const content= GetDefaultContent(type)
-    const section= {
-      _id: "temp-"+ Date.now(),
-      name:"Untitled section",
-      type:type,
-      content:content,
-      order: sections.length>0 ? sections.length : 0
+    const content = GetDefaultContent(type)
+    const existingNames = sections.map((sec) => sec.name)
+    const untitledCount = sections.filter((s) => s.name.startsWith("Untitled")).length
+    const name = `Untitled section ${untitledCount + 1}`
+
+    if (existingNames.includes(name)) {
+      alert("Duplicate name. Please rename existing sections before adding new ones.")
+      return
+    }
+    const section = {
+      _id: "temp-" + Date.now(),
+      name,
+      type: type,
+      content: content,
+      order: sections.length > 0 ? sections.length : 0
     }
     try {
       dispatch(addSection(section));
