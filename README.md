@@ -5,7 +5,7 @@
 
 A cutting-edge SaaS platform that helps developers, designers, and creatives build beautiful, responsive portfolios with ease. Drag-and-drop interface, AI-powered suggestions, and seamless deployment.
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live-green)](https://yourdemo.com)
+[![Live Demo](https://img.shields.io/badge/Demo-Live-green)](buildfolio-three.vercel.app)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 ## ✨ Features
