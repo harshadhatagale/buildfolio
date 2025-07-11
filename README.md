@@ -69,4 +69,4 @@ A powerful and elegant **portfolio builder platform** for developers, freelancer
 ---
 
 ## 📁 Folder Structure
-
+<pre> portfolio-builder/ ├── app/ # App router pages │ ├── layout.tsx # Root layout │ └── page.tsx # Main editor page │ ├── components/ # All reusable UI components │ ├── ui/ # shadcn/ui components │ ├── Navbar.tsx │ └── Preview.tsx │ ├── features/portfolio/ # Redux slice for managing sections │ ├── portfolioSlice.ts │ └── store.ts │ ├── public/assets/ # Images, gifs, static media │ ├── styles/ # Tailwind config │ ├── README.md └── package.json </pre>
