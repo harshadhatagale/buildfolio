@@ -1,42 +1,70 @@
-# ⚡ Portfolio Builder
+# 🛠️ Portfolio Builder
 
-> Create, customize, and deploy your developer portfolio in minutes. Built with **Next.js 14 App Router**, **Redux**, **Tailwind CSS**, and **shadcn/ui**.
-
-[![Vercel Deploy](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/yourusername/portfolio-builder)
-
----
-
-## 🌐 Live Demo
-
-👉 [https://portfolio-builder.vercel.app](https://portfolio-builder.vercel.app)
-
-![Portfolio Builder Preview](public/assets/preview.gif)
+### 🎯 Create. Customize. Deploy.  
+A powerful and elegant **portfolio builder platform** for developers, freelancers, and professionals — designed to make beautiful portfolios effortlessly.
 
 ---
 
-## 🚀 Features
+## 🚀 Live Demo
 
-- 🔥 Drag & drop style section editor
-- 🎨 Theme customization (color, font, layout)
-- 🧠 Redux-powered real-time editing
-- 📄 Dynamic sections like About, Experience, Projects
-- 🔗 Add/edit links with unique titles
-- 📦 Export or publish your portfolio instantly
-- 💻 Built with App Router + Tailwind + ShadCN
+🔗 [https://portfolio-builder.vercel.app](https://portfolio-builder.vercel.app)
+
+![Demo Preview](public/assets/preview.gif)
 
 ---
 
-## 🧑‍💻 Tech Stack
+## 📌 Table of Contents
 
-| Tech             | Role                                 |
-|------------------|--------------------------------------|
-| Next.js 14       | App router, SSR, file-based routing  |
-| Redux Toolkit    | State management for all sections    |
-| Tailwind CSS     | Utility-first styling                |
-| Shadcn/UI        | Beautiful pre-built components       |
-| Lucide Icons     | Icon system                          |
-| UUID             | Unique IDs for sections/links        |
-| Vercel           | 1-click deploy platform              |
+- [🚀 Live Demo](#-live-demo)
+- [🌟 Features](#-features)
+- [🖼️ Screenshots](#-screenshots)
+- [🧱 Tech Stack](#-tech-stack)
+- [📁 Folder Structure](#-folder-structure)
+- [⚙️ Getting Started](#-getting-started)
+- [🧑‍💻 Customization](#-customization)
+- [🧩 Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [📣 Author](#-author)
+
+---
+
+## 🌟 Features
+
+✅ Drag-and-drop editing (Redux-powered)\
+✅ Fully dynamic section editor — add, remove, update sections like "About", "Experience", "Projects", "Skills" etc.\
+✅ Add links with validation (unique names)\
+✅ Editable layout with App Router support\
+✅ Live preview while editing\
+✅ Popover-based link editing\
+✅ Add/Delete experiences with date pickers\
+✅ Technology badge rendering\
+✅ Portfolio name + section headings editable\
+✅ Theming & customization support (WIP)\
+✅ Production-ready Vercel deployment
+
+---
+
+## 🖼️ Screenshots
+
+| Editor | Preview |
+|--------|---------|
+| ![Editor](public/assets/editor-view.png) | ![Preview](public/assets/preview-view.png) |
+
+---
+
+## 🧱 Tech Stack
+
+| Tech              | Purpose                              |
+|-------------------|--------------------------------------|
+| **Next.js 14**    | App Router, SSR                      |
+| **Redux Toolkit** | State management                     |
+| **Tailwind CSS**  | Utility-first styling                |
+| **shadcn/ui**     | Reusable UI components               |
+| **Lucide Icons**  | Iconography                          |
+| **React Hot Toast** | Notifications                      |
+| **uuid**          | Unique ID generation for sections    |
+| **Vercel**        | Hosting + instant deployment         |
 
 ---
 
