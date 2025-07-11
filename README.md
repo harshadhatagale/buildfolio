@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Buildfolio - Modern Portfolio Builder 🚀
 
-First, run the development server:
+![PortfolioCraft Banner](https://buildfolio-three.vercel.app/images/demo1.png)
+A cutting-edge SaaS platform that helps developers, designers, and creatives build beautiful, responsive portfolios with ease. Drag-and-drop interface, AI-powered suggestions, and seamless deployment.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[![Live Demo](https://img.shields.io/badge/Demo-Live-green)](buildfolio-three.vercel.app)
+[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+
+## ✨ Features
+
+- **Drag-and-Drop Editor** - Build your portfolio visually
+- **100+ Professional Templates** - For all industries
+- **AI Content Suggestions** - Get writing help for your sections
+- **Responsive Design** - Looks great on all devices
+- **One-Click Deployment** - Publish to custom domain or our subdomain
+- **Analytics Dashboard** - Track your portfolio visitors
+- **Dark/Light Mode** - With automatic system detection
+
+## 🛠 Tech Stack
+
+**Frontend:**
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- ShadCN UI Components
+- Framer Motion (Animations)
+- React DnD (Drag and Drop)
+
+**Backend:**
+- Node.js
+- Express
+- MongoDB (Database)
+- Redis (Caching)
+- Firebase (Authentication)
+
+**DevOps:**
+- Docker
+- Kubernetes
+- GitHub Actions (CI/CD)
+- AWS EKS (Deployment)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- MongoDB Atlas account
+- Firebase project
+
+### Installation
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/yourusername/portfoliocraft.git
+   ```
+2. Install dependencies:
+   ```bash
+   cd portfoliocraft
+   npm install
+   ```
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 📂 Project Structure
+
+```
+portfoliocraft/
+├── app/                  # Next.js app router
+├── components/           # Reusable components
+├── lib/                  # Utility functions
+├── styles/               # Global styles
+├── types/                # TypeScript types
+├── public/               # Static assets
+├── .env.example          # Environment variables template
+├── next.config.js        # Next.js config
+└── package.json          # Dependencies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Screenshots
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+| Editor View | Template Gallery | Analytics Dashboard |
+|-------------|------------------|---------------------|
+| ![Editor](https://placehold.co/300x200?text=Editor+View) | ![Templates](https://placehold.co/300x200?text=Template+Gallery) | ![Analytics](https://placehold.co/300x200?text=Analytics+Dashboard) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🤝 Contributing
 
-## Learn More
+We welcome contributions! Please follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Deploy on Vercel
+## 📧 Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - your.email@example.com
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Project Link: [https://github.com/yourusername/portfoliocraft](https://github.com/yourusername/portfoliocraft)
+```
+
