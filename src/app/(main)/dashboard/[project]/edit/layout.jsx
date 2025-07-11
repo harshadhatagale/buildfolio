@@ -3,10 +3,11 @@ import Navbar from '@/components/dashboard/editor/Navbar'
 import Toolbar from '@/components/dashboard/editor/Toolbar'
 import React, { useEffect } from 'react'
 import Sidebar from '@/components/dashboard/editor/Sidebar'
-import PropertiesBar from '@/components/dashboard/editor/PropertiesBar'
+import PropertiesBar from '@/components/dashboard/editor/Inspector'
 import { useParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSections } from '../../../../../../features/portfolio/portfolioSlice'
+import Inspector from '@/components/dashboard/editor/Inspector'
 export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
@@ -41,7 +42,7 @@ export default function EditorLayout({ children }) {
       <Toolbar projectId={params.project}  sections={sections}/>
       <Sidebar projectId={params.project} />
       {children}
-      <PropertiesBar />
+      <Inspector/>
     </>
   )
 }
