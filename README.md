@@ -1,72 +1,53 @@
-# 🛠️ Portfolio Builder
+# PortfolioCraft - Modern Portfolio Builder 🚀
 
-### 🎯 Create. Customize. Deploy.  
-A powerful and elegant **portfolio builder platform** for developers, freelancers, and professionals — designed to make beautiful portfolios effortlessly.
+![PortfolioCraft Banner](https://placehold.co/1200x400?text=PortfolioCraft+Modern+Portfolio+Builder)
 
----
+A cutting-edge SaaS platform that helps developers, designers, and creatives build beautiful, responsive portfolios with ease. Drag-and-drop interface, AI-powered suggestions, and seamless deployment.
 
-## 🚀 Live Demo
+[![Live Demo](https://img.shields.io/badge/Demo-Live-green)](https://yourdemo.com)
+[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-🔗 [https://portfolio-builder.vercel.app](https://portfolio-builder.vercel.app)
+## ✨ Features
 
-![Demo Preview](public/assets/preview.gif)
+- **Drag-and-Drop Editor** - Build your portfolio visually
+- **100+ Professional Templates** - For all industries
+- **AI Content Suggestions** - Get writing help for your sections
+- **Responsive Design** - Looks great on all devices
+- **One-Click Deployment** - Publish to custom domain or our subdomain
+- **Analytics Dashboard** - Track your portfolio visitors
+- **Dark/Light Mode** - With automatic system detection
 
----
+## 🛠 Tech Stack
 
-## 📌 Table of Contents
+**Frontend:**
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- ShadCN UI Components
+- Framer Motion (Animations)
+- React DnD (Drag and Drop)
 
-- [🚀 Live Demo](#-live-demo)
-- [🌟 Features](#-features)
-- [🖼️ Screenshots](#-screenshots)
-- [🧱 Tech Stack](#-tech-stack)
-- [📁 Folder Structure](#-folder-structure)
-- [⚙️ Getting Started](#-getting-started)
-- [🧑‍💻 Customization](#-customization)
-- [🧩 Roadmap](#-roadmap)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [📣 Author](#-author)
+**Backend:**
+- Node.js
+- Express
+- MongoDB (Database)
+- Redis (Caching)
+- Firebase (Authentication)
 
----
+**DevOps:**
+- Docker
+- Kubernetes
+- GitHub Actions (CI/CD)
+- AWS EKS (Deployment)
 
-## 🌟 Features
+## 🚀 Getting Started
 
-✅ Drag-and-drop editing (Redux-powered)\
-✅ Fully dynamic section editor — add, remove, update sections like "About", "Experience", "Projects", "Skills" etc.\
-✅ Add links with validation (unique names)\
-✅ Editable layout with App Router support\
-✅ Live preview while editing\
-✅ Popover-based link editing\
-✅ Add/Delete experiences with date pickers\
-✅ Technology badge rendering\
-✅ Portfolio name + section headings editable\
-✅ Theming & customization support (WIP)\
-✅ Production-ready Vercel deployment
+### Prerequisites
+- Node.js 18+
+- MongoDB Atlas account
+- Firebase project
 
----
-
-## 🖼️ Screenshots
-
-| Editor | Preview |
-|--------|---------|
-| ![Editor](public/assets/editor-view.png) | ![Preview](public/assets/preview-view.png) |
-
----
-
-## 🧱 Tech Stack
-
-| Tech              | Purpose                              |
-|-------------------|--------------------------------------|
-| **Next.js 14**    | App Router, SSR                      |
-| **Redux Toolkit** | State management                     |
-| **Tailwind CSS**  | Utility-first styling                |
-| **shadcn/ui**     | Reusable UI components               |
-| **Lucide Icons**  | Iconography                          |
-| **React Hot Toast** | Notifications                      |
-| **uuid**          | Unique ID generation for sections    |
-| **Vercel**        | Hosting + instant deployment         |
-
----
-
-## 📁 Folder Structure
-<pre> portfolio-builder/ ├── app/ # App router pages │ ├── layout.tsx # Root layout │ └── page.tsx # Main editor page │ ├── components/ # All reusable UI components │ ├── ui/ # shadcn/ui components │ ├── Navbar.tsx │ └── Preview.tsx │ ├── features/portfolio/ # Redux slice for managing sections │ ├── portfolioSlice.ts │ └── store.ts │ ├── public/assets/ # Images, gifs, static media │ ├── styles/ # Tailwind config │ ├── README.md └── package.json </pre>
+### Installation
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/yourusername/portfoliocraft.git
