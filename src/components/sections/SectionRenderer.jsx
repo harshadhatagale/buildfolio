@@ -18,33 +18,33 @@ export default function SectionRenderer({ id, type,content }) {
   const renderSection = () => {
     switch (type) {
       case 'hero':
-        return <HeroSection  content={content}/>;
+        return <HeroSection id={id}  content={content}/>;
       case 'nav':
-        return <Nav content={content}/>;
+        return <Nav id={id} content={content}/>;
       case 'about':
-        return <AboutSection  content={content}/>;
+        return <AboutSection id={id} content={content}/>;
       case 'skills':
-        return <SkillsSection  content={content}/>;
+        return <SkillsSection id={id} content={content}/>;
       case 'experience':
-        return <ExperienceSection  content={content}/>;
+        return <ExperienceSection id={id} content={content}/>;
       case 'testimonials':
         return <TestimonialsSection id={id} content={content}/>;
       case 'footer':
-        return <Footer content={content}/>;
+        return <Footer id={id} content={content}/>;
       case 'projects':
-        return <ProjectsSection content={content}/>;
+        return <ProjectsSection id={id} content={content}/>;
       case "services":
-        return <ServicesSection content={content}/>
+        return <ServicesSection id={id} content={content}/>
       case "education":
-        return <EducationSection content={content}/>
+        return <EducationSection id={id} content={content}/>
       case "certifications":
-        return <CertificationsSection content={content}/>
+        return <CertificationsSection id={id} content={content}/>
       case "faqs":
-        return <FaqsSection content={content}/>
+        return <FaqsSection id={id} content={content}/>
       case "achievements":
-        return <AchievementsSection content={content}/>
+        return <AchievementsSection id={id} content={content}/>
       default:
-        return <SimpleSection content={content}/>;
+        return <SimpleSection id={id} content={content}/>;
     }
   };
 

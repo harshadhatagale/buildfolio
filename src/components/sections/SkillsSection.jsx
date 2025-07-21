@@ -1,11 +1,28 @@
 // components/SkillsSection.tsx
-import React from "react"
+import React, {useState, useEffect} from "react"
 import { Badge } from "@/components/ui/badge"
+import { useSelector } from "react-redux"
 
-
-export default function SkillsSection({content}) {
+export default function SkillsSection({id, content}) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="bg-background py-3 px-6">
+    <section className={`${isSelected? "selected-section":""} relative bg-background py-10 px-6`}>
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
           {content.primaryHeading}

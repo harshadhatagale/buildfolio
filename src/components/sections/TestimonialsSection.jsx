@@ -1,39 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSelector } from 'react-redux';
 
 
-export default function TestimonialsSection({ id }) {
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection);
-  const isSelected = selectedSection._id === id;
-  console.log(isSelected)
-  const content = {
-    heading: "What People Say", // optional heading
-    testimonials: [
-      {
-        name: "Ravi Kumar",
-        role: "CEO, TechCorp",
-        message: "Harshad did an excellent job. Highly recommended!",
-        image: "https://example.com/ravi.jpg"
-      },
-      {
-        name: "Anjali Sharma",
-        role: "Project Manager, InnovateX",
-        message: "Professional, punctual, and very talented developer.",
-        image: "https://example.com/anjali.jpg"
-      },
-      {
-        name: "Rahul Verma",
-        role: "Founder, CodeMasters",
-        message: "Working with Harshad was a fantastic experience.",
-        image: "https://example.com/rahul.jpg"
+export default function TestimonialsSection({ id, content }) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+    const [isSelected, setSelected]= useState(false)
+    useEffect(()=>{
+      const handleSelection=()=>{
+        if (selectedSection._id===id) {
+          setSelected(true)
+        }
+        else
+        {
+          setSelected(false)
+        }
       }
-    ]
-  }
-
+      if(selectedSection)
+      {
+        handleSelection()
+      }
+    }, [selectedSection])
   return (
-    <section className={`w-full py-3 border-2 border-dashed ${isSelected ? "border-muted" : ""} bg-background px-6`}>
+    <section className={`${isSelected? "selected-section": ""} relative w-full py-10 bg-background px-6`}>
       <div className="container space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-4xl font-bold tracking-tight">

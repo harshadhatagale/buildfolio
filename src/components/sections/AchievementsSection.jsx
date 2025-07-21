@@ -1,4 +1,6 @@
 'use client';
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 
 import {
   Award,
@@ -15,54 +17,44 @@ import {
   CardContent
 } from '@/components/ui/card';
 
-export default function AchievementsSection() {
+export default function AchievementsSection({id, content}) {
   const iconMap = {
     award: Award,
     cloud: Cloud,
     gitbranch: GitBranch
   };
-  const content = {
-    heading: "Achievements",
-    subHeading: "Milestones and recognitions that I'm proud of.",
-    items: [
-      {
-        title: "Top Performer at Hackathon 2024",
-        issuer: "GCOEJ",
-        year: "2024",
-        description: "Won 1st place in a national-level hackathon organized at GCOEJ for building an AI-powered SaaS product.",
-        icon: "award"
-      },
-      {
-        title: "Google Cloud Career Readiness Scholarship",
-        issuer: "Google Cloud",
-        year: "2023",
-        description: "Received a scholarship for completing the Google Cloud training program.",
-        icon: "cloud"
-      },
-      {
-        title: "Open Source Contributor",
-        issuer: "GirlScript Summer of Code",
-        year: "2022",
-        description: "Contributed to multiple open-source projects including documentation, features, and bug fixes.",
-        icon: "gitBranch"
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
       }
-    ]
-  }
-
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="w-full py-3 md:py-20 px-6 bg-background">
+    <section className={`${isSelected? "selected-section":""} relative w-full py-10 px-6 bg-background`}>
+
       <div className="container space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-4xl font-bold tracking-tight">
-            {content?.heading || 'Achievements'}
+            {content.heading || 'Achievements'}
           </h2>
           <p className="text-muted-foreground text-lg">
-            {content?.subHeading || 'Some of my proudest moments.'}
+            {content.subHeading || 'Some of my proudest moments.'}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content?.items?.map((item, index) => {
+          {content.items.map((item, index) => {
             const Icon = iconMap[item.icon?.toLowerCase()] || Layout;
             return (
               <Card key={index} className="hover:shadow-xl transition-shadow">

@@ -1,5 +1,6 @@
 'use client';
-
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import {
   Accordion,
   AccordionContent,
@@ -7,31 +8,26 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 
-export default function FaqsSection() {
-  const content = {
-    heading: "Frequently Asked Questions",
-    subHeading: "Got questions? I’ve got answers.",
-    items: [
-      {
-        question: "Can I customize my portfolio after publishing?",
-        answer: "Yes! You can log in anytime to edit, add, or remove sections as you like."
-      },
-      {
-        question: "Is the portfolio mobile-friendly?",
-        answer: "Absolutely! All portfolios are fully responsive and look great on any device."
-      },
-      {
-        question: "Do I need to know coding?",
-        answer: "No coding needed. The builder is completely drag and drop with customizable sections."
-      },
-      {
-        question: "Is there a free plan?",
-        answer: "Yes, there is a basic free plan with limited features. You can upgrade anytime."
+export default function FaqsSection({id, content}) {
+ const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
       }
-    ]
-  }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="w-full py-3 bg-background px-6">
+    <section className={`${isSelected? "selected-section": ""} relative w-full py-3 bg-background px-6`}>
       <div className="container space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-4xl font-bold tracking-tight">

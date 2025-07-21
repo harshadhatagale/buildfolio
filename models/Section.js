@@ -8,7 +8,13 @@ const SectionType = [
   "experience",
   "section",
   "testimonials",
-  "footer"
+  "footer",
+  "projects",
+  'services',
+  'education',
+  'certifications',
+  'achievements',
+  'faqs',
 ]
 const SectionSchema = new mongoose.Schema(
   {
@@ -37,7 +43,12 @@ const SectionSchema = new mongoose.Schema(
       required: true,
       default: {},
       minimize: false
-    }
+    },
+    style:{
+      type:Object,
+      required:true,
+      default:{},
+    },
   },
   {
     timestamps: true, // adds createdAt and updatedAt

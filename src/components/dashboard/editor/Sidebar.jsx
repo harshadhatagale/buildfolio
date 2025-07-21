@@ -59,7 +59,14 @@ export default function Sidebar({ projectId }) {
         className={`p-3 overflow-x-hidden overflow-hidden absolute top-0 left-0 w-full h-auto transition-transform duration-300 
         ${side ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <h3 className='text-lg font-bold mb-5'>Sections</h3>
+        <div className='flex justify-between items-center pb-3'>
+          <h3 className='text-lg font-bold'>Sections</h3>
+          <Plus
+            onClick={() => setSide(false)}
+            size={30}
+            className='cursor-pointer hover:opacity-80 hover:bg-muted p-1 rounded-md'
+          />
+        </div>
         <DndContext
           collisionDetection={closestCenter}
           sensors={sensors}
@@ -142,16 +149,16 @@ const SortableProjectSectionItem = ({ id, section }) => {
       toast.error("Section name cannot be empty")
       return false
     }
-    
+
     const isDuplicate = sections.some(
       s => s.name.toLowerCase() === name.toLowerCase() && s._id !== section._id
     )
-    
+
     if (isDuplicate) {
       toast.error("This section name already exists")
       return false
     }
-    
+
     return true
   }
 
@@ -159,7 +166,7 @@ const SortableProjectSectionItem = ({ id, section }) => {
     if (!validateName(tempName)) {
       return false
     }
-    
+
     dispatch(renameSection({ _id: section._id, name: tempName }))
     dispatch(setSelectedSection({ ...section, name: tempName }))
     return true
@@ -198,9 +205,8 @@ const SortableProjectSectionItem = ({ id, section }) => {
       className={`cn(
         'hover:shadow',
         isDragging && 'opacity-50 border-none'
-      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${
-        selectedSection?._id === section._id ? "border-primary/100" : ""
-      }`}
+      ) w-full py-2 hover:border transition hover:border-primary rounded-md ${selectedSection?._id === section._id ? "border-primary/100" : ""
+        }`}
       onClick={() => dispatch(setSelectedSection(section))}
     >
       <div className='flex justify-between items-center w-full h-full px-2'>
@@ -275,7 +281,7 @@ export const SectionIconRenderer = ({ id, type }) => {
       case "education":
         return <GraduationCap {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
-      case "faq":
+      case "faqs":
         return <HelpCircle {...attributes} {...listeners} className={"cursor-move"} size={15} />
 
       case "certifications":

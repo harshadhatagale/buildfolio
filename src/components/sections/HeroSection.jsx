@@ -1,8 +1,26 @@
 import { Button } from "@/components/ui/button"
-
-export default function HeroSection({content}) {
+import { useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+export default function HeroSection({id, content}) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="py-20 flex items-center justify-center bg-background px-6">
+    <section className={`${isSelected? "selected-section": ""} relative py-20 flex items-center justify-center bg-background px-6`}>
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold text-foreground">
           {content.primaryHeading}

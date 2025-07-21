@@ -113,7 +113,7 @@ export const GetDefaultContent = (type) => {
             return content
             break
 
-        case "Services":
+        case "services":
             content = {
                 type: "services",
                 heading: "My Services",
@@ -318,6 +318,8 @@ export const GetDefaultContent = (type) => {
                     }
                 ]
             }
+            return content
+            break
         case "footer":
             content = {
                 portfolioName: "Harshad's Portfolio", // Footer title or brand name

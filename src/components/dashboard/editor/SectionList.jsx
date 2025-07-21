@@ -120,7 +120,7 @@ export const SectionIconRenderer = ({ type }) => {
       case "education":
         return <GraduationCap />
 
-      case "faq":
+      case "faqs":
         return <HelpCircle />
 
       case "certifications":

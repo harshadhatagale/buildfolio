@@ -1,5 +1,6 @@
 'use client';
-
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import {
     BadgeCheck,
     Cloud,
@@ -20,45 +21,34 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-export default function CertificationsSection() {
+export default function CertificationsSection({id, content}) {
+
+
     const iconMap = {
         badgecheck: BadgeCheck,
         cloud: Cloud,
         braces: Braces
     };
-    const content = {
-        heading: "Certifications",
-        subHeading: "Here are some of the certifications I have earned.",
-        items: [
-            {
-                title: "Full Stack Web Development",
-                issuer: "Coursera",
-                year: "2023",
-                description: "Completed a comprehensive full-stack web development course including React, Node.js, and MongoDB.",
-                link: "https://coursera.org/certificate/xyz123",
-                icon: "badgeCheck"
-            },
-            {
-                title: "AWS Certified Cloud Practitioner",
-                issuer: "Amazon Web Services",
-                year: "2024",
-                description: "Certification in basic AWS cloud concepts and services.",
-                link: "https://aws.amazon.com/certification/",
-                icon: "cloud"
-            },
-            {
-                title: "Data Structures & Algorithms",
-                issuer: "Coding Ninjas",
-                year: "2023",
-                description: "Mastered DSA in C++ with hands-on problem solving.",
-                link: "https://codingninjas.com/certificate/abc",
-                icon: "braces"
-            }
-        ]
+    const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
     }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
 
     return (
-        <section className="w-full py-3 bg-background px-6">
+        <section className={`${isSelected? "selected-section": ""} relative w-full py-10 bg-background px-6`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

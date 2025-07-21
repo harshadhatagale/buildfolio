@@ -1,32 +1,27 @@
 // components/ExperienceSection.jsx
+import React, { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 
-const experiences = [
-  {
-    company: "Freelance Projects",
-    role: "Full Stack Developer",
-    duration: "Jan 2023 – Present",
-    description:
-      "Built responsive web apps using Next.js, Firebase, and Tailwind. Delivered real client projects like dashboards and landing pages."
-  },
-  {
-    company: "GameDev Studio (YouTube)",
-    role: "Content Creator & Developer",
-    duration: "2022 – Present",
-    description:
-      "Created dev content for 900+ subscribers. Built and shared mobile games using Unity and Java."
-  },
-  {
-    company: "College Projects",
-    role: "Developer",
-    duration: "2021 – 2024",
-    description:
-      "Made SaaS projects like a portfolio builder, donation platform, and messaging system using MERN stack and Firebase."
-  }
-]
-
-export default function ExperienceSection({ content }) {
+export default function ExperienceSection({ id, content }) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="bg-background py-10 px-6">
+    <section className={`${isSelected?"selected-section":""} relative bg-background py-10 px-6`}>
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-5">
           {content.primaryHeading}

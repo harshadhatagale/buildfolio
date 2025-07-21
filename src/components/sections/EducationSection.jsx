@@ -1,5 +1,7 @@
 'use client';
 
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import {
     GraduationCap,
     Book,
@@ -15,41 +17,31 @@ import {
     CardContent
 } from '@/components/ui/card';
 
-export default function EducationSection() {
+export default function EducationSection({id, content}) {
     const iconMap = {
         graduationcap: GraduationCap,
         book: Book,
         school: School
     };
-    const content = {
-        heading: "Education",
-        subHeading: "My academic journey so far.",
-        items: [
-            {
-                degree: "Bachelor of Technology in Computer Science",
-                institution: "GCOEJ - Government College of Engineering, Jalgaon",
-                year: "2022 - 2026",
-                description: "Learning Computer Science fundamentals, data structures, algorithms, and software development practices.",
-                icon: "graduationCap"
-            },
-            {
-                degree: "HSC - Science",
-                institution: "XYZ Junior College",
-                year: "2020 - 2022",
-                description: "Physics, Chemistry, Math with Computer Science.",
-                icon: "book"
-            },
-            {
-                degree: "SSC - High School",
-                institution: "ABC High School",
-                year: "2010 - 2020",
-                description: "Completed schooling with distinction.",
-                icon: "school"
-            }
-        ]
+    const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
     }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
     return (
-        <section className="w-full py-3 px-6 bg-background">
+        <section className={`${isSelected ? "selected-section" : ""} relative w-full py-10 px-6 bg-background`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

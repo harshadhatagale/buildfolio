@@ -1,9 +1,27 @@
 // components/AboutSection.tsx
 import Image from "next/image"
-
-export default function AboutSection({content}) {
+import { useSelector } from "react-redux"
+import React, { useState, useEffect } from "react"
+export default function AboutSection({ id, content }) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <section className="py-10 px-5 bg-background">
+    <div className={`${isSelected ? "selected-section" : ""} relative py-10 px-5 bg-background`}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
         <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">
@@ -25,6 +43,6 @@ export default function AboutSection({content}) {
           </p>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

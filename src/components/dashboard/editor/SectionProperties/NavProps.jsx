@@ -88,7 +88,7 @@ export default function NavProps() {
         <div className='flex flex-col gap-3'>
           {section.content.links.map((link, index) => (
             <LinkPopover
-              key={link.id}
+              key={index}
               link={link}
               index={index}
               allSections={sections}
