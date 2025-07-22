@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { Skeleton } from '@/components/ui/skeleton' // Assuming you have a skeleton component
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
-
+import FloatingEditBtn from '@/components/basics/FloatingEditBtn'
 export default function PreviewPage() {
   const params = useParams()
   const [loading, setLoading] = useState(true)
@@ -92,6 +92,7 @@ export default function PreviewPage() {
           content={section.content}
         />
       ))}
+      <FloatingEditBtn projectId={params.project}/>
     </div>
   )
 }

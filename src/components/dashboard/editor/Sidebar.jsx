@@ -247,50 +247,50 @@ export const SectionIconRenderer = ({ id, type }) => {
   const renderIcon = () => {
     switch (type) {
       case "nav":
-        return <LayoutDashboard {...attributes} {...listeners} className={"cursor-move order-none"} size={15} />
+        return <LayoutDashboard {...attributes} {...listeners} className={"cursor-grabbing order-none"} size={15} />
         break;
 
       case "hero":
-        return <Mountain {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Mountain {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
         break
 
       case "about":
-        return <UserCircle {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <UserCircle {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
         break
 
       case "skills":
-        return <Swords {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Swords {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "experience":
-        return <Briefcase {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Briefcase {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "testimonials":
-        return <Quote {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Quote {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
         break
 
       case 'section':
-        return <Layout {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Layout {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
         break
 
       case "projects":
-        return <FolderKanban {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <FolderKanban {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "services":
-        return <Package {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Package {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "education":
-        return <GraduationCap {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <GraduationCap {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "faqs":
-        return <HelpCircle {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <HelpCircle {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "certifications":
-        return <BadgeCheck {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <BadgeCheck {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
 
       case "achievements":
-        return <Award {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Award {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
       default:
-        return <Layout {...attributes} {...listeners} className={"cursor-move"} size={15} />
+        return <Layout {...attributes} {...listeners} className={"cursor-grabbing"} size={15} />
         break;
     }
   }
