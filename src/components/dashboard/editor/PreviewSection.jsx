@@ -7,12 +7,11 @@ import FloatingEditBtn from '@/components/basics/FloatingEditBtn'
 
 export default function PreviewSection() {
   const [device, setDevice] = useState("mobile")
-  const dispatch= useDispatch()
-  const sections= useSelector((state)=> state.portfolio.present)
+  const dispatch = useDispatch()
+  const sections = useSelector((state) => state.portfolio.present)
   return (
     <div className='flex flex-col w-full border-l-2 border-muted px-[248px] h-[calc(100vh-56px)] py-3 overflow-auto scroll-auto transition'>
-      <PortfolioPreview sections={sections}/>
-      
+      <PortfolioPreview sections={sections} />
     </div>
   )
 }

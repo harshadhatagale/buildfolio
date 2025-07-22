@@ -1,12 +1,106 @@
 // features/portfolio/portfolioSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
+const defaultTheme = {
+  light: {
+    background: "oklch(0.99 0 0)",
+    foreground: "oklch(0.35 0.02 165.48)",
+    card: "oklch(1.00 0 0)",
+    cardForeground: "oklch(0.35 0.02 165.48)",
+    popover: "oklch(1.00 0 0)",
+    popoverForeground: "oklch(0.35 0.02 165.48)",
+    primary: "oklch(0.67 0.17 153.85)",
+    primaryForeground: "oklch(0.99 0.02 175.22)",
+    secondary: "oklch(0.90 0.02 238.66)",
+    secondaryForeground: "oklch(0.20 0.02 266.02)",
+    muted: "oklch(0.90 0.02 240.73)",
+    mutedForeground: "oklch(0.50 0.03 268.53)",
+    accent: "oklch(0.90 0.02 240.73)",
+    accentForeground: "oklch(0.35 0.02 165.48)",
+    destructive: "oklch(0.61 0.24 20.96)",
+    border: "oklch(0.94 0.01 238.46)",
+    input: "oklch(0.85 0.02 240.75)",
+    ring: "oklch(0.67 0.17 153.85)",
+    chart1: "oklch(0.67 0.17 153.85)",
+    chart2: "oklch(0.50 0.10 270.06)",
+    chart3: "oklch(0.72 0.12 201.79)",
+    chart4: "oklch(0.80 0.10 100.65)",
+    chart5: "oklch(0.60 0.15 300.14)",
+    sidebar: "oklch(0.98 0.01 238.45)",
+    sidebarForeground: "oklch(0.35 0.02 165.48)",
+    sidebarPrimary: "oklch(0.67 0.17 153.85)",
+    sidebarPrimaryForeground: "oklch(0.98 0.01 238.45)",
+    sidebarAccent: "oklch(0.90 0.02 240.73)",
+    sidebarAccentForeground: "oklch(0.35 0.02 165.48)",
+    sidebarBorder: "oklch(0.85 0.02 240.75)",
+    sidebarRing: "oklch(0.67 0.17 153.85)",
+    radius: "0.25rem",
+    shadows: {
+      shadow2xs: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.02)",
+      shadowXs: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.02)",
+      shadowSm: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 1px 2px -1px oklch(0.35 0.05 163.02 / 0.04)",
+      shadow: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 1px 2px -1px oklch(0.35 0.05 163.02 / 0.04)",
+      shadowMd: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 2px 4px -1px oklch(0.35 0.05 163.02 / 0.04)",
+      shadowLg: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 4px 6px -1px oklch(0.35 0.05 163.02 / 0.04)",
+      shadowXl: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 8px 10px -1px oklch(0.35 0.05 163.02 / 0.04)",
+      shadow2xl: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.10)"
+    }
+  },
+  dark: {
+    background: "oklch(0.15 0.02 269.18)",
+    foreground: "oklch(0.95 0.01 238.46)",
+    card: "oklch(0.20 0.02 266.02)",
+    cardForeground: "oklch(0.95 0.01 238.46)",
+    popover: "oklch(0.20 0.02 266.02)",
+    popoverForeground: "oklch(0.95 0.01 238.46)",
+    primary: "oklch(0.67 0.17 153.85)",
+    primaryForeground: "oklch(0.15 0.02 269.18)",
+    secondary: "oklch(0.30 0.03 271.05)",
+    secondaryForeground: "oklch(0.95 0.01 238.46)",
+    muted: "oklch(0.30 0.03 271.05)",
+    mutedForeground: "oklch(0.60 0.03 269.46)",
+    accent: "oklch(0.30 0.03 271.05)",
+    accentForeground: "oklch(0.95 0.01 238.46)",
+    destructive: "oklch(0.64 0.25 19.69)",
+    border: "oklch(0.95 0.01 238.46 / 15%)",
+    input: "oklch(0.95 0.01 238.46 / 20%)",
+    ring: "oklch(0.67 0.17 153.85)",
+    chart1: "oklch(0.67 0.17 153.85)",
+    chart2: "oklch(0.60 0.10 269.83)",
+    chart3: "oklch(0.72 0.12 201.79)",
+    chart4: "oklch(0.80 0.10 100.65)",
+    chart5: "oklch(0.60 0.15 300.14)",
+    sidebar: "oklch(0.20 0.02 266.02)",
+    sidebarForeground: "oklch(0.95 0.01 238.46)",
+    sidebarPrimary: "oklch(0.67 0.17 153.85)",
+    sidebarPrimaryForeground: "oklch(0.15 0.02 269.18)",
+    sidebarAccent: "oklch(0.30 0.03 271.05)",
+    sidebarAccentForeground: "oklch(0.95 0.01 238.46)",
+    sidebarBorder: "oklch(0.95 0.01 238.46 / 15%)",
+    sidebarRing: "oklch(0.67 0.17 153.85)",
+    radius: "0.25rem",
+    shadows: {
+      shadow2xs: "0px 1px 2px 0px oklch(0 0 0 / 0.01)",
+      shadowXs: "0px 1px 2px 0px oklch(0 0 0 / 0.01)",
+      shadowSm: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 1px 2px -1px oklch(0 0 0 / 0.01)",
+      shadow: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 1px 2px -1px oklch(0 0 0 / 0.01)",
+      shadowMd: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 2px 4px -1px oklch(0 0 0 / 0.01)",
+      shadowLg: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 4px 6px -1px oklch(0 0 0 / 0.01)",
+      shadowXl: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 8px 10px -1px oklch(0 0 0 / 0.01)",
+      shadow2xl: "0px 1px 2px 0px oklch(0 0 0 / 0.03)"
+    }
+  }
+};
+
+
+
 const initialState = {
+  theme: defaultTheme,
+  themeMode: 'light', // renamed to avoid conflict
   selectedSection: null,
   past: [],
   present: [],
   future: [],
-  theme: 'light',
   title: "",
   isPublished: false
 };
@@ -42,7 +136,10 @@ export const portfolioSlice = createSlice({
         (section) => section._id === _id
       );
       if (index !== -1) {
-        state.present[index].content = { ...state.present.content, ...content }
+        state.present[index].content = {
+          ...state.present[index].content,
+          ...content
+        };
         state.future = [];
       }
     },
@@ -53,7 +150,7 @@ export const portfolioSlice = createSlice({
         (section) => section._id === _id
       );
       if (index !== -1) {
-        state.present[index].name =  name 
+        state.present[index].name = name;
         state.future = [];
       }
     },
