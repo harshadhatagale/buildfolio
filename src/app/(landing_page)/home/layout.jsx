@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function DashboardLayout({children}) {
   return (
-   <main className='min-h-screen w-full'>
+   <main className='min-h-screen w-full' suppressHydrationWarning>
     <Navbar/>
     {children}
    </main>

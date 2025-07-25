@@ -35,16 +35,6 @@ const defaultTheme = {
     sidebarBorder: "oklch(0.85 0.02 240.75)",
     sidebarRing: "oklch(0.67 0.17 153.85)",
     radius: "0.25rem",
-    shadows: {
-      shadow2xs: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.02)",
-      shadowXs: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.02)",
-      shadowSm: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 1px 2px -1px oklch(0.35 0.05 163.02 / 0.04)",
-      shadow: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 1px 2px -1px oklch(0.35 0.05 163.02 / 0.04)",
-      shadowMd: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 2px 4px -1px oklch(0.35 0.05 163.02 / 0.04)",
-      shadowLg: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 4px 6px -1px oklch(0.35 0.05 163.02 / 0.04)",
-      shadowXl: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.04), 0px 8px 10px -1px oklch(0.35 0.05 163.02 / 0.04)",
-      shadow2xl: "0px 1px 3px 0px oklch(0.35 0.05 163.02 / 0.10)"
-    }
   },
   dark: {
     background: "oklch(0.15 0.02 269.18)",
@@ -79,16 +69,6 @@ const defaultTheme = {
     sidebarBorder: "oklch(0.95 0.01 238.46 / 15%)",
     sidebarRing: "oklch(0.67 0.17 153.85)",
     radius: "0.25rem",
-    shadows: {
-      shadow2xs: "0px 1px 2px 0px oklch(0 0 0 / 0.01)",
-      shadowXs: "0px 1px 2px 0px oklch(0 0 0 / 0.01)",
-      shadowSm: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 1px 2px -1px oklch(0 0 0 / 0.01)",
-      shadow: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 1px 2px -1px oklch(0 0 0 / 0.01)",
-      shadowMd: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 2px 4px -1px oklch(0 0 0 / 0.01)",
-      shadowLg: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 4px 6px -1px oklch(0 0 0 / 0.01)",
-      shadowXl: "0px 1px 2px 0px oklch(0 0 0 / 0.01), 0px 8px 10px -1px oklch(0 0 0 / 0.01)",
-      shadow2xl: "0px 1px 2px 0px oklch(0 0 0 / 0.03)"
-    }
   }
 };
 
@@ -171,6 +151,9 @@ export const portfolioSlice = createSlice({
         state.future.shift();
         state.selectedSection = null;
       }
+    },
+    setTheme: (state, action) => {
+      state.theme = action.payload
     }
   }
 });

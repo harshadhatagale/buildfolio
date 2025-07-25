@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+
 export default function page() {
   const params = useParams()
   const dispatch = useDispatch()

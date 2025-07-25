@@ -1,9 +1,10 @@
 'use client'
 import { ModeToggle } from '@/components/basics/ModeToggle'
 import { Button } from '@/components/ui/button'
-import { Eye, Globe, Save, Settings } from 'lucide-react'
+import { Eye, Globe, Paintbrush, Save, Settings } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import React from 'react'
+import ThemeEditor from './ThemeEditor/ThemeEditor'
 
 export default function Navbar({ name, logo }) {
   const router = useRouter()
@@ -15,6 +16,7 @@ export default function Navbar({ name, logo }) {
         <span className='text-lg font-semibold' contentEditable suppressContentEditableWarning>Harshad's Portfolio</span>
       </div>
       <div className="flex justify-center items-center gap-4">
+        <ThemeEditor/>
         <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />
         <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} />
         <Button variant={"outline"} className={"bg-emerald-500 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}>

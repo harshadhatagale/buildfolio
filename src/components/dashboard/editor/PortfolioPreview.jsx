@@ -1,4 +1,5 @@
 import SectionRenderer from '@/components/sections/SectionRenderer'
+import { useTheme } from 'next-themes'
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -6,15 +7,16 @@ export default function PortfolioPreview({ sections }) {
     const [device, setDevice] = useState("mobile")
     const sectionRefs = useRef({})
     const containerRef = useRef(null)
+    const { theme, setTheme } = useTheme()
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-    const theme = useSelector((state) => state.portfolio.theme)
-    const themeMode = useSelector((state) => state.portfolio.themeMode)
+    const previewTheme = useSelector((state) => state.portfolio.theme)
+    const previewThemeMode = useSelector((state) => state.portfolio.themeMode)
 
     // Apply theme styles to the preview container
     const getThemeStyles = () => {
-        const colors = theme["dark"]
+        const colors = previewTheme["dark"]
         return {
-            '--radius': colors.radius,
+            
             '--background': colors.background,
             '--foreground': colors.foreground,
             '--card': colors.card,

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
-
+import Image from 'next/image'
 import Link from 'next/link'
+import PricingSection from '@/components/landing/PricingSection'
 const inter = Inter({
   subsets: ['latin'],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
@@ -16,16 +17,18 @@ export default function Page() {
 
         <p className={`text-center ${inter.className}`}>Build your own portfolio</p>
 
-        <div className='bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative'>
-          <h1 className='md:text-[200px] text-7xl font-bold text-center  tracking-tight'>BuildFolio</h1>
+        <div className='relative'>
+          <h1 className={`md:text-[200px] text-7xl font-bold text-center tracking-tight`}>
+            <span className='bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text animate-gradient'>
+              BuildFolio
+            </span>
+          </h1>
+        </div>
+        <div className='flex justify-center items-center relative md:mt-[-50px]'>
+          <Image src="/images/demo3.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
         </div>
       </section>
-      <section className={`${inter.className} flex justify-center items-center flex-col gap-4 md:!mt-20 mt-[40px]`}>
-        <h2 className='text-4xl text-center'>Choose what, fits you right</h2>
-        <p className="text-muted-foreground text-center">Our straightforward pricing plans are tailored to meet your needs.
-          If not {"You're"} not  <br /> ready to commit you can get started for free.
-        </p>
-      </section>
+      <PricingSection/>
     </>
   )
 }
