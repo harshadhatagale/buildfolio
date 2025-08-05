@@ -2,21 +2,26 @@ import SectionRenderer from '@/components/sections/SectionRenderer'
 import { useTheme } from 'next-themes'
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { defaultTheme } from '../../../../features/portfolio/portfolioSlice'
 
 export default function PortfolioPreview({ sections }) {
     const [device, setDevice] = useState("mobile")
     const sectionRefs = useRef({})
     const containerRef = useRef(null)
-    const { theme, setTheme } = useTheme()
+    const { theme } = useTheme()
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     const previewTheme = useSelector((state) => state.portfolio.theme)
     const previewThemeMode = useSelector((state) => state.portfolio.themeMode)
 
-    // Apply theme styles to the preview container
+    // Apply theme styles with default theme fallback
     const getThemeStyles = () => {
-        const colors = previewTheme["dark"]
+        // Merge user theme + default theme for safety
+        const colors = {
+            ...defaultTheme[theme === "dark" ? "dark" : "light"],   // fallback
+            ...previewTheme[theme === "dark" ? "dark" : "light"]    // user custom
+        }
+
         return {
-            
             '--background': colors.background,
             '--foreground': colors.foreground,
             '--card': colors.card,
@@ -61,7 +66,6 @@ export default function PortfolioPreview({ sections }) {
     // Handle scroll to section when selected
     useEffect(() => {
         if (!selectedSection) return
-
         const sectionElement = sectionRefs.current[selectedSection._id]
         if (sectionElement) {
             sectionElement.scrollIntoView({
@@ -73,6 +77,7 @@ export default function PortfolioPreview({ sections }) {
 
     return (
         <div
+            suppressHydrationWarning
             ref={containerRef}
             className={`mt-5 z-10 overflow-y-scroll border-2 border-border bg-background text-foreground
                 ${device === "mobile" ? "w-[680px] h-[667px]" : ""}
@@ -86,10 +91,10 @@ export default function PortfolioPreview({ sections }) {
                     ref={(el) => assignSectionRef(section._id, el)}
                     className="bg-card text-card-foreground"
                 >
-                    <SectionRenderer 
-                        id={section._id} 
-                        type={section.type} 
-                        content={section.content} 
+                    <SectionRenderer
+                        id={section._id}
+                        type={section.type}
+                        content={section.content}
                     />
                 </div>
             ))}

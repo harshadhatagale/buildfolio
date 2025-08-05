@@ -1,7 +1,7 @@
 // features/portfolio/portfolioSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const defaultTheme = {
+export const defaultTheme = {
   light: {
     background: "oklch(0.99 0 0)",
     foreground: "oklch(0.35 0.02 165.48)",

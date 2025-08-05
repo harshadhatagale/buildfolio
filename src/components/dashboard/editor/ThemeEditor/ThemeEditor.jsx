@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from 'react';
 import {
     Sheet,
     SheetContent,
@@ -6,13 +7,40 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet"
-import { Paintbrush } from 'lucide-react'
-import ThemeVariant from './ThemeVariant'
+} from "@/components/ui/sheet";
+import { Paintbrush, Loader2 } from 'lucide-react';
+import ThemeVariant from './ThemeVariant';
+import { useAuth } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export default function ThemeEditor() {
+    const { userId } = useAuth();
+    const [themes, setThemes] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchThemes = async () => {
+            if (!userId) return;
+            try {
+                const res = await fetch(`/api/themes?userId=${userId}`);
+                const data = await res.json();
+                if (res.ok) {
+                    setThemes(data.themes || []);
+                } else {
+                    toast.error(data.error || "Failed to fetch themes");
+                }
+            } catch (err) {
+                console.error("Error fetching themes:", err);
+                toast.error("Error fetching themes");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchThemes();
+    }, [userId]);
+
     return (
-        <Sheet>
+        <Sheet >
             <SheetTrigger asChild>
                 <Paintbrush className='cursor-pointer' size={20} />
             </SheetTrigger>
@@ -25,14 +53,28 @@ export default function ThemeEditor() {
                         </div>
                     </SheetTitle>
                     <SheetDescription asChild>
-                        <div className="mt-4 gap-2 grid grid-cols-2 items-center">
-                            {Array(4).fill().map((_, index) => (
-                                <ThemeVariant key={index}/>
-                            ))}
+                        <div suppressHydrationWarning className="mt-4 mx-auto gap-4 grid grid-cols-2 items-center">
+                            {loading ? (
+                                <div className="col-span-2 flex justify-center">
+                                    <Loader2 className="animate-spin" size={24} />
+                                </div>
+                            ) : themes.length > 0 ? (
+                                themes.map((theme) => (
+                                    <ThemeVariant
+                                        key={theme._id}
+                                        name={theme.name}
+                                        colors={theme.colors}
+                                    />
+                                ))
+                            ) : (
+                                <p className="col-span-2 text-muted-foreground text-sm">
+                                    No themes found. Create one to see it here!
+                                </p>
+                            )}
                         </div>
                     </SheetDescription>
                 </SheetHeader>
             </SheetContent>
         </Sheet>
-    )
+    );
 }
