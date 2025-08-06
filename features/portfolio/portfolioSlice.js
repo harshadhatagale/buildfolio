@@ -162,6 +162,7 @@ export const {
   addSection,
   removeSection,
   setSections,
+  setTheme,
   setSelectedSection,
   updateSection,
   renameSection,

@@ -7,28 +7,27 @@ import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { cn } from "@/lib/utils";
 import { useSelector } from "react-redux";
+import { ModeToggle } from "../basics/ModeToggle";
 
-const Nav = ({id, content }) => {
+const Nav = ({ id, content }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
-  const [isSelected, setSelected]= useState(false)
-  useEffect(()=>{
-    const handleSelection=()=>{
-      if (selectedSection._id===id) {
+  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+  const [isSelected, setSelected] = useState(false)
+  useEffect(() => {
+    const handleSelection = () => {
+      if (selectedSection._id === id) {
         setSelected(true)
       }
-      else
-      {
+      else {
         setSelected(false)
       }
     }
-    if(selectedSection)
-    {
+    if (selectedSection) {
       handleSelection()
     }
   }, [selectedSection])
   return (
-    <header className={`${isSelected ? "selected-section": ""} sticky px-3 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
+    <header className={`${isSelected ? "selected-section" : ""} sticky px-3 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <div className="flex h-16 items-center justify-between w-full">
         {/* Logo */}
         <Link href="/" className="text-lg font-semibold">
@@ -50,6 +49,7 @@ const Nav = ({id, content }) => {
               {link.title}
             </Link>
           ))}
+          <ModeToggle/>
         </nav>
 
         {/* Mobile Navigation */}
@@ -59,6 +59,7 @@ const Nav = ({id, content }) => {
               <AlignRight className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
+            
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <SheetHeader>

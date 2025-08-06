@@ -1,25 +1,31 @@
 'use client'
+
 import SectionRenderer from '@/components/sections/SectionRenderer'
-import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'next/navigation'
-import { Skeleton } from '@/components/ui/skeleton'
+import { useSelector } from 'react-redux'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
 import FloatingEditBtn from '@/components/basics/FloatingEditBtn'
-import { useSelector } from 'react-redux'
+import { defaultTheme } from '../../../../../../features/portfolio/portfolioSlice'
 
 export default function PreviewPage() {
   const params = useParams()
   const [loading, setLoading] = useState(true)
   const [sections, setSections] = useState(null)
   const [error, setError] = useState(null)
-  const theme = useSelector((state) => state.portfolio.theme)
-  const themeMode = useSelector((state) => state.portfolio.themeMode)
+  const sectionRefs = useRef({})
+  const { theme } = useTheme()
+  const previewTheme = useSelector((state) => state.portfolio.theme)
 
-  // Apply theme styles
+  // Apply theme styles with default theme fallback
   const getThemeStyles = () => {
-    const colors = theme["dark"]
+    const colors = {
+      ...defaultTheme[theme === "dark" ? "dark" : "light"],   // fallback
+      ...previewTheme[theme === "dark" ? "dark" : "light"]    // user custom
+    }
+
     return {
-      '--radius': colors.radius,
       '--background': colors.background,
       '--foreground': colors.foreground,
       '--card': colors.card,
@@ -54,9 +60,16 @@ export default function PreviewPage() {
     }
   }
 
+  // Assign refs to each section
+  const assignSectionRef = (id, element) => {
+    if (element) {
+      sectionRefs.current[id] = element
+    }
+  }
+
   useEffect(() => {
     let isMounted = true
-    
+
     const fetchSections = async () => {
       try {
         if (!params.project) {
@@ -109,7 +122,7 @@ export default function PreviewPage() {
 
   if (error) {
     return (
-      <div 
+      <div
         className="p-4 text-center text-destructive"
         style={getThemeStyles()}
       >
@@ -121,7 +134,7 @@ export default function PreviewPage() {
 
   if (!sections || sections.length === 0) {
     return (
-      <div 
+      <div
         className="p-4 text-center text-muted-foreground"
         style={getThemeStyles()}
       >
@@ -131,19 +144,24 @@ export default function PreviewPage() {
   }
 
   return (
-    <div 
+    <div
+      suppressHydrationWarning
       className="space-y-8 bg-background text-foreground"
       style={getThemeStyles()}
     >
       {sections.map((section) => (
-        <div key={section._id} className="bg-card text-card-foreground">
+        <div
+          key={section._id}
+          ref={(el) => assignSectionRef(section._id, el)}
+          className="bg-card text-card-foreground"
+        >
           <SectionRenderer
             type={section.type}
             content={section.content}
           />
         </div>
       ))}
-      <FloatingEditBtn projectId={params.project}/>
+      <FloatingEditBtn projectId={params.project} />
     </div>
   )
 }

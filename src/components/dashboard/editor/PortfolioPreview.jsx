@@ -1,3 +1,5 @@
+'use client'
+
 import SectionRenderer from '@/components/sections/SectionRenderer'
 import { useTheme } from 'next-themes'
 import React, { useEffect, useState, useRef } from 'react'
@@ -15,7 +17,7 @@ export default function PortfolioPreview({ sections }) {
 
     // Apply theme styles with default theme fallback
     const getThemeStyles = () => {
-        // Merge user theme + default theme for safety
+        
         const colors = {
             ...defaultTheme[theme === "dark" ? "dark" : "light"],   // fallback
             ...previewTheme[theme === "dark" ? "dark" : "light"]    // user custom
