@@ -20,7 +20,7 @@ export default function HeroSection({id, content}) {
     }
   }, [selectedSection])
   return (
-    <section className={`${isSelected? "selected-section": ""} relative py-20 flex items-center justify-center bg-background px-6`}>
+    <section className={`${isSelected? "selected-section": ""} relative h-full py-20 flex items-center justify-center bg-background px-6`}>
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold text-foreground">
           {content.primaryHeading}
@@ -28,10 +28,10 @@ export default function HeroSection({id, content}) {
         <p className="text-muted-foreground text-lg md:text-xl">
           {content.secondaryHeading}
         </p>
-        <div className="flex justify-center gap-4">
+        {/* <div className="flex justify-center gap-4">
           <Button>Contact Me</Button>
           <Button variant="outline">View Projects</Button>
-        </div>
+        </div> */}
       </div>
     </section>
   )
