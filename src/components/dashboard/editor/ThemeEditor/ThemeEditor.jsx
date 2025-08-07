@@ -53,7 +53,7 @@ export default function ThemeEditor() {
                         </div>
                     </SheetTitle>
                     <SheetDescription asChild>
-                        <div suppressHydrationWarning className="mt-4 mx-auto gap-4 grid grid-cols-3 items-center">
+                        <div suppressHydrationWarning className="mt-4 overflow-y-auto mx-auto gap-4 grid grid-cols-3 items-center">
                             {loading ? (
                                 <div className="col-span-2 flex justify-center">
                                     <Loader2 className="animate-spin" size={24} />
