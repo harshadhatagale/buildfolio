@@ -39,13 +39,6 @@ export default function HeroProps() {
                 <Label htmlFor="sec_heading">Secondary Heading</Label>
                 <Textarea name="sec_heading" placeholder="I'm a full-stack developer passionate about building interactive websites and mobile apps. I specialize in React, Next.js, and Tailwind CSS." row="5" onChange={handleChange("secondaryHeading")} value={section.content.secondaryHeading || ""} />
             </div>
-            <div className="grid w-full max-w-sm items-center gap-3">
-                <Label >Call To Action</Label>
-                <div className='flex flex-wrap space-x-3 space-y-3'>
-                    <Button className={"w-[40%] cursor-pointer"} variant={"outline"}>Primary</Button>
-                    <Button className={"w-[40%] cursor-pointer"} variant={"outline"}>Secondary</Button>
-                </div>
-            </div>
         </div>
     )
 }

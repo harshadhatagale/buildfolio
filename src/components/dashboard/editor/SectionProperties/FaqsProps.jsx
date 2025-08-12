@@ -3,7 +3,7 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { GraduationCap, Plus, X, Pencil, Trash2, Check, ArrowUp, ArrowDown } from 'lucide-react'
+import { Plus, X, Pencil, Trash2, Check, ArrowUp, ArrowDown, HelpCircle } from 'lucide-react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedSection, updateSection } from '../../../../../features/portfolio/portfolioSlice'
@@ -11,16 +11,13 @@ import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'react-hot-toast'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
-export default function EducationProps() {
+export default function FaqsProps() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
   const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-  const [newEducation, setNewEducation] = useState({
-    degree: '',
-    institution: '',
-    year: '',
-    description: '',
-    icon: ''
+  const [newFaq, setNewFaq] = useState({
+    question: '',
+    answer: ''
   })
   const [editingIndex, setEditingIndex] = useState(-1)
   const [isAdding, setIsAdding] = useState(false)
@@ -38,85 +35,61 @@ export default function EducationProps() {
     dispatch(setSelectedSection({ ...section, content: newContent }))
   }
 
-  const handleEducationChange = (key, value, idx) => {
-    const updatedItems = [...section.content.items]
-    updatedItems[idx] = { ...updatedItems[idx], [key]: value }
-    const newContent = { ...section.content, items: updatedItems }
-    dispatch(updateSection({ _id: section._id, content: newContent }))
-    dispatch(setSelectedSection({ ...section, content: newContent }))
-  }
-
-  const handleAddEducation = () => {
-    if (!newEducation.degree.trim() || !newEducation.institution.trim()) {
-      toast.error('Degree and Institution are required')
+  const handleAddFaq = () => {
+    if (!newFaq.question.trim() || !newFaq.answer.trim()) {
+      toast.error('Question and Answer are required')
       return
     }
 
     const newContent = {
       ...section.content,
-      items: [...section.content.items, newEducation]
+      items: [...section.content.items, newFaq]
     }
 
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
 
-    setNewEducation({
-      degree: '',
-      institution: '',
-      year: '',
-      description: '',
-      icon: ''
-    })
+    setNewFaq({ question: '', answer: '' })
     setIsAdding(false)
-    toast.success('Education added')
+    toast.success('FAQ added')
   }
 
-  const handleEditEducation = (idx) => {
-    setNewEducation(section.content.items[idx])
+  const handleEditFaq = (idx) => {
+    setNewFaq(section.content.items[idx])
     setEditingIndex(idx)
     setIsAdding(true)
   }
 
-  const handleUpdateEducation = () => {
-    if (!newEducation.degree.trim() || !newEducation.institution.trim()) {
-      toast.error('Degree and Institution are required')
+  const handleUpdateFaq = () => {
+    if (!newFaq.question.trim() || !newFaq.answer.trim()) {
+      toast.error('Question and Answer are required')
       return
     }
 
     const updatedItems = [...section.content.items]
-    updatedItems[editingIndex] = newEducation
+    updatedItems[editingIndex] = newFaq
 
-    const newContent = {
-      ...section.content,
-      items: updatedItems
-    }
-
+    const newContent = { ...section.content, items: updatedItems }
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
 
-    setNewEducation({
-      degree: '',
-      institution: '',
-      year: '',
-      description: '',
-      icon: ''
-    })
+    setNewFaq({ question: '', answer: '' })
     setEditingIndex(-1)
     setIsAdding(false)
-    toast.success('Education updated')
+    toast.success('FAQ updated')
   }
 
-  const handleDeleteEducation = (idx) => {
+  const handleDeleteFaq = (idx) => {
     const updatedItems = [...section.content.items]
     updatedItems.splice(idx, 1)
 
     const newContent = { ...section.content, items: updatedItems }
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
-    toast.success('Education removed')
+    toast.success('FAQ removed')
   }
 
-  const handleMoveEducation = (idx, direction) => {
+  const handleMoveFaq = (idx, direction) => {
     if ((direction === 'up' && idx === 0) ||
       (direction === 'down' && idx === section.content.items.length - 1)) {
       return
@@ -135,7 +108,7 @@ export default function EducationProps() {
   return (
     <div className='w-full flex flex-col justify-center items-center gap-6'>
       <div className='w-full flex justify-start gap-3 items-center'>
-        <GraduationCap className="text-primary" />
+        <HelpCircle className="text-primary" />
         <h2>{section.name}</h2>
       </div>
 
@@ -145,7 +118,7 @@ export default function EducationProps() {
           <Label>Section Title</Label>
           <Input
             type="text"
-            placeholder="e.g. Education"
+            placeholder="e.g. Frequently Asked Questions"
             value={section.content.heading || ''}
             onChange={handleChange("heading")}
           />
@@ -155,7 +128,7 @@ export default function EducationProps() {
           <Label>Section Subtitle</Label>
           <Input
             type="text"
-            placeholder="e.g. My academic journey so far."
+            placeholder="e.g. Got questions? I’ve got answers."
             value={section.content.subHeading || ''}
             onChange={handleChange("subHeading")}
           />
@@ -164,19 +137,13 @@ export default function EducationProps() {
         {/* Items */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-medium">Education Items</h3>
+            <h3 className="text-lg font-medium">FAQ Items</h3>
             <Button
               size="sm"
               onClick={() => {
                 setIsAdding(true)
                 setEditingIndex(-1)
-                setNewEducation({
-                  degree: '',
-                  institution: '',
-                  year: '',
-                  description: '',
-                  icon: ''
-                })
+                setNewFaq({ question: '', answer: '' })
               }}
               disabled={isAdding}
             >
@@ -187,43 +154,19 @@ export default function EducationProps() {
           {(isAdding || editingIndex !== -1) && (
             <div className="border rounded-lg p-4 space-y-4 bg-card">
               <div className="space-y-2">
-                <Label>Degree*</Label>
+                <Label>Question*</Label>
                 <Input
-                  value={newEducation.degree}
-                  onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                  placeholder="e.g. Bachelor of Technology in Computer Science"
+                  value={newFaq.question}
+                  onChange={(e) => setNewFaq({ ...newFaq, question: e.target.value })}
+                  placeholder="e.g. Can I customize my portfolio after publishing?"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Institution*</Label>
-                <Input
-                  value={newEducation.institution}
-                  onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
-                  placeholder="e.g. GCOEJ - Government College of Engineering, Jalgaon"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Year</Label>
-                <Input
-                  value={newEducation.year}
-                  onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                  placeholder="e.g. 2022 - 2026"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Description</Label>
+                <Label>Answer*</Label>
                 <Textarea
-                  value={newEducation.description}
-                  onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
-                  placeholder="Describe the course and achievements"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Icon (optional)</Label>
-                <Input
-                  value={newEducation.icon}
-                  onChange={(e) => setNewEducation({ ...newEducation, icon: e.target.value })}
-                  placeholder="e.g. graduationCap"
+                  value={newFaq.answer}
+                  onChange={(e) => setNewFaq({ ...newFaq, answer: e.target.value })}
+                  placeholder="e.g. Yes! You can log in anytime to edit, add, or remove sections as you like."
                 />
               </div>
               <div className="flex justify-between gap-2">
@@ -233,20 +176,14 @@ export default function EducationProps() {
                   onClick={() => {
                     setIsAdding(false)
                     setEditingIndex(-1)
-                    setNewEducation({
-                      degree: '',
-                      institution: '',
-                      year: '',
-                      description: '',
-                      icon: ''
-                    })
+                    setNewFaq({ question: '', answer: '' })
                   }}
                 >
                   Cancel
                 </Button>
                 <Button
                   size="sm"
-                  onClick={editingIndex !== -1 ? handleUpdateEducation : handleAddEducation}
+                  onClick={editingIndex !== -1 ? handleUpdateFaq : handleAddFaq}
                 >
                   <Check size={16} className="mr-2" />
                   {editingIndex !== -1 ? 'Update' : 'Save'}
@@ -257,26 +194,26 @@ export default function EducationProps() {
 
           {/* Accordion list */}
           <Accordion type="single" collapsible>
-            {section.content.items?.map((edu, idx) => (
-              <AccordionItem key={idx} value={edu.degree + idx}>
+            {section.content.items?.map((faq, idx) => (
+              <AccordionItem key={idx} value={faq.question + idx}>
                 <div className="flex items-center">
                   <AccordionTrigger className="flex-1">
-                    <h4 className="text-sm font-medium">{edu.degree}</h4>
+                    <h4 className="text-sm font-medium">{faq.question}</h4>
                   </AccordionTrigger>
                   <div className="flex gap-1 pr-4">
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'up')}>
+                    <Button variant="ghost" size="icon" onClick={() => handleMoveFaq(idx, 'up')}>
                       <ArrowUp size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'down')}>
+                    <Button variant="ghost" size="icon" onClick={() => handleMoveFaq(idx, 'down')}>
                       <ArrowDown size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleEditEducation(idx)}>
+                    <Button variant="ghost" size="icon" onClick={() => handleEditFaq(idx)}>
                       <Pencil size={16} />
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleDeleteEducation(idx)}
+                      onClick={() => handleDeleteFaq(idx)}
                       className="text-destructive hover:text-destructive"
                     >
                       <Trash2 size={16} />
@@ -284,12 +221,7 @@ export default function EducationProps() {
                   </div>
                 </div>
                 <AccordionContent>
-                  <div className="border rounded-lg p-4 space-y-3">
-                    <p className="text-muted-foreground">{edu.institution}</p>
-                    <p className="text-sm text-muted-foreground">{edu.year}</p>
-                    <p className="text-sm">{edu.description}</p>
-                    {edu.icon && <p className="text-xs text-muted-foreground">Icon: {edu.icon}</p>}
-                  </div>
+                  <p className="text-muted-foreground">{faq.answer}</p>
                 </AccordionContent>
               </AccordionItem>
             ))}

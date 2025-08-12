@@ -8,6 +8,9 @@ import ExperienceProps from './SectionProperties/ExperienceProps'
 import FooterProps from './SectionProperties/FooterProps'
 import TestimonialsProps from './SectionProperties/TestimonialsProps'
 import ProjectsProps from './SectionProperties/ProjectsProps'
+import EducationProps from './SectionProperties/EducationProps'
+import CertificationsProps from './SectionProperties/CertificationsProps'
+import FaqsProps from './SectionProperties/FaqsProps'
 
 
 export default function PropertiesEditor() {
@@ -27,6 +30,12 @@ export default function PropertiesEditor() {
                 return <SkillsProps />;
             case "experience":
                 return <ExperienceProps />;
+            case "education":
+                return <EducationProps />;
+            case "certifications":
+                return <CertificationsProps />;
+            case "faqs":
+                return <FaqsProps />;
             case "footer":
                 return <FooterProps />;
             case "testimonials":

@@ -223,18 +223,6 @@ export default function ExperienceProps() {
                         onChange={handleChange("primaryHeading")}
                     />
                 </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor="desc">Description</Label>
-                    <Textarea
-                        id="desc"
-                        placeholder="Brief introduction about your experience"
-                        value={section.content.secondaryHeading || ''}
-                        onChange={handleChange("secondaryHeading")}
-                        rows={3}
-                    />
-                </div>
-
                 <div className="space-y-4">
                     <div className="flex space-y-2 flex-col justify-between items-center">
                         <h3 className="text-lg font-medium">Work Experiences</h3>

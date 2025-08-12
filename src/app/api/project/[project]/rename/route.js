@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/db"
 import Project from "../../../../../../models/Project";
 import { NextResponse } from "next/server";
+// api/project/[project]/rename
 export async function PATCH(req, { params }) {
     try {
         const { project } = await params

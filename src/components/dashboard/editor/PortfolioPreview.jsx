@@ -91,7 +91,7 @@ export default function PortfolioPreview({ sections }) {
                 <div
                     key={section._id}
                     ref={(el) => assignSectionRef(section._id, el)}
-                    className="bg-card text-card-foreground"
+                    className="bg-card relative text-card-foreground"
                 >
                     <SectionRenderer
                         id={section._id}

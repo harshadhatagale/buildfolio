@@ -3,7 +3,7 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { GraduationCap, Plus, X, Pencil, Trash2, Check, ArrowUp, ArrowDown } from 'lucide-react'
+import { BadgeCheck, Plus, X, Pencil, Trash2, Check, ArrowUp, ArrowDown, Link as LinkIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedSection, updateSection } from '../../../../../features/portfolio/portfolioSlice'
@@ -11,15 +11,16 @@ import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'react-hot-toast'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
-export default function EducationProps() {
+export default function CertificationsProps() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
   const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-  const [newEducation, setNewEducation] = useState({
-    degree: '',
-    institution: '',
+  const [newCert, setNewCert] = useState({
+    title: '',
+    issuer: '',
     year: '',
     description: '',
+    link: '',
     icon: ''
   })
   const [editingIndex, setEditingIndex] = useState(-1)
@@ -38,7 +39,7 @@ export default function EducationProps() {
     dispatch(setSelectedSection({ ...section, content: newContent }))
   }
 
-  const handleEducationChange = (key, value, idx) => {
+  const handleCertChange = (key, value, idx) => {
     const updatedItems = [...section.content.items]
     updatedItems[idx] = { ...updatedItems[idx], [key]: value }
     const newContent = { ...section.content, items: updatedItems }
@@ -46,45 +47,46 @@ export default function EducationProps() {
     dispatch(setSelectedSection({ ...section, content: newContent }))
   }
 
-  const handleAddEducation = () => {
-    if (!newEducation.degree.trim() || !newEducation.institution.trim()) {
-      toast.error('Degree and Institution are required')
+  const handleAddCert = () => {
+    if (!newCert.title.trim() || !newCert.issuer.trim()) {
+      toast.error('Title and Issuer are required')
       return
     }
 
     const newContent = {
       ...section.content,
-      items: [...section.content.items, newEducation]
+      items: [...section.content.items, newCert]
     }
 
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
 
-    setNewEducation({
-      degree: '',
-      institution: '',
+    setNewCert({
+      title: '',
+      issuer: '',
       year: '',
       description: '',
+      link: '',
       icon: ''
     })
     setIsAdding(false)
-    toast.success('Education added')
+    toast.success('Certification added')
   }
 
-  const handleEditEducation = (idx) => {
-    setNewEducation(section.content.items[idx])
+  const handleEditCert = (idx) => {
+    setNewCert(section.content.items[idx])
     setEditingIndex(idx)
     setIsAdding(true)
   }
 
-  const handleUpdateEducation = () => {
-    if (!newEducation.degree.trim() || !newEducation.institution.trim()) {
-      toast.error('Degree and Institution are required')
+  const handleUpdateCert = () => {
+    if (!newCert.title.trim() || !newCert.issuer.trim()) {
+      toast.error('Title and Issuer are required')
       return
     }
 
     const updatedItems = [...section.content.items]
-    updatedItems[editingIndex] = newEducation
+    updatedItems[editingIndex] = newCert
 
     const newContent = {
       ...section.content,
@@ -94,29 +96,30 @@ export default function EducationProps() {
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
 
-    setNewEducation({
-      degree: '',
-      institution: '',
+    setNewCert({
+      title: '',
+      issuer: '',
       year: '',
       description: '',
+      link: '',
       icon: ''
     })
     setEditingIndex(-1)
     setIsAdding(false)
-    toast.success('Education updated')
+    toast.success('Certification updated')
   }
 
-  const handleDeleteEducation = (idx) => {
+  const handleDeleteCert = (idx) => {
     const updatedItems = [...section.content.items]
     updatedItems.splice(idx, 1)
 
     const newContent = { ...section.content, items: updatedItems }
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
-    toast.success('Education removed')
+    toast.success('Certification removed')
   }
 
-  const handleMoveEducation = (idx, direction) => {
+  const handleMoveCert = (idx, direction) => {
     if ((direction === 'up' && idx === 0) ||
       (direction === 'down' && idx === section.content.items.length - 1)) {
       return
@@ -135,7 +138,7 @@ export default function EducationProps() {
   return (
     <div className='w-full flex flex-col justify-center items-center gap-6'>
       <div className='w-full flex justify-start gap-3 items-center'>
-        <GraduationCap className="text-primary" />
+        <BadgeCheck className="text-primary" />
         <h2>{section.name}</h2>
       </div>
 
@@ -145,7 +148,7 @@ export default function EducationProps() {
           <Label>Section Title</Label>
           <Input
             type="text"
-            placeholder="e.g. Education"
+            placeholder="e.g. Certifications"
             value={section.content.heading || ''}
             onChange={handleChange("heading")}
           />
@@ -155,7 +158,7 @@ export default function EducationProps() {
           <Label>Section Subtitle</Label>
           <Input
             type="text"
-            placeholder="e.g. My academic journey so far."
+            placeholder="e.g. Here are some of the certifications I have earned."
             value={section.content.subHeading || ''}
             onChange={handleChange("subHeading")}
           />
@@ -164,17 +167,18 @@ export default function EducationProps() {
         {/* Items */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-medium">Education Items</h3>
+            <h3 className="text-lg font-medium">Certification Items</h3>
             <Button
               size="sm"
               onClick={() => {
                 setIsAdding(true)
                 setEditingIndex(-1)
-                setNewEducation({
-                  degree: '',
-                  institution: '',
+                setNewCert({
+                  title: '',
+                  issuer: '',
                   year: '',
                   description: '',
+                  link: '',
                   icon: ''
                 })
               }}
@@ -187,43 +191,51 @@ export default function EducationProps() {
           {(isAdding || editingIndex !== -1) && (
             <div className="border rounded-lg p-4 space-y-4 bg-card">
               <div className="space-y-2">
-                <Label>Degree*</Label>
+                <Label>Title*</Label>
                 <Input
-                  value={newEducation.degree}
-                  onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                  placeholder="e.g. Bachelor of Technology in Computer Science"
+                  value={newCert.title}
+                  onChange={(e) => setNewCert({ ...newCert, title: e.target.value })}
+                  placeholder="e.g. Full Stack Web Development"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Institution*</Label>
+                <Label>Issuer*</Label>
                 <Input
-                  value={newEducation.institution}
-                  onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
-                  placeholder="e.g. GCOEJ - Government College of Engineering, Jalgaon"
+                  value={newCert.issuer}
+                  onChange={(e) => setNewCert({ ...newCert, issuer: e.target.value })}
+                  placeholder="e.g. Coursera"
                 />
               </div>
               <div className="space-y-2">
                 <Label>Year</Label>
                 <Input
-                  value={newEducation.year}
-                  onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                  placeholder="e.g. 2022 - 2026"
+                  value={newCert.year}
+                  onChange={(e) => setNewCert({ ...newCert, year: e.target.value })}
+                  placeholder="e.g. 2023"
                 />
               </div>
               <div className="space-y-2">
                 <Label>Description</Label>
                 <Textarea
-                  value={newEducation.description}
-                  onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
-                  placeholder="Describe the course and achievements"
+                  value={newCert.description}
+                  onChange={(e) => setNewCert({ ...newCert, description: e.target.value })}
+                  placeholder="Describe the certification and skills learned"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Link</Label>
+                <Input
+                  value={newCert.link}
+                  onChange={(e) => setNewCert({ ...newCert, link: e.target.value })}
+                  placeholder="e.g. https://coursera.org/certificate/xyz123"
                 />
               </div>
               <div className="space-y-2">
                 <Label>Icon (optional)</Label>
                 <Input
-                  value={newEducation.icon}
-                  onChange={(e) => setNewEducation({ ...newEducation, icon: e.target.value })}
-                  placeholder="e.g. graduationCap"
+                  value={newCert.icon}
+                  onChange={(e) => setNewCert({ ...newCert, icon: e.target.value })}
+                  placeholder="e.g. badgeCheck"
                 />
               </div>
               <div className="flex justify-between gap-2">
@@ -233,11 +245,12 @@ export default function EducationProps() {
                   onClick={() => {
                     setIsAdding(false)
                     setEditingIndex(-1)
-                    setNewEducation({
-                      degree: '',
-                      institution: '',
+                    setNewCert({
+                      title: '',
+                      issuer: '',
                       year: '',
                       description: '',
+                      link: '',
                       icon: ''
                     })
                   }}
@@ -246,7 +259,7 @@ export default function EducationProps() {
                 </Button>
                 <Button
                   size="sm"
-                  onClick={editingIndex !== -1 ? handleUpdateEducation : handleAddEducation}
+                  onClick={editingIndex !== -1 ? handleUpdateCert : handleAddCert}
                 >
                   <Check size={16} className="mr-2" />
                   {editingIndex !== -1 ? 'Update' : 'Save'}
@@ -257,26 +270,26 @@ export default function EducationProps() {
 
           {/* Accordion list */}
           <Accordion type="single" collapsible>
-            {section.content.items?.map((edu, idx) => (
-              <AccordionItem key={idx} value={edu.degree + idx}>
+            {section.content.items?.map((cert, idx) => (
+              <AccordionItem key={idx} value={cert.title + idx}>
                 <div className="flex items-center">
                   <AccordionTrigger className="flex-1">
-                    <h4 className="text-sm font-medium">{edu.degree}</h4>
+                    <h4 className="text-sm font-medium">{cert.title}</h4>
                   </AccordionTrigger>
                   <div className="flex gap-1 pr-4">
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'up')}>
+                    <Button variant="ghost" size="icon" onClick={() => handleMoveCert(idx, 'up')}>
                       <ArrowUp size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'down')}>
+                    <Button variant="ghost" size="icon" onClick={() => handleMoveCert(idx, 'down')}>
                       <ArrowDown size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleEditEducation(idx)}>
+                    <Button variant="ghost" size="icon" onClick={() => handleEditCert(idx)}>
                       <Pencil size={16} />
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleDeleteEducation(idx)}
+                      onClick={() => handleDeleteCert(idx)}
                       className="text-destructive hover:text-destructive"
                     >
                       <Trash2 size={16} />
@@ -285,10 +298,20 @@ export default function EducationProps() {
                 </div>
                 <AccordionContent>
                   <div className="border rounded-lg p-4 space-y-3">
-                    <p className="text-muted-foreground">{edu.institution}</p>
-                    <p className="text-sm text-muted-foreground">{edu.year}</p>
-                    <p className="text-sm">{edu.description}</p>
-                    {edu.icon && <p className="text-xs text-muted-foreground">Icon: {edu.icon}</p>}
+                    <p className="text-muted-foreground">{cert.issuer}</p>
+                    <p className="text-sm text-muted-foreground">{cert.year}</p>
+                    <p className="text-sm">{cert.description}</p>
+                    {cert.link && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-primary text-xs"
+                      >
+                        <LinkIcon size={14} /> View Certificate
+                      </a>
+                    )}
+                    {cert.icon && <p className="text-xs text-muted-foreground">Icon: {cert.icon}</p>}
                   </div>
                 </AccordionContent>
               </AccordionItem>

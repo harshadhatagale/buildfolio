@@ -27,7 +27,7 @@ const Nav = ({ id, content }) => {
     }
   }, [selectedSection])
   return (
-    <header className={`${isSelected ? "selected-section" : ""} fixed left-0 px-3 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
+    <header className={`${isSelected ? "selected-section" : ""} px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <div className="flex h-16 items-center justify-between w-full">
         {/* Logo */}
         <Link href="/" className="text-lg font-semibold">
