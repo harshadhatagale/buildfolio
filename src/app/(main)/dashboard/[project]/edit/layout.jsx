@@ -38,7 +38,7 @@ export default function EditorLayout({ children }) {
   }, [])
   return (
     <>
-      <Navbar />
+      <Navbar initialName={params.project}/>
       <Toolbar projectId={params.project}  sections={sections}/>
       <Sidebar projectId={params.project} />
       {children}

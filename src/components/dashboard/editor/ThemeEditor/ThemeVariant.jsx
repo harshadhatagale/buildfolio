@@ -8,7 +8,7 @@ import { setTheme } from '../../../../../features/portfolio/portfolioSlice';
 export default function ThemeVariant({ name, colors }) {
   const dispatch= useDispatch()
   return (
-    <div className='w-[110px] bg-card border-2 shadow-md space-y-2 rounded-md p-2 flex justify-center items-center flex-col'>
+    <div className='w-[140px] bg-card border-2 shadow-md space-y-2 rounded-md p-2 flex justify-center items-center flex-col'>
         <div className='w-full h-25 rounded-md overflow-hidden'>
             <div className='w-full h-full grid grid-cols-2'>
               <div style={{ background: colors?.light?.primary || "#ccc" }} />
