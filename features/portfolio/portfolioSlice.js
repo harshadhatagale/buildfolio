@@ -76,6 +76,7 @@ export const defaultTheme = {
 
 const initialState = {
   theme: defaultTheme,
+  project: {},
   themeMode: 'light', // renamed to avoid conflict
   selectedSection: null,
   past: [],
@@ -89,6 +90,9 @@ export const portfolioSlice = createSlice({
   name: "portfolio",
   initialState,
   reducers: {
+    setProject:(state, action)=>{
+      state.project= action.payload
+    },
     setSections: (state, action) => {
       state.present = action.payload;
       state.past = [];
@@ -159,6 +163,7 @@ export const portfolioSlice = createSlice({
 });
 
 export const {
+  setProject,
   addSection,
   removeSection,
   setSections,

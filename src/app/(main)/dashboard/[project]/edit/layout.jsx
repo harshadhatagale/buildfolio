@@ -6,15 +6,31 @@ import Sidebar from '@/components/dashboard/editor/Sidebar'
 import PropertiesBar from '@/components/dashboard/editor/Inspector'
 import { useParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSections } from '../../../../../../features/portfolio/portfolioSlice'
+import { setProject, setSections } from '../../../../../../features/portfolio/portfolioSlice'
 import Inspector from '@/components/dashboard/editor/Inspector'
 export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
+  const project = useSelector((state) => state.portfolio.project)
   const sections = useSelector((state) => state.portfolio.present)
   useEffect(() => {
+    const fetchProject = async () => {
+      try
+      {
+        const res = await fetch(`/api/project/${params.project}`, {
+        method: 'GET',
+      })
+      const data=await res.json()
+      dispatch(setProject(data.myproject))
+      console.log(data)
+      }
+      catch(error)
+      {
+        console.error(error)
+      }
+    }
     const fetchSections = async () => {
-     await fetch(`/api/sections`, {
+      await fetch(`/api/sections`, {
         method: 'POST',
         body: JSON.stringify({ projectId: params.project }),
         headers: {
@@ -33,16 +49,16 @@ export default function EditorLayout({ children }) {
           console.error('Error fetching sections:', error);
         });
     }
-
+    fetchProject();
     fetchSections();
   }, [])
   return (
     <>
-      <Navbar initialName={params.project}/>
-      <Toolbar projectId={params.project}  sections={sections}/>
+      <Navbar />
+      <Toolbar projectId={params.project} sections={sections} />
       <Sidebar projectId={params.project} />
       {children}
-      <Inspector/>
+      <Inspector />
     </>
   )
 }
