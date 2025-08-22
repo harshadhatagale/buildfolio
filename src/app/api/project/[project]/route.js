@@ -6,7 +6,7 @@ export async function GET(req, { params }) {
     const { project } = await params
     try {
         await dbConnect()
-        const myproject = await Project.findById(project)
+        const myproject = await Project.findById(project).pop
         if (!myproject) {
             return NextResponse.json({ error: "Project not found !" }, { status: 404 })
         }
