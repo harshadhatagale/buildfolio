@@ -59,11 +59,6 @@ export async function PATCH(req, { params }) {
         return NextResponse.json(
             { error: "Failed to update project!" + error },
             { status: 500 },
-            {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                }
-            }
         )
     }
 }
