@@ -1,5 +1,6 @@
 'use client'
 import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import {
   Github,
   Linkedin,
@@ -19,9 +20,26 @@ const iconMap = {
   globe: Globe
 };
 export default function Footer({id, content}) {
-  
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
+
   return (
-    <footer className={`relative w-full border-t bg-background px-6 py-5`}>
+    <footer className={`${isSelected? "selected-section": ""} relative w-full border-t bg-background px-6 py-5`}>
       <div className="container py-3 flex flex-col md:flex-row justify-between gap-6">
         {/* Left Side */}
         <div className="space-y-2 text-center md:text-left">

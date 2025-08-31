@@ -1,6 +1,7 @@
 'use client';
 
 import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import {
     GraduationCap,
     Book,
@@ -22,8 +23,25 @@ export default function EducationSection({id, content}) {
         book: Book,
         school: School
     };
+    const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
     return (
-        <section className={`relative w-full py-10 px-6 bg-background`}>
+        <section className={`${isSelected ? "selected-section" : ""} relative w-full py-10 px-6 bg-background`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

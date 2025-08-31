@@ -1,5 +1,6 @@
 'use client';
 import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +9,23 @@ import {
 } from '@/components/ui/accordion';
 
 export default function FaqsSection({id, content}) {
-
+ const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
     <section className={`${isSelected? "selected-section": ""} relative w-full py-3 bg-background px-6`}>
       <div className="container space-y-8">

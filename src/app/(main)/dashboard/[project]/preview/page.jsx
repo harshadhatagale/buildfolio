@@ -1,5 +1,6 @@
 'use client'
 
+import SectionRenderer from '@/components/sections/SectionRenderer'
 import { useTheme } from 'next-themes'
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'next/navigation'

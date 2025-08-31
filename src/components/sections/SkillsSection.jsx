@@ -1,7 +1,7 @@
 // components/SkillsSection.tsx
 import React, {useState, useEffect} from "react"
 import { Badge } from "@/components/ui/badge"
-
+import { useSelector } from "react-redux"
 
 export default function SkillsSection({id, content}) {
   const selectedSection= useSelector((state)=> state.portfolio.selectedSection)

@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
 
 export default function ServicesSection({ id, content }) {
@@ -25,9 +26,23 @@ export default function ServicesSection({ id, content }) {
         smartphone: Smartphone
     };
 
-    
+    const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+    const [isSelected, setSelected] = useState(false)
+    useEffect(() => {
+        const handleSelection = () => {
+            if (selectedSection._id === id) {
+                setSelected(true)
+            }
+            else {
+                setSelected(false)
+            }
+        }
+        if (selectedSection) {
+            handleSelection()
+        }
+    }, [selectedSection])
     return (
-        <section className={`relative w-full py-10 bg-background px-6`}>
+        <section className={`${isSelected ? "selected-section" : ""} relative w-full py-10 bg-background px-6`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

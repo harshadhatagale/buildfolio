@@ -1,10 +1,27 @@
 import React, {useState, useEffect} from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSelector } from 'react-redux';
 
 
 export default function TestimonialsSection({ id, content }) {
-  
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+    const [isSelected, setSelected]= useState(false)
+    useEffect(()=>{
+      const handleSelection=()=>{
+        if (selectedSection._id===id) {
+          setSelected(true)
+        }
+        else
+        {
+          setSelected(false)
+        }
+      }
+      if(selectedSection)
+      {
+        handleSelection()
+      }
+    }, [selectedSection])
   return (
     <section className={`${isSelected? "selected-section": ""} relative w-full py-10 bg-background px-6`}>
       <div className="container space-y-8">

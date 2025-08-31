@@ -1,6 +1,8 @@
-
+import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 export default function HeroSection({id, content}) {
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
   useEffect(()=>{
     const handleSelection=()=>{
       if (selectedSection._id===id) {

@@ -6,13 +6,28 @@ import { AlignRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "../globals/ModeToggle";
+import { useSelector } from "react-redux";
+import { ModeToggle } from "../basics/ModeToggle";
 
 const Nav = ({ id, content }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+  const [isSelected, setSelected] = useState(false)
+  useEffect(() => {
+    const handleSelection = () => {
+      if (selectedSection._id === id) {
+        setSelected(true)
+      }
+      else {
+        setSelected(false)
+      }
+    }
+    if (selectedSection) {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
-    <header className={`px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
+    <header className={`${isSelected ? "selected-section" : ""} px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <div className="flex h-16 items-center justify-between w-full">
         {/* Logo */}
         <Link href="/" className="text-lg font-semibold">

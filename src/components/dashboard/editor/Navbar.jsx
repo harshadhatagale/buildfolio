@@ -55,7 +55,7 @@ export default function Navbar({ name, logo }) {
           <Button
             onClick={() => handlePublish("public")}
             variant={"outline"}
-            className={"bg-emerald-500 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
+            className={"bg-emerald-500 hover:bg-emerald-500/50 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
           >
             <Globe size={20} />
             <span>Publish</span>
@@ -65,7 +65,7 @@ export default function Navbar({ name, logo }) {
           <Button
             onClick={() => handlePublish("private")}  // Note: changed to "private"
             variant={"outline"}
-            className={"bg-emerald-500 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
+            className={"bg-emerald-500 hover:bg-emerald-500/50 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
           >
             <Lock size={20} />
             <span>Make Private</span>
@@ -78,7 +78,7 @@ export default function Navbar({ name, logo }) {
             className={"bg-muted"}
             disabled
           >
-            <Loader size={20} />
+            <Loader size={20} className='animate-spin'/>
             <span>Loading</span>
           </Button>
         )}

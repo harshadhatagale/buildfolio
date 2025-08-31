@@ -1,9 +1,26 @@
 // components/ProjectsSection.jsx
 import { Button } from "@/components/ui/button"
 import React, {useState, useEffect} from "react"
+import { useSelector } from "react-redux"
 
 export default function ProjectsSection({id, content}) {
-  
+  const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
+  const [isSelected, setSelected]= useState(false)
+  useEffect(()=>{
+    const handleSelection=()=>{
+      if (selectedSection._id===id) {
+        setSelected(true)
+      }
+      else
+      {
+        setSelected(false)
+      }
+    }
+    if(selectedSection)
+    {
+      handleSelection()
+    }
+  }, [selectedSection])
   return (
     <section className={`${isSelected ? "selected-section" :""} relative bg-background py-10 px-6`}>
       <div className="max-w-6xl mx-auto">
