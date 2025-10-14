@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Triangle } from 'lucide-react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import { ModeToggle } from '@/components/basics/ModeToggle'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 export default function Navbar() {
   return (
     <div className="bg-background w-full h-16 flex justify-between items-center px-6 border-b-2 border-muted">
@@ -18,7 +19,7 @@ export default function Navbar() {
         <SignedIn>
           <UserButton />
         </SignedIn>
-        <ModeToggle />
+        <AnimatedThemeToggler/>
       </div>
     </div>
   )

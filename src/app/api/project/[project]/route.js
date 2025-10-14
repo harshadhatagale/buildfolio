@@ -2,9 +2,10 @@ import dbConnect from "@/lib/db"
 import Project from "../../../../../models/Project"
 import { NextResponse } from "next/server"
 
-export async function GET(req, { params }) {
-    const { project } = await params
+export async function GET(req, {params}) {
+
     try {
+        const { project } = await params
         await dbConnect()
         const myproject = await Project.findById(project)
         if (!myproject) {
@@ -14,6 +15,25 @@ export async function GET(req, { params }) {
     }
     catch (error) {
         return NextResponse.json({ error: "Failed to fetch project !" }, { status: 501 })
+    }
+}
+
+export async function POST(request, { params }) {
+    const { userId, name, urlSlug } = await request.json();
+
+    try {
+        await dbConnect();
+        const existingURLSlug = await Project.find({ urlSlug: urlSlug })
+        if (!existingURLSlug) {
+            const newProject = await Project({ userId: userId, name: name, theme: "", urlSlug: urlSlug });
+            await newProject.save();
+            return NextResponse.json({ message: "Project created Successfully!" }, { status: 201 });
+        }
+        else {
+            return NextResponse.json({ message: "URL slug is not available !" }, { status: 400 });
+        }
+    } catch (error) {
+        return NextResponse.json({ error: "Internal Server Error", error }, { status: 500 });
     }
 }
 

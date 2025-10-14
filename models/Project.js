@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const visibillityType = [
   "public",
   'private'
@@ -19,6 +20,12 @@ const ProjectSchema = new mongoose.Schema(
     theme:{
         type: mongoose.Schema.Types.Mixed,
         default:{}
+    },
+    urlSlug:{
+      type: String,
+      required:true,
+      unique: true,
+      default:""
     },
     visibillity:{
       type:String,

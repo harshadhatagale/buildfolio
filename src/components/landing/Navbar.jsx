@@ -6,6 +6,7 @@ import { SignedIn, SignInButton, SignOutButton, SignedOut, UserButton } from '@c
 import { Roboto, Inter } from 'next/font/google'
 import { Menu } from 'lucide-react'
 import { Button } from '../ui/button'
+import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
 
 const roboto = Roboto({
     subsets: ['latin'],
@@ -45,7 +46,7 @@ export default function Navbar() {
                     <SignedIn>
                         <UserButton />
                     </SignedIn>
-                    <ModeToggle />
+                    <AnimatedThemeToggler className={"cursor-pointer"}/>
                     <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
                 </div>
             </div>

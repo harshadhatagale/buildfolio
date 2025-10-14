@@ -367,7 +367,7 @@ export const GetDefaultContent = (type) => {
                 ],
 
                 copyright:
-                    "© 2025 Harshad Hatagale. All rights reserved. Built with ❤️ using Next.js & ShadCN."
+                    "© 2025 Harshad Hatagale. All rights reserved."
             }
             return content
         default:
