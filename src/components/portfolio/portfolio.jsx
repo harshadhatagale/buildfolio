@@ -3,27 +3,25 @@
 import SectionRenderer from './sections/SectionRenderer'
 import { useEffect, useState, useRef } from 'react'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
+import { useParams } from 'next/navigation'
 
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true)
   const [sections, setSections] = useState(null)
   const [error, setError] = useState(null)
+  const params= useParams()
   useEffect(() => {
     let isMounted = true
 
     const fetchSections = async () => {
       try {
-        if (!params.project) {
+        if (!params.portfolio) {
           throw new Error('Project ID is missing')
         }
 
-        const response = await fetch(`/api/sections`, {
-          method: 'POST',
-          body: JSON.stringify({ projectId: params.project }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        const response = await fetch(`/api/portfolio/${params.portfolio}`, {
+          method: 'GET',
         })
 
         if (!response.ok) {
@@ -33,8 +31,9 @@ export default function Portfolio() {
         const data = await response.json()
 
         if (isMounted) {
-          if (data.success) {
-            setSections(data.data)
+          if (data.myproject) {
+            console.log(data.myproject.sections)
+            setSections(data.myproject.sections)
           } else {
             setError(data.error || 'Failed to fetch sections')
           }
@@ -66,7 +65,6 @@ export default function Portfolio() {
     return (
       <div
         className="p-4 text-center text-destructive"
-        style={getThemeStyles()}
       >
         <p>Error loading sections:</p>
         <p className="text-sm">{error}</p>
@@ -78,7 +76,6 @@ export default function Portfolio() {
     return (
       <div
         className="p-4 text-center text-muted-foreground"
-        style={getThemeStyles()}
       >
         No sections found for this project
       </div>

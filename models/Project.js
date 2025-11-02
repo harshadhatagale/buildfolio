@@ -33,7 +33,7 @@ const ProjectSchema = new mongoose.Schema(
       default:"private",
       enum: visibillityType
     },
-    section: [
+    sections: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Section',

@@ -8,26 +8,13 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { cn } from "@/lib/utils";
 import { useSelector } from "react-redux";
 import { ModeToggle } from "@/components/basics/ModeToggle";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 const Nav = ({ id, content }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-  const [isSelected, setSelected] = useState(false)
-  useEffect(() => {
-    const handleSelection = () => {
-      if (selectedSection._id === id) {
-        setSelected(true)
-      }
-      else {
-        setSelected(false)
-      }
-    }
-    if (selectedSection) {
-      handleSelection()
-    }
-  }, [selectedSection])
+  
   return (
-    <header className={`${isSelected ? "selected-section" : ""} px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
+    <header className={`px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <div className="flex h-16 items-center justify-between w-full">
         {/* Logo */}
         <Link href="/" className="text-lg font-semibold">
@@ -49,7 +36,7 @@ const Nav = ({ id, content }) => {
               {link.title}
             </Link>
           ))}
-          <ModeToggle/>
+          <AnimatedThemeToggler/>
         </nav>
 
         {/* Mobile Navigation */}

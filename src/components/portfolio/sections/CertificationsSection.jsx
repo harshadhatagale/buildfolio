@@ -29,26 +29,9 @@ export default function CertificationsSection({id, content}) {
         cloud: Cloud,
         braces: Braces
     };
-    const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
-  const [isSelected, setSelected]= useState(false)
-  useEffect(()=>{
-    const handleSelection=()=>{
-      if (selectedSection._id===id) {
-        setSelected(true)
-      }
-      else
-      {
-        setSelected(false)
-      }
-    }
-    if(selectedSection)
-    {
-      handleSelection()
-    }
-  }, [selectedSection])
 
     return (
-        <section className={`${isSelected? "selected-section": ""} relative w-full py-10 bg-background px-6`}>
+        <section className={`relative w-full py-10 bg-background px-6`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

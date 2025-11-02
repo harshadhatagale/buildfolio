@@ -6,6 +6,8 @@ import { ArrowRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import PricingSection from '@/components/landing/PricingSection'
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text'
+import FeaturesSection from '@/components/landing/FeaturesSection'
+import Footer from '@/components/landing/FooterSection'
 const inter = Inter({
   subsets: ['latin'],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
@@ -44,6 +46,8 @@ export default function Page() {
         </div>
       </section>
       <PricingSection />
+      <FeaturesSection/>
+      <Footer/>
     </>
   )
 }

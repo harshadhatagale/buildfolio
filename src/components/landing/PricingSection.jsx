@@ -13,7 +13,7 @@ const inter = Inter({
 
 export default function PricingSection() {
   return (
-    <section className={`${inter.className} py-12 px-4 max-w-7xl mx-auto`}>
+    <section id='pricing' className={`${inter.className} py-12 px-4 max-w-7xl mx-auto`}>
       <div className="text-center mb-12">
         <h2 className='text-4xl font-bold mb-4'>Choose the plan that fits your needs</h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">

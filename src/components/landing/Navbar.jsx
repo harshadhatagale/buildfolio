@@ -19,22 +19,22 @@ const inter = Inter({
 export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
     return (
-        <nav className={`flex bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? ' h-[100vh] flex-col' : "h-16"}`}>
+        <nav className={`flex z-99 border-b border-muted sticky top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? ' h-[100vh] flex-col' : "h-16"}`}>
             <div className={`flex justify-between items-center w-full ${isNavOpen ? "h-16 flex justify-between items-center" : ""}`}>
                 <div className='flex justify-center items-center'>
                     <Link href={"/"} className={`text-xl font-bold`}>BuildFolio</Link>
                 </div>
                 <div className='hidden md:block'>
                     <ul className={`flex justify-center items-center gap-8`}>
-                        <Link href={"/pricing"}>Pricing</Link>
+                        <Link href={"#pricing"}>Pricing</Link>
                         <Link href={"/about"}>About</Link>
                         <Link href={"#"}>Documentation</Link>
-                        <Link href={"#"}>Features</Link>
+                        <Link href={"#features"}>Features</Link>
                     </ul>
                 </div>
                 <div className='flex justify-center items-center gap-4'>
                     <SignedIn>
-                        <Button variant={"secondary"} className={"cursor-pointer"} asChild>
+                        <Button variant={"outline"} className={"cursor-pointer"} asChild>
                             <Link href={"/dashboard"} className={`${roboto.className}`}>Dashboard</Link>
                         </Button>
                     </SignedIn>
