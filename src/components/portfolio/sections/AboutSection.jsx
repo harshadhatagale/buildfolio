@@ -10,7 +10,7 @@ export default function AboutSection({ id, content }) {
         {/* Image */}
         <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">
           <img
-            src={`https://media.licdn.com/dms/image/v2/D5603AQHxr5mE2KkGkQ/profile-displayphoto-scale_400_400/B56ZgisT7tHQAg-/0/1752928702690?e=1763596800&v=beta&t=qzO37s3-ygrAI8flMPwlH0dPZ8oZ8I5_LY6-vdbygk0`} // Add your image in public folder
+            src={content.avatar} // Add your image in public folder
             alt="Harshad"
             
             className="object-cover"
