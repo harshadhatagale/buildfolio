@@ -8,10 +8,10 @@ export default function AboutSection({ id, content }) {
     <div className={`relative py-10 px-5 bg-background`}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
-        <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">
+        <div className="relative w-full flex justify-center items-center h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">
           <Image
             src={content.avatar} // Add your image in public folder
-            alt="Harshad"
+            alt={content.name}
             fill
             className="object-cover"
           />
