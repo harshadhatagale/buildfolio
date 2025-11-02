@@ -9,10 +9,10 @@ export default function AboutSection({ id, content }) {
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
         <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">
-          <img
+          <Image
             src={content.avatar} // Add your image in public folder
             alt="Harshad"
-            
+            fill
             className="object-cover"
           />
         </div>
