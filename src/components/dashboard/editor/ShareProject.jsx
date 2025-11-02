@@ -13,7 +13,7 @@ import { slugify } from "./SectionProperties/NavProps"
 export default function ShareProject() {
     const [copied, setCopied] = useState(false)
     const project= useSelector((state)=> state.portfolio.project)
-    const portfolioLink = `https://buildfolio-three.vercel.app/${project.urlSlug}`// replace with dynamic link
+    const portfolioLink = `https://buildfolio-pro.vercel.app/${project.urlSlug}`// replace with dynamic link
 
     const handleCopy = () => {
         navigator.clipboard.writeText(portfolioLink)

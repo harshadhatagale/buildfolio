@@ -24,10 +24,10 @@ export default function Footer() {
               Product
             </h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/features" className="hover:text-blue-500">Features</Link></li>
-              <li><Link href="/pricing" className="hover:text-blue-500">Pricing</Link></li>
-              <li><Link href="/docs" className="hover:text-blue-500">Documentation</Link></li>
-              <li><Link href="/blog" className="hover:text-blue-500">Blog</Link></li>
+              <li><Link href="/home/#features" className="hover:text-blue-500">Features</Link></li>
+              <li><Link href="/home/#pricing" className="hover:text-blue-500">Pricing</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">Documentation</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">Blog</Link></li>
             </ul>
           </div>
 
@@ -37,10 +37,10 @@ export default function Footer() {
               Company
             </h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-blue-500">About</Link></li>
-              <li><Link href="/careers" className="hover:text-blue-500">Careers</Link></li>
-              <li><Link href="/contact" className="hover:text-blue-500">Contact</Link></li>
-              <li><Link href="/terms" className="hover:text-blue-500">Terms</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">About</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">Careers</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">Contact</Link></li>
+              <li><Link href="#" className="hover:text-blue-500">Terms</Link></li>
             </ul>
           </div>
 
@@ -71,9 +71,6 @@ export default function Footer() {
           <p className="text-sm text-gray-500 dark:text-gray-400">
             © {new Date().getFullYear()} BuildFolio. All rights reserved.
           </p>
-          <div className="text-sm text-gray-500 dark:text-gray-400 mt-3 md:mt-0">
-            Crafted with ❤️ by <span className="font-semibold text-blue-500">Harshad</span>
-          </div>
         </div>
       </div>
     </footer>

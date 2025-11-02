@@ -12,7 +12,7 @@ export default function AboutSection({ id, content }) {
           <img
             src={content.avatar} // Add your image in public folder
             alt={content.name}
-            className="object-cover"
+            className="object-contain"
           />
         </div>
 

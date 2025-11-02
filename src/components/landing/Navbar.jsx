@@ -22,7 +22,7 @@ export default function Navbar() {
         <nav className={`flex z-99 border-b border-muted sticky top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? ' h-[100vh] flex-col' : "h-16"}`}>
             <div className={`flex justify-between items-center w-full ${isNavOpen ? "h-16 flex justify-between items-center" : ""}`}>
                 <div className='flex justify-center items-center'>
-                    <Link href={"/"} className={`text-xl font-bold`}>BuildFolio</Link>
+                    <Link href={"/home"} className={`text-xl font-bold`}>BuildFolio</Link>
                 </div>
                 <div className='hidden md:block'>
                     <ul className={`flex justify-center items-center gap-8`}>

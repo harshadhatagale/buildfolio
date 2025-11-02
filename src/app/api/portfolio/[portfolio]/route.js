@@ -4,21 +4,23 @@ import { NextResponse } from "next/server"
 import Section from "../../../../../models/Section";
 
 export async function GET(req, { params }) {
-  try {
-    const { portfolio } = await params;
-    await dbConnect();
+    try {
+        const { portfolio } = await params;
+        await dbConnect();
 
-    const myproject= await Project.findOne({ urlSlug: portfolio }).populate("sections")
+        const myproject = await Project.findOne({ urlSlug: portfolio }).populate("sections")
 
-    if (!myproject) {
-      return NextResponse.json({ error: "Project not found!" }, { status: 404 });
+        if (!myproject) {
+            return NextResponse.json({ error: "Project not found!" }, { status: 404 });
+        }
+        if (myproject.visibillity === "private") {
+            return NextResponse.json({ error: "Project not found!" }, { status: 404 });
+        }
+        return NextResponse.json({ myproject }, { status: 200 });
+    } catch (error) {
+
+        return NextResponse.json({ error: "Failed to fetch project!" }, { status: 500 });
     }
-
-    return NextResponse.json({ myproject }, { status: 200 });
-  } catch (error) {
-    
-    return NextResponse.json({ error: "Failed to fetch project!" }, { status: 500 });
-  }
 }
 
 export async function POST(request, { params }) {
