@@ -1,9 +1,13 @@
+import Navbar from '@/components/landing/Navbar'
 import React from 'react'
 
 export default function AuthLayout({children}) {
   return (
-    <div className='h-full justify-center items-center flex'>
+    <>
+    <Navbar/>
+    <div className='flex justify-center mt-5 items-center w-full'>
         {children}
     </div>
+    </>
   )
 }

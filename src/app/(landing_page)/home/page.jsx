@@ -17,7 +17,7 @@ const inter = Inter({
 export default function Page() {
   return (
     <>
-      <section className='h-full w-full pt-36 relative flex justify-center items-center flex-col'>
+      <section className='h-full w-full pt-20 relative flex justify-center items-center flex-col'>
         <div className="z-10 flex items-center justify-center absolute top-5 text-center">
           <div
             className={cn(
@@ -41,7 +41,7 @@ export default function Page() {
             </span>
           </h1>
         </div>
-        <div className='flex justify-center items-center relative md:mt-[-50px]'>
+        <div className='flex justify-center items-center relative md:mt-[-65px]'>
           <Image src="/images/demo3.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
         </div>
       </section>

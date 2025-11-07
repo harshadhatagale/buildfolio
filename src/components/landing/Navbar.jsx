@@ -34,7 +34,7 @@ export default function Navbar() {
                 </div>
                 <div className='flex justify-center items-center gap-4'>
                     <SignedIn>
-                        <Button variant={"outline"} className={"cursor-pointer"} asChild>
+                        <Button variant={"outline"} className={"cursor-pointer md:block hidden"} asChild>
                             <Link href={"/dashboard"} className={`${roboto.className}`}>Dashboard</Link>
                         </Button>
                     </SignedIn>
@@ -52,10 +52,10 @@ export default function Navbar() {
             </div>
             <div className={`block md:hidden ${isNavOpen ? "h-[70%] flex flex-col justify-center items-center gap-5" : "hidden"}`}>
                 <ul className={`flex justify-center items-center gap-8 ${isNavOpen ? "flex flex-col justify-center items-center gap-5" : ""}`}>
-                    <Link href={"/pricing"}>Pricing</Link>
-                    <Link href={"/about"}>About</Link>
-                    <Link href={"#"}>Documentation</Link>
-                    <Link href={"#"}>Features</Link>
+                    <Link href={"/home#pricing"} onClick={()=> setIsNavOpen(false)}>Pricing</Link>
+                    <Link href={"#"} onClick={()=> setIsNavOpen(false)}>About</Link>
+                    <Link href={"/home#features"} onClick={()=> setIsNavOpen(false)}>Features</Link>
+                    <Link href={"#"} onClick={()=> setIsNavOpen(false)}>Documentation</Link>
                 </ul>
             </div>
         </nav>

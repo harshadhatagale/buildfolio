@@ -1,20 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AlignRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { useSelector } from "react-redux";
-import { ModeToggle } from "@/components/basics/ModeToggle";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 const Nav = ({ id, content }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className={`px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
+    <header className={`px-3 sticky top-0 left-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
       <div className="flex h-16 items-center justify-between w-full">
         {/* Logo */}
         <Link href="/" className="text-lg font-semibold">
