@@ -34,10 +34,6 @@ const SectionSchema = new mongoose.Schema(
       enum: SectionType,
       default: 'section',
     },
-    order: {
-      type: Number,
-      default: 0
-    },
     content: {
       type: Object,
       required: true,
@@ -51,7 +47,7 @@ const SectionSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt
+    timestamps: true, 
   }
 );
 export default mongoose.models.Section || mongoose.model('Section', SectionSchema);

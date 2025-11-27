@@ -61,6 +61,7 @@ export default function ThemeEditor() {
                             ) : themes.length > 0 ? (
                                 themes.map((theme) => (
                                     <ThemeVariant
+                                        id= {theme._id}
                                         key={theme._id}
                                         name={theme.name}
                                         colors={theme.colors}

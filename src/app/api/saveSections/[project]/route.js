@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(req, { params }) {
   try {
-    const { project } = params;
-    const { sections } = await req.json();
-
+    const { project } = await params;
+    const { sections, themeId } = await req.json();
+    console.log(themeId)
     if (!sections || !Array.isArray(sections)) {
       return NextResponse.json(
         { success: false, error: "Sections data must be an array" },
@@ -24,10 +24,8 @@ export async function POST(req, { params }) {
 
     await dbConnect();
 
-    // ✅ Delete old sections for this project
     await Section.deleteMany({ projectId: project });
 
-    // ✅ Prepare new sections for insertion
     const sectionsToInsert = sections.map((s) => {
       const id = s._id?.toString();
       if (id?.startsWith("temp-")) {
@@ -40,9 +38,16 @@ export async function POST(req, { params }) {
     // ✅ Insert all new sections
     const createdSections = await Section.insertMany(sectionsToInsert);
 
-    // ✅ Update Project's sections array
     const sectionIds = createdSections.map((sec) => sec._id);
-    await Project.findByIdAndUpdate(project, { sections: sectionIds });
+    await Project.findByIdAndUpdate(
+      project,
+      {
+        sections: sectionIds,
+        theme: themeId || null
+      },
+      { new: true }
+    );
+
 
     return NextResponse.json({
       success: true,

@@ -13,11 +13,9 @@ export default function PortfolioPreview({ sections }) {
     const { theme } = useTheme()
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     const previewTheme = useSelector((state) => state.portfolio.theme)
-    const previewThemeMode = useSelector((state) => state.portfolio.themeMode)
 
-    // Apply theme styles with default theme fallback
     const getThemeStyles = () => {
-        
+
         const colors = {
             ...defaultTheme[theme === "dark" ? "dark" : "light"],   // fallback
             ...previewTheme[theme === "dark" ? "dark" : "light"]    // user custom

@@ -1,100 +1,111 @@
 'use client'
 
 import SectionRenderer from './sections/SectionRenderer'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
+import { defaultTheme } from '../../../features/portfolio/portfolioSlice'
 import { useParams } from 'next/navigation'
-
+import { useTheme } from 'next-themes'
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true)
   const [sections, setSections] = useState(null)
   const [error, setError] = useState(null)
-  const params= useParams()
-  useEffect(() => {
-    let isMounted = true
 
+  const { theme } = useTheme()
+  const params = useParams()
+
+  useEffect(() => {
     const fetchSections = async () => {
       try {
-        if (!params.portfolio) {
-          throw new Error('Project ID is missing')
-        }
+        const res = await fetch(`/api/portfolio/${params.portfolio}`)
+        const data = await res.json()
 
-        const response = await fetch(`/api/portfolio/${params.portfolio}`, {
-          method: 'GET',
-        })
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-
-        const data = await response.json()
-
-        if (isMounted) {
-          if (data.myproject) {
-            console.log(data.myproject.sections)
-            setSections(data.myproject.sections)
-          } else {
-            setError(data.error || 'Failed to fetch sections')
-          }
+        if (data.myproject) {
+          setSections(data.myproject.sections)
+          setThemeId(data.myproject.theme) // *** FIXED ***
+        } else {
+          setError(data.error)
         }
       } catch (err) {
-        if (isMounted) {
-          console.error('Error fetching sections:', err)
-          setError(err.message)
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false)
-        }
+        setError(err.message)
       }
+      setLoading(false)
     }
 
     fetchSections()
-
-    return () => {
-      isMounted = false
-    }
   }, [params.project])
 
-  if (loading) {
-    return <PreviewSkeleton />
+  useEffect(() => {
+    if (!themeId) return
+
+    const fetchTheme = async () => {
+      const res = await fetch(`/api/themes/${themeId}`) 
+      const data = await res.json()
+
+      if (data.success) {
+        console.log(data.theme.colors)
+        setThemeColors(data.theme.colors) 
+      }
+    }
+
+    fetchTheme()
+  }, [themeId])
+
+  const getThemeStyles = () => {
+    const mode = theme === "dark" ? "dark" : "light"
+
+    const colors = {
+      ...defaultTheme[theme === "dark" ? "dark" : "light"],   // fallback
+      ...themeColors?.[theme === "dark" ? "dark" : "light"]    // user custom
+    }
+
+    return {
+      '--background': colors.background,
+      '--foreground': colors.foreground,
+      '--card': colors.card,
+      '--card-foreground': colors.cardForeground,
+      '--popover': colors.popover,
+      '--popover-foreground': colors.popoverForeground,
+      '--primary': colors.primary,
+      '--primary-foreground': colors.primaryForeground,
+      '--secondary': colors.secondary,
+      '--secondary-foreground': colors.secondaryForeground,
+      '--muted': colors.muted,
+      '--muted-foreground': colors.mutedForeground,
+      '--accent': colors.accent,
+      '--accent-foreground': colors.accentForeground,
+      '--destructive': colors.destructive,
+      '--border': colors.border,
+      '--input': colors.input,
+      '--ring': colors.ring,
+      '--chart-1': colors.chart1,
+      '--chart-2': colors.chart2,
+      '--chart-3': colors.chart3,
+      '--chart-4': colors.chart4,
+      '--chart-5': colors.chart5,
+      '--sidebar': colors.sidebar,
+      '--sidebar-foreground': colors.sidebarForeground,
+      '--sidebar-primary': colors.sidebarPrimary,
+      '--sidebar-primary-foreground': colors.sidebarPrimaryForeground,
+      '--sidebar-accent': colors.sidebarAccent,
+      '--sidebar-accent-foreground': colors.sidebarAccentForeground,
+      '--sidebar-border': colors.sidebarBorder,
+      '--sidebar-ring': colors.sidebarRing,
+    }
   }
 
-  if (error) {
-    return (
-      <div
-        className="p-4 text-center text-destructive"
-      >
-        <p>Error loading sections:</p>
-        <p className="text-sm">{error}</p>
-      </div>
-    )
-  }
-
-  if (!sections || sections.length === 0) {
-    return (
-      <div
-        className="p-4 text-center text-muted-foreground"
-      >
-        No sections found for this project
-      </div>
-    )
-  }
+  if (loading) return <PreviewSkeleton />
+  if (error) return <div className="p-4 text-center text-destructive">{error}</div>
 
   return (
     <div
       className="space-y-8 bg-background text-foreground"
+      style={getThemeStyles()}
     >
-      {sections.map((section) => (
-        <div
-          key={section._id}
-          className="bg-card text-card-foreground"
-        >
-          <SectionRenderer
-            type={section.type}
-            content={section.content}
-          />
+      {sections.map(section => (
+        <div key={section._id} className="bg-card text-card-foreground">
+          <SectionRenderer type={section.type} content={section.content} />
         </div>
       ))}
     </div>

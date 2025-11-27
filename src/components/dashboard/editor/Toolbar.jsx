@@ -9,15 +9,15 @@ export default function Toolbar() {
   const params = useParams()
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
-
+  const themeId = useSelector((state) => state.portfolio.themeId)
   const handleSave = async () => {
     // Create a promise toast
+    console.log(themeId)
     const savePromise = new Promise(async (resolve, reject) => {
       try {
-        console.log('Saving Sections:', sections);
         const res = await fetch(`/api/saveSections/${params.project}`, {
           method: 'POST',
-          body: JSON.stringify({ sections }),
+          body: JSON.stringify({ sections, themeId }),
           headers: { 'Content-Type': 'application/json' },
         });
 

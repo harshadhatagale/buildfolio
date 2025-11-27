@@ -76,8 +76,9 @@ export const defaultTheme = {
 
 const initialState = {
   theme: defaultTheme,
+  themeId: null,
   project: {},
-  themeMode: 'light', // renamed to avoid conflict
+  themeMode: 'light', 
   selectedSection: null,
   past: [],
   present: [],
@@ -156,8 +157,13 @@ export const portfolioSlice = createSlice({
         state.selectedSection = null;
       }
     },
+    setThemeColors: (state, action) => {
+      const {colors}= action.payload
+      state.theme = colors
+    },
     setTheme: (state, action) => {
-      state.theme = action.payload
+      const {id}= action.payload
+      state.themeId= id
     }
   }
 });
@@ -167,6 +173,7 @@ export const {
   addSection,
   removeSection,
   setSections,
+  setThemeColors,
   setTheme,
   setSelectedSection,
   updateSection,

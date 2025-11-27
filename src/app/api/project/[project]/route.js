@@ -1,20 +1,19 @@
 import dbConnect from "@/lib/db"
 import Project from "../../../../../models/Project"
 import { NextResponse } from "next/server"
-
+import Section from "../../../../../models/Section"
 export async function GET(req, {params}) {
-
     try {
         const { project } = await params
         await dbConnect()
-        const myproject = await Project.findById(project)
+        const myproject = await Project.findById(project).populate("sections")
         if (!myproject) {
             return NextResponse.json({ error: "Project not found !" }, { status: 404 })
         }
         return NextResponse.json({ myproject }, { status: 200 })
     }
     catch (error) {
-        return NextResponse.json({ error: "Failed to fetch project !" }, { status: 501 })
+        return NextResponse.json({ error: `Failed to fetch project ! ${error}` }, { status: 501 })
     }
 }
 

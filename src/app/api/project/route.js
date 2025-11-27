@@ -29,8 +29,7 @@ export async function POST(request) {
         // Create and save new project
         const newProject = new Project({ 
             userId: userId, 
-            name: name, 
-            theme: "", 
+            name: name,
             urlSlug: urlSlug 
         });
         

@@ -18,8 +18,10 @@ const ProjectSchema = new mongoose.Schema(
       trim: true,
     },
     theme:{
-        type: mongoose.Schema.Types.Mixed,
-        default:{}
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Theme',
+        required: false,
+        default: null
     },
     urlSlug:{
       type: String,
@@ -41,7 +43,7 @@ const ProjectSchema = new mongoose.Schema(
     ],
   },
   {
-    timestamps: true, // adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 export default mongoose.models.Project || mongoose.model('Project', ProjectSchema)
