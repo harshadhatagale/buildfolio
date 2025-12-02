@@ -2,6 +2,12 @@
 
 @plugin "tailwindcss-animate";
 
+.cl-internal-fcx671 ,
+.cl-internal-tk30ch {
+  visibility: hidden;
+}
+
+
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;

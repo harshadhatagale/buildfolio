@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { FileIcon, PlusIcon } from "lucide-react";
 
 export default function CreateProject({ onProjectCreated, userId }) {
   const [name, setName] = useState("");
@@ -52,7 +53,10 @@ export default function CreateProject({ onProjectCreated, userId }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create Project</Button>
+        <Button className="dark:text-black">
+          <FileIcon/>
+          <span>Create Project</span>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

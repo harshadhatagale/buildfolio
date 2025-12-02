@@ -16,6 +16,7 @@ export async function GET(req, { params }) {
         if (myproject.visibillity === "private") {
             return NextResponse.json({ error: "Project not found!" }, { status: 404 });
         }
+        console.log("Portfolio:")
         return NextResponse.json({ myproject }, { status: 200 });
     } catch (error) {
 

@@ -9,7 +9,6 @@ export default function ProjectList({ user, projects, setProjects }) {
     const [loading, setLoading] = useState(true);
     const [isCreating, setIsCreating] = useState(false);
 
-    // ✅ Fetch projects
     const fetchProjects = async () => {
         if (!user) return;
         try {
@@ -89,6 +88,7 @@ export default function ProjectList({ user, projects, setProjects }) {
                             id={project._id}
                             name={project.name}
                             urlSlug={project.urlSlug}
+                            visibillity={project.visibillity}
                             onDelete={() => {
                                 setProjects(prev => prev.filter(p => p._id !== project._id));
                             }}

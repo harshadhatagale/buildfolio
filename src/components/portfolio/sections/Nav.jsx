@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { ModeToggle } from "@/components/globals/ModeToggle";
 
 const Nav = ({ id, content }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,7 @@ const Nav = ({ id, content }) => {
               {link.title}
             </Link>
           ))}
-          <AnimatedThemeToggler />
+          <ModeToggle/>
         </nav>
 
         {/* Mobile Navigation - Fixed Structure */}

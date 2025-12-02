@@ -31,8 +31,8 @@ export default function Navbar() {
                     <ul className="flex justify-center items-center gap-8">
                         <ToolsDropdown />
                         <Link href={"/home#pricing"}>Pricing</Link>
-                        <Link href={"/about"}>About</Link>   {/* Added */}
                         <Link href={"/home#features"}>Features</Link>
+                        <Link href={"/about"}>About</Link>   
                     </ul>
                 </div>
 

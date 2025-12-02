@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Linkedin, Github, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 
 const TeamMember = ({ name, role, bio, img, links = {} }) => (
@@ -42,6 +45,7 @@ const TeamMember = ({ name, role, bio, img, links = {} }) => (
 );
 
 export default function AboutPage() {
+  const router= useRouter()
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Hero */}
@@ -53,8 +57,8 @@ automated templates, AI and share-first growth loops.
         </p>
 
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button variant="secondary" className="px-6">Get Started</Button>
-          <Button variant="ghost" className="px-6">See Templates</Button>
+          <Button variant="secondary" onClick={()=> router.push("/sign-in")} className="px-6">Get Started</Button>
+          <Button variant="ghost" onClick={()=> router.push("/login")} className="px-6">See Templates</Button>
         </div>
       </section>
 
