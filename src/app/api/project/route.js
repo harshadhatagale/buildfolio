@@ -16,7 +16,6 @@ export async function POST(request) {
 
         await dbConnect();
         
-        // Check if URL slug already exists
         const existingProject = await Project.findOne({ urlSlug: urlSlug });
         
         if (existingProject) {
@@ -26,7 +25,14 @@ export async function POST(request) {
             );
         }
         
-        // Create and save new project
+        const projectCount = await Project.countDocuments({ userId: userId });
+        if (projectCount > 0)
+        {
+            return NextResponse.json(
+                { message: "Limit is reached! Upgrade your subscription plan!" }, 
+                { status: 403 } 
+            );
+        }
         const newProject = new Project({ 
             userId: userId, 
             name: name,

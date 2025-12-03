@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addSection, setSelectedSection } from "../../../features/portfolio/portfolioSlice";
 import { GetDefaultContent } from "../getDefaultContent";
+import toast from "react-hot-toast";
 
 export const useAddSection = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ export const useAddSection = () => {
   const handleAddSection = async ({ type }) => {
     const content = GetDefaultContent(type)
     const existingNames = sections.map((sec) => sec.name)
+    
     const untitledCount = sections.filter((s) => s.name.startsWith("Untitled")).length
     const name = `Untitled section ${untitledCount + 1}`
 
@@ -25,7 +27,15 @@ export const useAddSection = () => {
       order: sections.length > 0 ? sections.length : 0
     }
     try {
-      dispatch(addSection(section));
+      if (sections.length < 8 )
+      {
+        dispatch(addSection(section));
+      }
+      else
+      {
+        toast.error("Section limit reached. Cannot add more sections.");
+        return;
+      }
       dispatch(setSelectedSection(section));
     } catch (error) {
       console.error("Error adding section:", error);

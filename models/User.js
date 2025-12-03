@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
+const SubscriptionTypes = ['free', 'basic', 'premium']
+
 const UserSchema = new mongoose.Schema(
     {
         userId:{
@@ -31,9 +33,14 @@ const UserSchema = new mongoose.Schema(
             twitter: { type: String },
             website: { type: String },
         },
+        subscriptionType:{
+            type: String,
+            enum: SubscriptionTypes,
+            default:'free'
+        }
     },
     {
-        timestamps: true, // adds createdAt and updatedAt
+        timestamps: true,
     }
 )
 export default mongoose.models.User || mongoose.model('User', UserSchema)

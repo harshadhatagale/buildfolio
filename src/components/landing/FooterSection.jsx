@@ -1,6 +1,7 @@
 import React from "react";
 import { Github, Twitter, Linkedin, Globe } from "lucide-react";
 import Link from "next/link";
+import Logo from "../basics/Logo";
 
 export default function Footer() {
   return (
@@ -10,8 +11,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              BuildFolio
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex justify-start items-center gap-1">
+              <Logo/> <span className="font-bold text-xl">BuildFolio</span>
             </h2>
             <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
               The easiest way to build, design and share your professional portfolio.

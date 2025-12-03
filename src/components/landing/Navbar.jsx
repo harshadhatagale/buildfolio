@@ -8,6 +8,7 @@ import { Menu } from 'lucide-react'
 import { Button } from '../ui/button'
 import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
 import ToolsDropdown from './ToolsDropdown'
+import Logo from '../basics/Logo'
 
 const roboto = Roboto({ subsets: ['latin'] })
 const inter = Inter({ subsets: ['latin'] })
@@ -17,22 +18,24 @@ export default function Navbar() {
 
     return (
         <nav className={`flex z-99 border-b border-muted sticky top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? 'h-[100vh] flex-col' : 'h-16'}`}>
-            
+
             {/* TOP ROW */}
             <div className={`flex justify-between items-center w-full ${isNavOpen ? 'h-16' : ''}`}>
-                
+
                 {/* Logo */}
-                <Link href={"/home"} className="text-xl font-bold">
-                    BuildFolio
+                <Link href={"/home"} className="text-xl font-bold cursor-pointer flex justify-center items-center gap-1">
+                    <Logo />
+                    <span className='text-xl'>BuildFolio</span>
                 </Link>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:block">
                     <ul className="flex justify-center items-center gap-8">
-                        <ToolsDropdown />
+                        {/* <ToolsDropdown /> */}
+                        <Link href={"/home"}>Home</Link>
                         <Link href={"/home#pricing"}>Pricing</Link>
                         <Link href={"/home#features"}>Features</Link>
-                        <Link href={"/about"}>About</Link>   
+                        <Link href={"/about"}>About</Link>
                     </ul>
                 </div>
 
