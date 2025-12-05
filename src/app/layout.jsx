@@ -3,6 +3,7 @@ import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import { Outfit, Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import NextTopLoader from "nextjs-toploader";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,6 +34,18 @@ export default function RootLayout({ children }) {
           className={`${outfit.className} min-h-screen bg-background`}
         >
           <ThemeProvider>
+            <NextTopLoader
+              color="#2b7fff"
+              initialPosition={0.08}
+              crawlSpeed={400}
+              height={4}
+              crawl={true}
+              easing="ease"
+              showSpinner={false}
+              speed={100}
+              zIndex={1600}
+              showAtBottom={false}
+            />
             {children}
           </ThemeProvider>
         </body>
