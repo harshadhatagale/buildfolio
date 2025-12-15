@@ -13,7 +13,6 @@ import {
 import { motion } from "framer-motion";
 import Header from "./sections/Header";
 import { useUser, SignInButton } from "@clerk/nextjs";
-import GitStats from "./sections/GitStats";
 
 export default function DeveloperProfilePage() {
     const { isLoaded, isSignedIn, user } = useUser();
