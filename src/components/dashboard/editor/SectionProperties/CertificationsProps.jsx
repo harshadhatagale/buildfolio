@@ -1,5 +1,5 @@
 'use client'
-
+import IconChooser from '@/components/icons/iconChooser'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,6 @@ import { setSelectedSection, updateSection } from '../../../../../features/portf
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'react-hot-toast'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-
 export default function CertificationsProps() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
@@ -232,10 +231,11 @@ export default function CertificationsProps() {
               </div>
               <div className="space-y-2">
                 <Label>Icon (optional)</Label>
-                <Input
+                <IconChooser
                   value={newCert.icon}
-                  onChange={(e) => setNewCert({ ...newCert, icon: e.target.value })}
-                  placeholder="e.g. badgeCheck"
+                  onChange={(icon) =>
+                    setNewCert({ ...newCert, icon })
+                  }
                 />
               </div>
               <div className="flex justify-between gap-2">
