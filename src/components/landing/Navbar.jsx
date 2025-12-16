@@ -9,6 +9,7 @@ import { Button } from '../ui/button'
 import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
 import ToolsDropdown from './ToolsDropdown'
 import Logo from '../basics/Logo'
+import ProfileBtn from '../basics/ProfileBtn'
 
 const roboto = Roboto({ subsets: ['latin'] })
 const inter = Inter({ subsets: ['latin'] })
@@ -55,7 +56,7 @@ export default function Navbar() {
                         </SignInButton>
                     </SignedOut>
 
-                    <SignedIn><UserButton /></SignedIn>
+                    <SignedIn><ProfileBtn/></SignedIn>
                     <AnimatedThemeToggler className="cursor-pointer" />
                     <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
                 </div>

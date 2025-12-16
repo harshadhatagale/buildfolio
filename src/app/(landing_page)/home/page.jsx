@@ -45,9 +45,9 @@ export default function Page() {
           <Image src="/images/demo3.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
         </div>
       </section>
+      <FeaturesSection />
       <PricingSection />
-      <FeaturesSection/>
-      <Footer/>
+      <Footer />
     </>
   )
 }

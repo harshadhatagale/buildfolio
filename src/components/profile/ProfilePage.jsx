@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
     Github, Linkedin, Twitter, Globe, Code2, Terminal,
-    Cpu, GitBranch, Palette, Shield, Zap
+    Cpu, GitBranch, Palette, Shield, Zap,
+    LoaderPinwheel
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Header from "./sections/Header";
@@ -21,7 +21,7 @@ export default function DeveloperProfilePage() {
     if (!isLoaded) {
         return (
             <div className="flex items-center justify-center h-screen text-xl">
-                Loading…
+                <LoaderPinwheel className="animate-spin" size={28}/>
             </div>
         );
     }
