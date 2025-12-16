@@ -14,37 +14,37 @@ import CertificationsSection from './CertificationsSection';
 import FaqsSection from './FaqsSection';
 import AchievementsSection from './AchievementsSection';
 
-export default function SectionRenderer({ id, type,content }) {
+export default function SectionRenderer({ id,name, type,content }) {
   const renderSection = () => {
     switch (type) {
       case 'hero':
-        return <HeroSection id={id}  content={content}/>;
+        return <HeroSection name={name} id={id}  content={content}/>;
       case 'nav':
-        return <Nav id={id} content={content}/>;
+        return <Nav name={name} id={id} content={content}/>;
       case 'about':
-        return <AboutSection id={id} content={content}/>;
+        return <AboutSection name={name} id={id} content={content}/>;
       case 'skills':
-        return <SkillsSection id={id} content={content}/>;
+        return <SkillsSection name={name} id={id} content={content}/>;
       case 'experience':
-        return <ExperienceSection id={id} content={content}/>;
+        return <ExperienceSection name={name} id={id} content={content}/>;
       case 'testimonials':
-        return <TestimonialsSection id={id} content={content}/>;
+        return <TestimonialsSection name={name} id={id} content={content}/>;
       case 'footer':
-        return <Footer id={id} content={content}/>;
+        return <Footer name={name} id={id} content={content}/>;
       case 'projects':
-        return <ProjectsSection id={id} content={content}/>;
+        return <ProjectsSection name={name} id={id} content={content}/>;
       case "services":
-        return <ServicesSection id={id} content={content}/>
+        return <ServicesSection name={name} id={id} content={content}/>
       case "education":
-        return <EducationSection id={id} content={content}/>
+        return <EducationSection name={name} id={id} content={content}/>
       case "certifications":
-        return <CertificationsSection id={id} content={content}/>
+        return <CertificationsSection name={name} id={id} content={content}/>
       case "faqs":
-        return <FaqsSection id={id} content={content}/>
+        return <FaqsSection name={name} id={id} content={content}/>
       case "achievements":
-        return <AchievementsSection id={id} content={content}/>
+        return <AchievementsSection name={name} id={id} content={content}/>
       default:
-        return <SimpleSection id={id} content={content}/>;
+        return <SimpleSection name={name} id={id} content={content}/>;
     }
   };
 

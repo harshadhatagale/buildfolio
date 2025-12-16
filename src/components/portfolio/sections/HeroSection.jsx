@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-export default function HeroSection({id, content}) {
+export default function HeroSection({id,name, content}) {
   
   return (
-    <section className={`h-[calc(80vh-40px)] relative flex items-center justify-center bg-background px-6`}>
+    <section id={name} className={`h-[calc(100vh-100px)] relative flex items-center justify-center bg-background px-6`}>
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold text-foreground">
           {content.primaryHeading}

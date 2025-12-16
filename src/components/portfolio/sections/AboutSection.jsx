@@ -2,10 +2,10 @@
 import Image from "next/image"
 import { useSelector } from "react-redux"
 import React, { useState, useEffect } from "react"
-export default function AboutSection({ id, content }) {
+export default function AboutSection({ id,name, content }) {
  
   return (
-    <div className={`relative py-10 px-5 bg-background`}>
+    <div id={name} className={`relative py-20 px-5 bg-background`}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
         <div className="relative w-full flex justify-center items-center h-72 md:h-96 rounded-xl overflow-hidden shadow-lg">

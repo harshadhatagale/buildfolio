@@ -17,14 +17,14 @@ import {
     CardContent
 } from '@/components/ui/card';
 
-export default function EducationSection({id, content}) {
+export default function EducationSection({id,name, content}) {
     const iconMap = {
         graduationcap: GraduationCap,
         book: Book,
         school: School
     };
     return (
-        <section className={`relative w-full py-10 px-6 bg-background`}>
+        <section id={name} className={`relative w-full py-20 px-6 bg-background`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

@@ -21,16 +21,14 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-export default function CertificationsSection({id, content}) {
-
-
+export default function CertificationsSection({id,name, content}) {
     const iconMap = {
         badgecheck: BadgeCheck,
         cloud: Cloud,
         braces: Braces
     };
     return (
-        <section className={`relative w-full py-10 bg-background px-6`}>
+        <section id={name} className={`relative w-full py-20 bg-background px-6`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

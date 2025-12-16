@@ -19,7 +19,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
 
-export default function ServicesSection({ id, content }) {
+export default function ServicesSection({ id,name, content }) {
     const iconMap = {
         code: Code,
         palette: Palette,
@@ -28,7 +28,7 @@ export default function ServicesSection({ id, content }) {
 
     
     return (
-        <section className={`relative w-full py-10 bg-background px-6`}>
+        <section id={name} className={`relative w-full py-20 bg-background px-6`}>
             <div className="container space-y-8">
                 <div className="text-center space-y-2">
                     <h2 className="text-4xl font-bold tracking-tight">

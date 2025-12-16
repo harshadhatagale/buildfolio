@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
+import { slugify } from '@/components/dashboard/editor/SectionProperties/NavProps'
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true)
@@ -31,7 +32,6 @@ export default function Portfolio() {
         if (data) {
           dispatch(setSections(data.myproject.sections))
           dispatch(setTheme({ id: data.myproject.theme })) 
-          console.log(themeId)
         } else {
           setError(data.error)
         }
@@ -52,7 +52,6 @@ export default function Portfolio() {
       const data = await res.json()
 
       if (data.success) {
-        console.log(data.theme.colors)
         dispatch(setThemeColors({colors: data.theme.colors}))
       }
     }
@@ -113,7 +112,7 @@ export default function Portfolio() {
     >
       {sections.map(section => (
         <div key={section._id} className="bg-card text-card-foreground">
-          <SectionRenderer type={section.type} content={section.content} />
+          <SectionRenderer name={slugify(section.name)} type={section.type} content={section.content} />
         </div>
       ))}
     </div>

@@ -8,10 +8,10 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion';
 
-export default function FaqsSection({id, content}) {
+export default function FaqsSection({id,name, content}) {
 
   return (
-    <section className={`relative w-full py-3 bg-background px-6`}>
+    <section id={name} className={`relative w-full py-20 bg-background px-6`}>
       <div className="container space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-4xl font-bold tracking-tight">

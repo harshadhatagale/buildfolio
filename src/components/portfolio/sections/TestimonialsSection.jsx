@@ -4,10 +4,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSelector } from 'react-redux';
 
 
-export default function TestimonialsSection({ id, content }) {
+export default function TestimonialsSection({ id,name, content }) {
   
   return (
-    <section className={`relative w-full py-10 bg-background px-6`}>
+    <section id={name} className={`relative w-full py-20 bg-background px-6`}>
       <div className="container space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-4xl font-bold tracking-tight">

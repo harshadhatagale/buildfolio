@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button"
 import React, {useState, useEffect} from "react"
 import { useSelector } from "react-redux"
 
-export default function ProjectsSection({id, content}) {
+export default function ProjectsSection({id,name, content}) {
   const selectedSection= useSelector((state)=> state.portfolio.selectedSection)
  
   return (
-    <section className={`relative bg-background py-10 px-6`}>
+    <section id={name} className={`relative bg-background py-20 px-6`}>
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
           {content.heading}
