@@ -76,7 +76,7 @@ export default function PreviewPage() {
           throw new Error('Project ID is missing')
         }
 
-        const response = await fetch(`/api/sections`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sections`, {
           method: 'POST',
           body: JSON.stringify({ projectId: params.project }),
           headers: {

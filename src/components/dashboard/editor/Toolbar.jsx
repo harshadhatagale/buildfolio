@@ -15,7 +15,7 @@ export default function Toolbar() {
     console.log(themeId)
     const savePromise = new Promise(async (resolve, reject) => {
       try {
-        const res = await fetch(`/api/saveSections/${params.project}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/saveSections/${params.project}`, {
           method: 'POST',
           body: JSON.stringify({ sections, themeId }),
           headers: { 'Content-Type': 'application/json' },

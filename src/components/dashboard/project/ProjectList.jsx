@@ -13,13 +13,13 @@ export default function ProjectList({ user, projects, setProjects }) {
         if (!user) return;
         try {
             setLoading(true);
-            const res = await fetch(`/api/user/${user}/projects/`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${user}/projects`);
             if (res.ok) {
                 const data = await res.json();
                 setProjects(data);
             } else {
                 console.error('Failed to fetch projects');
-                toast.error('Failed to fetch projects');
+                toast.error('Failed to fetch projects', res);
             }
         } catch (error) {
             console.error('Error fetching projects:', error);

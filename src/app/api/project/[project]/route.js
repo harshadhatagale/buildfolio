@@ -52,7 +52,7 @@ export async function DELETE(req, { params }) {
 }
 
 export async function PATCH(req, { params }) {
-    const { project } = await params // Removed unnecessary await
+    const { project } = await params 
     const body = await req.json()
     try {
         await dbConnect()

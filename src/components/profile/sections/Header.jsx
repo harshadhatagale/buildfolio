@@ -13,7 +13,7 @@ export default function Header({ user }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 flex items-center"
+            className="px-3 bg-background w-full h-16 justify-between flex items-center border-b-2 border-muted"
         >
             <Button variant={'outline'} size={'icon'} className={'mr-5'} onClick={()=> router.back()}>
                 <ChevronLeft />
@@ -34,7 +34,7 @@ export default function Header({ user }) {
                         <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                         <div className="w-3 h-3 rounded-full bg-green-500"></div>
                     </div>
-                    <AnimatedThemeToggler />
+                    <AnimatedThemeToggler className={"cursor-pointer"}/>
                 </div>
             </div>
         </motion.div>

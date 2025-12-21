@@ -6,10 +6,6 @@ import Project from "../../../../../../models/Project";
 
 export async function GET(request, { params }) {
     const { user } = await params;
-    const { userId } = await auth();
-    if (!userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
     try {
         await dbConnect();
         const projects = await Project.find({ userId: user });
@@ -22,11 +18,6 @@ export async function GET(request, { params }) {
 
 export async function POST(request, { params }) {
     const { user } = await params;
-    const { userId } = await auth()
-    if (!userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    const clerkUser = await currentUser()
     try {
         await dbConnect();
         const newProject = await Project({userId: user, name: "Untitled Project", theme: "#fff" });

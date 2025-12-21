@@ -15,7 +15,7 @@ export default function EditorLayout({ children }) {
     console.log(theme)
     const fetchProject = async () => {
       try {
-        const res = await fetch(`/api/project/${params.project}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`, {
           method: 'GET',
         })
         const data = await res.json()
@@ -27,7 +27,7 @@ export default function EditorLayout({ children }) {
     }
     
     const fetchSections = async () => {
-      await fetch(`/api/project/${params.project}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export default function EditorLayout({ children }) {
   if (!theme) return; 
   
   const fetchTheme = async () => {
-    const res = await fetch(`/api/themes/${theme}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes/${theme}`);
     const data = await res.json();
     if (data.success) {
       dispatch(setThemeColors({ colors: data.theme.colors }));

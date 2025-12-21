@@ -18,27 +18,36 @@ export default function Navbar() {
 
   const project = useSelector((state) => state.portfolio.project)
   const handlePublish = async (status) => {
+    const toastId = toast.loading("Updating publish status...")
     try {
-      const response = await fetch(`/api/project/${params.project}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ visibillity: status }),
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ visibillity: status }),
+        }
+      )
 
       if (!response.ok) {
-        throw new Error('Failed to update publish status')
+        const err = await response.text()
+        throw new Error(err || 'Publish update failed')
       }
 
       const data = await response.json()
       dispatch(setProject(data.project))
+
       toast.success(
-        project.visibillity === 'private' ? 'Project published successfully!' : project.visibillity === 'public' ? 'Project unpublished successfully!' : "Project updated successfully!"
+        status === 'public'
+          ? 'Project published successfully!'
+          : 'Project unpublished successfully!',
+        { id: toastId }
       )
-      // Optionally refresh or update state here
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error?.message || String(error), { id: toastId })
+      console.error(error)
     }
   }
 
@@ -54,14 +63,6 @@ export default function Navbar() {
         <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />
         <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} />
         {project.visibillity === "private" ? (
-          // <Button
-          //   onClick={() => handlePublish("public")}
-          //   variant={"outline"}
-          //   className={"bg-emerald-500 hover:bg-emerald-500/50 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
-          // >
-          //   <Globe size={20} />
-          //   <span>Publish</span>
-          // </Button>
           <ShimmerButton onClick={() => handlePublish("public")} className="py-1 px-3 flex gap-2 justify-between items-center">
             <Globe size={16} />
             <span className='text-[16px]'>Publish</span>

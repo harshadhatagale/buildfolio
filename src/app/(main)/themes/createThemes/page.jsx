@@ -14,7 +14,7 @@ export default function Page() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`/api/user/${userId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${userId}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);
@@ -51,7 +51,7 @@ const saveTheme = async (data) => {
 
     console.log("Sending payload:", payload); // Debug log
 
-    const res = await fetch("/api/themes", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

@@ -10,7 +10,7 @@ export default function PreviewSection() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
   return (
-    <div className='flex flex-col w-full border-l-2 border-muted px-[248px] h-[calc(100vh-56px)] py-3 overflow-auto scroll-auto transition'>
+    <div className='flex resize overflow-auto flex-col w-full border-l-2 border-muted px-[248px] h-[calc(100vh-56px)] py-3 scroll-auto transition'>
       <PortfolioPreview sections={sections} />
     </div>
   )
