@@ -27,7 +27,7 @@ export default function EditorLayout({ children }) {
         dispatch(setSections(data.myproject.sections))
         dispatch(setTheme({ id: data.myproject.theme }))
 
-        // ⏳ FORCE DELAY (for skeleton visibility)
+       
         await delay(2000)
 
       } catch (err) {
