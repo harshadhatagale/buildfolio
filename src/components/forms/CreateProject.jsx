@@ -26,7 +26,7 @@ export default function CreateProject({ onProjectCreated, userId }) {
     setError("");
     
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, name, urlSlug }),

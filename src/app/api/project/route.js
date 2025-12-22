@@ -21,7 +21,7 @@ export async function POST(request) {
         if (existingProject) {
             return NextResponse.json(
                 { message: "URL slug is not available!" }, 
-                { status: 409 } // 409 Conflict is more appropriate for duplicate resources
+                { status: 409 } 
             );
         }
         
