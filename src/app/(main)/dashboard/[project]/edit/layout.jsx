@@ -10,61 +10,36 @@ import Inspector from '@/components/dashboard/editor/Inspector'
 export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
-  const theme= useSelector((state)=> state.portfolio.themeId)
-  const [loading, setLoading]= useState(true)
+  const theme = useSelector((state) => state.portfolio.themeId)
+  const [loading, setLoading] = useState(true)
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   useEffect(() => {
-    console.log(theme)
-    const fetchProject = async () => {
+    const fetchAll = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`, {
-          method: 'GET',
-        })
+        setLoading(true)
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`
+        )
         const data = await res.json()
+
         dispatch(setProject(data.myproject))
-      }
-      catch (error) {
-        console.error(error)
+        dispatch(setSections(data.myproject.sections))
+        dispatch(setTheme({ id: data.myproject.theme }))
+
+        // ⏳ FORCE DELAY (for skeleton visibility)
+        await delay(2000)
+
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setLoading(false)
       }
     }
-    
-    const fetchSections = async () => {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            dispatch(setSections(data.myproject.sections));
-            dispatch(setTheme({ id: data.myproject.theme }))
-          } else {
-            console.error('Failed to fetch sections:', data.error);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching sections:', error);
-        });
-    }
-    fetchProject();
-    fetchSections();
-    setLoading(false)
+
+    fetchAll()
   }, [])
 
-  useEffect(() => {
-  if (!theme) return; 
-  
-  const fetchTheme = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes/${theme}`);
-    const data = await res.json();
-    if (data.success) {
-      dispatch(setThemeColors({ colors: data.theme.colors }));
-    }
-  };
-
-  fetchTheme();
-}, [theme]);
   return (
     <>
       <Navbar loading={loading} />
