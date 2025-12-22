@@ -1,7 +1,7 @@
 'use client'
 import Navbar from '@/components/dashboard/editor/Navbar'
 import Toolbar from '@/components/dashboard/editor/Toolbar'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '@/components/dashboard/editor/Sidebar'
 import { useParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +11,7 @@ export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
   const theme= useSelector((state)=> state.portfolio.themeId)
+  const [loading, setLoading]= useState(true)
   useEffect(() => {
     console.log(theme)
     const fetchProject = async () => {
@@ -48,6 +49,7 @@ export default function EditorLayout({ children }) {
     }
     fetchProject();
     fetchSections();
+    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -65,9 +67,9 @@ export default function EditorLayout({ children }) {
 }, [theme]);
   return (
     <>
-      <Navbar />
+      <Navbar loading={loading} />
       <Toolbar />
-      <Sidebar projectId={params.project} />
+      <Sidebar loading={loading} projectId={params.project} />
       {children}
       <Inspector />
     </>

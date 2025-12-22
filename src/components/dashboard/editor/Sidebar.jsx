@@ -26,7 +26,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import SectionMenu from '../project/section/SectionMenu'
 import { Input } from '@/components/ui/input'
-export default function Sidebar({ projectId }) {
+export default function Sidebar({ loading, projectId }) {
   const [side, setSide] = useState(true)
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
@@ -76,9 +76,17 @@ export default function Sidebar({ projectId }) {
             items={sections.map((i) => i._id)}
             strategy={verticalListSortingStrategy}
           >
-            <div className='flex overflow-x-hidden flex-col w-full justify-center items-center gap-2 overflow-y-hidden mb-3'>
-              {sections.map((section) =>
-                <SortableProjectSectionItem id={section._id} key={section._id} section={section} />
+            <div className="flex flex-col w-full gap-2 mb-3">
+              {loading ? (
+                <SectionsSkeleton />
+              ) : (
+                sections.map((section) => (
+                  <SortableProjectSectionItem
+                    id={section._id}
+                    key={section._id}
+                    section={section}
+                  />
+                ))
               )}
             </div>
           </SortableContext>
@@ -107,6 +115,22 @@ export default function Sidebar({ projectId }) {
         </div>
       </div>
     </aside>
+  )
+}
+
+const SectionsSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className="w-full h-9 rounded-md bg-muted animate-pulse flex items-center px-2 gap-3"
+        >
+          <div className="w-4 h-4 rounded bg-muted-foreground/30" />
+          <div className="h-3 w-24 rounded bg-muted-foreground/30" />
+        </div>
+      ))}
+    </div>
   )
 }
 

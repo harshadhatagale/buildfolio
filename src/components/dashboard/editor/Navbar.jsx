@@ -11,7 +11,7 @@ import { setProject } from '../../../../features/portfolio/portfolioSlice'
 import ShareProject from './ShareProject'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 
-export default function Navbar() {
+export default function Navbar({ loading }) {
   const router = useRouter()
   const params = useParams()
   const dispatch = useDispatch()
@@ -55,7 +55,14 @@ export default function Navbar() {
     <nav className='flex bg-background justify-between items-center w-full h-14 border-b-2 border-muted px-3'>
       <div className='flex justify-center items-center gap-3'>
         <img src='/images/code.png' alt='Project Logo' width={30} height={30} />
-        <span className='text-lg font-semibold'>{project.name || "Untitled"}</span>
+        {loading ? (
+          <div className="w-32 h-4 rounded bg-gradient-to-r from-muted via-muted/50 to-muted animate-pulse" />
+        ) : (
+          <span className="text-lg font-semibold">
+            {project?.name}
+          </span>
+        )}
+
       </div>
       <div className="flex justify-center items-center gap-4">
         <Button onClick={() => router.push("/dashboard")} className={"cursor-pointer"} variant={"secondary"}>Dashboard</Button>
