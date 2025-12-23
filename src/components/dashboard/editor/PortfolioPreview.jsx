@@ -13,7 +13,6 @@ export default function PortfolioPreview({ sections }) {
     const { theme } = useTheme()
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     const previewTheme = useSelector((state) => state.portfolio.theme)
-
     const getThemeStyles = () => {
 
         const colors = {

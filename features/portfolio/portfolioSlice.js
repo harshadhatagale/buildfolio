@@ -3,80 +3,74 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const defaultTheme = {
   light: {
-    background: "oklch(1.00 0 0)",
-    foreground: "oklch(0.14 0 0)",
+    background: "oklch(0.99 0 0)",
+    foreground: "oklch(0.35 0.02 165.48)",
     card: "oklch(1.00 0 0)",
-    cardForeground: "oklch(0.14 0 0)",
+    cardForeground: "oklch(0.35 0.02 165.48)",
     popover: "oklch(1.00 0 0)",
-    popoverForeground: "oklch(0.14 0 0)",
-    primary: "oklch(0.20 0 0)",
-    primaryForeground: "oklch(0.99 0 0)",
-    secondary: "oklch(0.97 0 0)",
-    secondaryForeground: "oklch(0.20 0 0)",
-    muted: "oklch(0.97 0 0)",
-    mutedForeground: "oklch(0.56 0 0)",
-    accent: "oklch(0.97 0 0)",
-    accentForeground: "oklch(0.20 0 0)",
-    destructive: "oklch(0.58 0.24 28.48)",
-    border: "oklch(0.92 0 0)",
-    input: "oklch(0.92 0 0)",
-    ring: "oklch(0.71 0 0)",
-
-    chart1: "oklch(0.65 0.22 36.85)",
-    chart2: "oklch(0.60 0.11 184.15)",
-    chart3: "oklch(0.40 0.07 227.18)",
-    chart4: "oklch(0.83 0.17 81.03)",
-    chart5: "oklch(0.77 0.17 65.36)",
-
-    sidebar: "oklch(0.99 0 0)",
-    sidebarForeground: "oklch(0.14 0 0)",
-    sidebarPrimary: "oklch(0.20 0 0)",
-    sidebarPrimaryForeground: "oklch(0.99 0 0)",
-    sidebarAccent: "oklch(0.97 0 0)",
-    sidebarAccentForeground: "oklch(0.20 0 0)",
-    sidebarBorder: "oklch(0.92 0 0)",
-    sidebarRing: "oklch(0.708 0 0)",
-
-    radius: "0.625rem",
+    popoverForeground: "oklch(0.35 0.02 165.48)",
+    primary: "oklch(0.67 0.17 153.85)",
+    primaryForeground: "oklch(0.99 0.02 175.22)",
+    secondary: "oklch(0.90 0.02 238.66)",
+    secondaryForeground: "oklch(0.20 0.02 266.02)",
+    muted: "oklch(0.90 0.02 240.73)",
+    mutedForeground: "oklch(0.50 0.03 268.53)",
+    accent: "oklch(0.90 0.02 240.73)",
+    accentForeground: "oklch(0.35 0.02 165.48)",
+    destructive: "oklch(0.61 0.24 20.96)",
+    border: "oklch(0.94 0.01 238.46)",
+    input: "oklch(0.85 0.02 240.75)",
+    ring: "oklch(0.67 0.17 153.85)",
+    chart1: "oklch(0.67 0.17 153.85)",
+    chart2: "oklch(0.50 0.10 270.06)",
+    chart3: "oklch(0.72 0.12 201.79)",
+    chart4: "oklch(0.80 0.10 100.65)",
+    chart5: "oklch(0.60 0.15 300.14)",
+    sidebar: "oklch(0.98 0.01 238.45)",
+    sidebarForeground: "oklch(0.35 0.02 165.48)",
+    sidebarPrimary: "oklch(0.67 0.17 153.85)",
+    sidebarPrimaryForeground: "oklch(0.98 0.01 238.45)",
+    sidebarAccent: "oklch(0.90 0.02 240.73)",
+    sidebarAccentForeground: "oklch(0.35 0.02 165.48)",
+    sidebarBorder: "oklch(0.85 0.02 240.75)",
+    sidebarRing: "oklch(0.67 0.17 153.85)",
+    radius: "0.25rem",
   },
 
   dark: {
-    background: "oklch(0.14 0 0)",
-    foreground: "oklch(0.99 0 0)",
-    card: "oklch(0.20 0 0)",
-    cardForeground: "oklch(0.99 0 0)",
-    popover: "oklch(0.20 0 0)",
-    popoverForeground: "oklch(0.99 0 0)",
-    primary: "oklch(0.92 0 0)",
-    primaryForeground: "oklch(0.20 0 0)",
-    secondary: "oklch(0.27 0 0)",
-    secondaryForeground: "oklch(0.99 0 0)",
-    muted: "oklch(0.27 0 0)",
-    mutedForeground: "oklch(0.71 0 0)",
-    accent: "oklch(0.27 0 0)",
-    accentForeground: "oklch(0.99 0 0)",
-    destructive: "oklch(0.70 0.19 22.23)",
-    border: "oklch(1.00 0 0 / 10%)",
-    input: "oklch(1.00 0 0 / 15%)",
-    ring: "oklch(0.56 0 0)",
-
-    chart1: "oklch(0.49 0.24 264.40)",
-    chart2: "oklch(0.70 0.16 160.43)",
-    chart3: "oklch(0.77 0.17 65.36)",
-    chart4: "oklch(0.62 0.26 305.32)",
-    chart5: "oklch(0.64 0.25 16.51)",
-
-    sidebar: "oklch(0.20 0 0)",
-    sidebarForeground: "oklch(0.99 0 0)",
-    sidebarPrimary: "oklch(0.49 0.24 264.40)",
-    sidebarPrimaryForeground: "oklch(0.99 0 0)",
-    sidebarAccent: "oklch(0.27 0 0)",
-    sidebarAccentForeground: "oklch(0.99 0 0)",
-    sidebarBorder: "oklch(1.00 0 0 / 10%)",
-    sidebarRing: "oklch(0.56 0 0)",
-
-    radius: "0.625rem",
-  },
+    background: "oklch(0.15 0.02 269.18)",
+    foreground: "oklch(0.95 0.01 238.46)",
+    card: "oklch(0.20 0.02 266.02)",
+    cardForeground: "oklch(0.95 0.01 238.46)",
+    popover: "oklch(0.20 0.02 266.02)",
+    popoverForeground: "oklch(0.95 0.01 238.46)",
+    primary: "oklch(0.67 0.17 153.85)",
+    primaryForeground: "oklch(0.15 0.02 269.18)",
+    secondary: "oklch(0.30 0.03 271.05)",
+    secondaryForeground: "oklch(0.95 0.01 238.46)",
+    muted: "oklch(0.30 0.03 271.05)",
+    mutedForeground: "oklch(0.60 0.03 269.46)",
+    accent: "oklch(0.30 0.03 271.05)",
+    accentForeground: "oklch(0.95 0.01 238.46)",
+    destructive: "oklch(0.64 0.25 19.69)",
+    border: "oklch(0.95 0.01 238.46 / 15%)",
+    input: "oklch(0.95 0.01 238.46 / 20%)",
+    ring: "oklch(0.67 0.17 153.85)",
+    chart1: "oklch(0.67 0.17 153.85)",
+    chart2: "oklch(0.60 0.10 269.83)",
+    chart3: "oklch(0.72 0.12 201.79)",
+    chart4: "oklch(0.80 0.10 100.65)",
+    chart5: "oklch(0.60 0.15 300.14)",
+    sidebar: "oklch(0.20 0.02 266.02)",
+    sidebarForeground: "oklch(0.95 0.01 238.46)",
+    sidebarPrimary: "oklch(0.67 0.17 153.85)",
+    sidebarPrimaryForeground: "oklch(0.15 0.02 269.18)",
+    sidebarAccent: "oklch(0.30 0.03 271.05)",
+    sidebarAccentForeground: "oklch(0.95 0.01 238.46)",
+    sidebarBorder: "oklch(0.95 0.01 238.46 / 15%)",
+    sidebarRing: "oklch(0.67 0.17 153.85)",
+    radius: "0.25rem",
+  }
 };
 
 
@@ -86,7 +80,7 @@ const initialState = {
   theme: defaultTheme,
   themeId: null,
   project: {},
-  themeMode: 'light', 
+  themeMode: 'light',
   selectedSection: null,
   past: [],
   present: [],
@@ -99,8 +93,8 @@ export const portfolioSlice = createSlice({
   name: "portfolio",
   initialState,
   reducers: {
-    setProject:(state, action)=>{
-      state.project= action.payload
+    setProject: (state, action) => {
+      state.project = action.payload
     },
     setSections: (state, action) => {
       state.present = action.payload;
@@ -166,12 +160,12 @@ export const portfolioSlice = createSlice({
       }
     },
     setThemeColors: (state, action) => {
-      const {colors}= action.payload
+      const { colors } = action.payload
       state.theme = colors
     },
     setTheme: (state, action) => {
-      const {id}= action.payload
-      state.themeId= id
+      const { id } = action.payload
+      state.themeId = id
     }
   }
 });

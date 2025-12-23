@@ -9,6 +9,7 @@ import { useTheme } from 'next-themes'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import { slugify } from '@/components/dashboard/editor/SectionProperties/NavProps'
+import NotFound from '../not-found/page'
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true)
@@ -103,7 +104,7 @@ export default function Portfolio() {
     }
 
   if (loading) return <PreviewSkeleton />
-  if (error) return <div className="p-4 text-center text-destructive">{error}</div>
+  if (error) return <NotFound/>
 
   return (
     <div

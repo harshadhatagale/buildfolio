@@ -4,9 +4,19 @@ import { Button } from '@/components/ui/button';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setTheme } from '../../../../../features/portfolio/portfolioSlice';
+import toast from 'react-hot-toast';
 
 export default function ThemeVariant({ id, name, colors }) {
   const dispatch = useDispatch()
+  const handleThemeSelect = (id) => {
+    try {
+      dispatch(setTheme({ "id": id }))
+      window.setTimeout(() => { toast.success("Theme applied successfully") }, 2000)
+    }
+    catch (err) {
+      toast.error("Failed to apply theme")
+    }
+  }
   return (
     <div className='w-[140px] bg-card border-2 shadow-md space-y-2 rounded-md p-2 flex justify-center items-center flex-col'>
       <div className='w-full h-25 rounded-md overflow-hidden'>
@@ -21,7 +31,7 @@ export default function ThemeVariant({ id, name, colors }) {
         <p className='text-foreground font-semibold text-base truncate'>{name}</p>
       </div>
       <Button
-        onClick={() => dispatch(setTheme({"id": id}))}
+        onClick={() => handleThemeSelect(id)}
         className="w-full h-8 text-white bg-primary dark:bg-primary hover:bg-primary/50 dark:hover:bg-primary/50"
         variant="outline"
       >
