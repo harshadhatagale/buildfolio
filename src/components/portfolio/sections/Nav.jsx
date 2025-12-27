@@ -20,19 +20,15 @@ const Nav = ({ content }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // ✅ Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
     <>
-      {/* Spacer to prevent layout shift */}
-      <div className="h-16" />
-
       <header
         className={cn(
-          "fixed top-0 left-0 z-50 w-full",
+
           "border-b bg-background/80 backdrop-blur",
           "supports-[backdrop-filter]:bg-background/60"
         )}

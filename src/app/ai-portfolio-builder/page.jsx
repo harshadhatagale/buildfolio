@@ -1,10 +1,8 @@
 'use client'
-import { OnboardingProvider } from "./OnboardingProvider"
 import StepRenderer from "@/components/onboarding/StepRenderer"
 import Stepper from "@/components/onboarding/stepper"
 export default function OnboardingPage() {
   return (
-    <OnboardingProvider>
       <div className="flex items-center justify-center">
         <div className="w-full max-w-3xl space-y-6 p-6">
           
@@ -26,6 +24,5 @@ export default function OnboardingPage() {
 
         </div>
       </div>
-    </OnboardingProvider>
   )
 }

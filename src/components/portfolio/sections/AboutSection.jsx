@@ -1,7 +1,5 @@
-// components/AboutSection.tsx
-import Image from "next/image"
-import { useSelector } from "react-redux"
-import React, { useState, useEffect } from "react"
+
+import React from "react"
 export default function AboutSection({ id,name, content }) {
  
   return (

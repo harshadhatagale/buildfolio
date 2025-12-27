@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux"
-import { useState, useEffect } from "react"
+
 export default function HeroSection({id,name, content}) {
   
   return (

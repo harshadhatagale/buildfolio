@@ -2,23 +2,27 @@
 "use client"
 import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { getSections } from "@/app/ai-portfolio-builder/portfolio/getSections"
+import React from "react"
 
 export default function Step9Review() {
-  const { data } = useOnboarding()
+  const { data, setSections } = useOnboarding()
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const handleGenerate = async () => {
+    setLoading(true)
 
+    const generatedSections = await getSections(data)
+    setSections(generatedSections)
+    setLoading(false)
+    if(generatedSections.length>0)
+    {
+      router.push("/ai-portfolio-builder/portfolio")
+    }
+  }
   return (
     <Card>
       <CardHeader>
@@ -30,8 +34,8 @@ export default function Step9Review() {
           {JSON.stringify(data, null, 2)}
         </pre>
 
-        <Button className="w-full">
-         ✨ Generate Portfolio with AI
+        <Button className="w-full" onClick={() => handleGenerate()}>
+          {loading ? "Generating..." : "✨ Generate Portfolio with AI"}
         </Button>
       </CardContent>
     </Card>

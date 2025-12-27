@@ -104,7 +104,7 @@ automated templates, AI and share-first growth loops.
       <Separator className="my-8" />
 
       {/* Team */}
-      <section className="max-w-4xl mx-auto">
+      {/* <section className="max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold">Meet the Team</h2>
         <p className="mt-2 text-sm text-muted-foreground">Small team, big dreams. Built by engineers and designers who shipped products users love.</p>
 
@@ -115,7 +115,7 @@ automated templates, AI and share-first growth loops.
             bio="Building BuildFolio and obsessed with product-market fit and growth loops."
             img={null}
             links={{ linkedin: "https://linkedin.com", github: "https://github.com" }}
-          />
+          /> */}
 
           {/* <TeamMember
             name="Design Lead"
@@ -140,10 +140,10 @@ automated templates, AI and share-first growth loops.
             img={null}
             links={{ email: "support@buildfolio.app" }}
           /> */}
-        </div>
-      </section>
-
-      <Separator className="my-8" />
+        {/* </div>
+      </section> */}
+{/* 
+      <Separator className="my-8" /> */}
 
       {/* Milestones
       </h2>

@@ -86,7 +86,7 @@ const initialState = {
   present: [],
   future: [],
   title: "",
-  isPublished: false
+  isPublished: false,
 };
 
 export const portfolioSlice = createSlice({

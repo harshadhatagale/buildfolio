@@ -1,13 +1,13 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import PricingSection from '@/components/landing/PricingSection'
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text'
 import FeaturesSection from '@/components/landing/FeaturesSection'
 import Footer from '@/components/landing/FooterSection'
+import FAQSection from '@/components/landing/FaqsSection'
 const inter = Inter({
   subsets: ['latin'],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
@@ -32,7 +32,7 @@ export default function Page() {
         </div>
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#161616_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
 
-        <p className={`text-center ${inter.className}`}>Build your own portfolio</p>
+        <p className={`text-center capitalize text-xl font-semibold ${inter.className}`}>Create your portfolio website in just 5 minutes 🚀</p>
 
         <div className='relative'>
           <h1 className={`md:text-[200px] text-7xl font-bold text-center tracking-tight`}>
@@ -47,6 +47,7 @@ export default function Page() {
       </section>
       <FeaturesSection />
       <PricingSection />
+      <FAQSection/>
       <Footer />
     </>
   )

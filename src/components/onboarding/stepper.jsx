@@ -2,6 +2,7 @@
 "use client"
 import { Progress } from "@/components/ui/progress"
 import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
+import { GradientProgress } from "../ui/gradient-progress"
 
 export default function Stepper() {
   const { step } = useOnboarding()
@@ -13,7 +14,7 @@ export default function Stepper() {
         <span>Step {step} of 9</span>
         <span>{Math.round(percent)}%</span>
       </div>
-      <Progress value={percent} />
+      <GradientProgress value={percent}/>
     </div>
   )
 }

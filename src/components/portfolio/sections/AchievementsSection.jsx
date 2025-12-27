@@ -1,6 +1,5 @@
 'use client';
-import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import {
     BadgeCheck,
     Cloud,

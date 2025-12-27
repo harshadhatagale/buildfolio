@@ -11,18 +11,24 @@ export function OnboardingProvider({ children }) {
     summary: {},
     skills: {},
     experience: [],
-    education: [],
+    education: null,
     preferences: {},
     ai: {},
-    projects: []
+    projects: [],
+    generatedSections:null
   })
 
   const update = (section, value) => {
     setData(prev => ({ ...prev, [section]: value }))
   }
-
+  const setSections = (sections) => {
+    setData((prev) => ({
+      ...prev,
+      generatedSections: sections,
+    }))
+  }
   return (
-    <OnboardingContext.Provider value={{ step, setStep, data, update }}>
+    <OnboardingContext.Provider value={{ step, setStep, data, update, setSections, }}>
       {children}
     </OnboardingContext.Provider>
   )

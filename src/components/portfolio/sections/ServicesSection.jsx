@@ -15,8 +15,7 @@ import {
     CardContent
 } from '@/components/ui/card';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 
 export default function ServicesSection({ id,name, content }) {

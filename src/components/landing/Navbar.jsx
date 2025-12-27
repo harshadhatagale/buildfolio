@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react'
-import { ModeToggle } from '../basics/ModeToggle'
+
 import Link from 'next/link'
-import { SignedIn, SignInButton, SignedOut, UserButton } from '@clerk/nextjs'
-import { Roboto, Inter } from 'next/font/google'
+import { SignedIn, SignInButton, SignedOut } from '@clerk/nextjs'
+import { Roboto } from 'next/font/google'
 import { Menu } from 'lucide-react'
 import { Button } from '../ui/button'
 import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
@@ -12,7 +12,6 @@ import Logo from '../basics/Logo'
 import ProfileBtn from '../basics/ProfileBtn'
 
 const roboto = Roboto({ subsets: ['latin'] })
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
