@@ -6,7 +6,6 @@ export const pricingCards = [
     price: "₹0",
     duration: "forever",
     highlight: "What you get",
-    link:"/sign-in",
     features: [
       "1 portfolio",
       "All core sections",
@@ -35,7 +34,6 @@ export const pricingCards = [
       "Fast publish"
     ],
     cta: "Upgrade to Pro",
-    link:"#",
     recommended: true
   },
   {
@@ -52,7 +50,6 @@ export const pricingCards = [
       "No recurring fees"
     ],
     cta: "Get Lifetime Access",
-    link:"#",
     recommended: false
   },
   {
@@ -68,7 +65,6 @@ export const pricingCards = [
       "Custom features"
     ],
     cta: "Contact Us",
-    link:"#",
     recommended: false
   }
 ]

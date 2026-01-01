@@ -1,5 +1,6 @@
 'use client';
-import { Loader2 } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Loader2, Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import ProjectListItem from './ProjectListItem';
 import toast from 'react-hot-toast';
@@ -31,12 +32,14 @@ export default function ProjectList({ user, projects, setProjects }) {
     useEffect(() => {
         fetchProjects();
     }, [user]);
+
+    // ✅ Add project with toast.promise
     const addProject = async () => {
         if (isCreating) return;
 
         setIsCreating(true);
         try {
-            const promise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${user}/projects/`, {
+            const promise = fetch(`/api/user/${user}/projects/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
