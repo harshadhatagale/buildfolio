@@ -24,7 +24,7 @@ export default function ProjectMenu({ projectId }) {
     const [rename, setRename] = useState(false);
     const [name, setName] = useState("")
     const handleDelete = async () => {
-        const res = await fetch(`/api/project/${projectId}/`,
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${projectId}`,
             {
                 method: "DELETE"
             }
@@ -40,7 +40,7 @@ export default function ProjectMenu({ projectId }) {
         }
     }
     const handleRename = async () => {
-        const res = await fetch(`/api/project/${projectId}/rename`,
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project/${projectId}/rename`,
             {
                 method: "PATCH",
                 body: JSON.stringify({ name: name }),

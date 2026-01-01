@@ -27,7 +27,7 @@ export default function Portfolio() {
   useEffect(() => {
     const fetchSections = async () => {
       try {
-        const res = await fetch(`/api/portfolio/${params.portfolio}`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/${params.portfolio}`)
         const data = await res.json()
 
         if (data) {
@@ -49,7 +49,7 @@ export default function Portfolio() {
     if (!themeId) return
 
     const fetchTheme = async () => {
-      const res = await fetch(`/api/themes/${themeId}`) 
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes/${themeId}`) 
       const data = await res.json()
 
       if (data.success) {
