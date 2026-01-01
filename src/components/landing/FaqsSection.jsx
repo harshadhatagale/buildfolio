@@ -45,7 +45,7 @@ const faqs = [
 
 export default function FAQSection() {
   return (
-    <section className="relative py-18 bg-background px-6">
+    <section id="faqs" className="relative py-18 bg-background px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

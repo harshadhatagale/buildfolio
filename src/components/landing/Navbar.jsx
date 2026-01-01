@@ -36,6 +36,7 @@ export default function Navbar() {
                         <Link href={"/home#pricing"}>Pricing</Link>
                         <Link href={"/home#features"}>Features</Link>
                         <Link href={"/about"}>About</Link>
+                        <Link href={"/home#faqs"}>FAQ's</Link>
                     </ul>
                 </div>
 

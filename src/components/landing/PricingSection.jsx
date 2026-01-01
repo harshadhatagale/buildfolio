@@ -72,7 +72,7 @@ export default function PricingSection() {
               </div>
 
               <Link
-                href="#"
+                href={card.link}
                 className={clsx(
                   'w-full font-semibold text-center p-2 rounded-md transition-colors',
                   {

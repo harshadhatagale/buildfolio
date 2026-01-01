@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as LucideIcons from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   updateSection,
@@ -87,19 +86,7 @@ export default function ServicesSection({ id, content }) {
     if (!selectedSection) return
     setSelected(selectedSection._id === id)
   }, [selectedSection, id])
-
-  const getIcon = (iconName) => {
-    if (!iconName) return LucideIcons.Layout
-
-    const formatted = iconName
-      .toLowerCase()
-      .split(/[-_ ]+/)
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join('')
-
-    return LucideIcons[formatted] || LucideIcons.Layout
-  }
-
+  
   const addService = () => {
     const next = [
       ...(content.services || []),

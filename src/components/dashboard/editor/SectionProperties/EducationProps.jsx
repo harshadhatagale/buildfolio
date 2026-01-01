@@ -1,47 +1,62 @@
 'use client'
 
+import IconChooser from '@/components/icons/iconChooser'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { GraduationCap, Plus, X, Pencil, Trash2, Check, ArrowUp, ArrowDown } from 'lucide-react'
+import {
+  GraduationCap,
+  Plus,
+  Pencil,
+  Trash2,
+  Check,
+  ArrowUp,
+  ArrowDown,
+} from 'lucide-react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedSection, updateSection } from '../../../../../features/portfolio/portfolioSlice'
+import {
+  setSelectedSection,
+  updateSection,
+} from '../../../../../features/portfolio/portfolioSlice'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'react-hot-toast'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 export default function EducationProps() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
+  const selectedSection = useSelector(
+    (state) => state.portfolio.selectedSection
+  )
+
   const [newEducation, setNewEducation] = useState({
     degree: '',
     institution: '',
     year: '',
     description: '',
-    icon: ''
+    icon: '',
   })
+
   const [editingIndex, setEditingIndex] = useState(-1)
   const [isAdding, setIsAdding] = useState(false)
 
   if (!selectedSection) return null
 
-  const index = sections.findIndex(section => section._id === selectedSection._id)
+  const index = sections.findIndex(
+    (section) => section._id === selectedSection._id
+  )
   if (index === -1) return null
 
   const section = sections[index]
 
   const handleChange = (key) => (e) => {
     const newContent = { ...section.content, [key]: e.target.value }
-    dispatch(updateSection({ _id: section._id, content: newContent }))
-    dispatch(setSelectedSection({ ...section, content: newContent }))
-  }
-
-  const handleEducationChange = (key, value, idx) => {
-    const updatedItems = [...section.content.items]
-    updatedItems[idx] = { ...updatedItems[idx], [key]: value }
-    const newContent = { ...section.content, items: updatedItems }
     dispatch(updateSection({ _id: section._id, content: newContent }))
     dispatch(setSelectedSection({ ...section, content: newContent }))
   }
@@ -54,7 +69,7 @@ export default function EducationProps() {
 
     const newContent = {
       ...section.content,
-      items: [...section.content.items, newEducation]
+      items: [...section.content.items, newEducation],
     }
 
     dispatch(updateSection({ _id: section._id, content: newContent }))
@@ -65,7 +80,7 @@ export default function EducationProps() {
       institution: '',
       year: '',
       description: '',
-      icon: ''
+      icon: '',
     })
     setIsAdding(false)
     toast.success('Education added')
@@ -88,7 +103,7 @@ export default function EducationProps() {
 
     const newContent = {
       ...section.content,
-      items: updatedItems
+      items: updatedItems,
     }
 
     dispatch(updateSection({ _id: section._id, content: newContent }))
@@ -99,7 +114,7 @@ export default function EducationProps() {
       institution: '',
       year: '',
       description: '',
-      icon: ''
+      icon: '',
     })
     setEditingIndex(-1)
     setIsAdding(false)
@@ -117,10 +132,14 @@ export default function EducationProps() {
   }
 
   const handleMoveEducation = (idx, direction) => {
-    if ((direction === 'up' && idx === 0) ||
-      (direction === 'down' && idx === section.content.items.length - 1)) {
+    if (
+      (direction === 'up' && idx === 0) ||
+      (direction === 'down' &&
+        idx === section.content.items.length - 1)
+    ) {
       return
     }
+
     const newIndex = direction === 'up' ? idx - 1 : idx + 1
     const updatedItems = [...section.content.items]
     const temp = updatedItems[idx]
@@ -133,40 +152,35 @@ export default function EducationProps() {
   }
 
   return (
-    <div className='w-full flex flex-col justify-center items-center gap-6'>
-      <div className='w-full flex justify-start gap-3 items-center'>
+    <div className="w-full flex flex-col justify-center items-center gap-6">
+      <div className="w-full flex justify-start gap-3 items-center">
         <GraduationCap className="text-primary" />
         <h2>{section.name}</h2>
       </div>
 
       <div className="w-full max-w-2xl space-y-6">
-        {/* Heading */}
         <div className="space-y-2">
           <Label>Section Title</Label>
           <Input
-            type="text"
-            placeholder="e.g. Education"
             value={section.content.heading || ''}
-            onChange={handleChange("heading")}
-          />
-        </div>
-        {/* Subheading */}
-        <div className="space-y-2">
-          <Label>Section Subtitle</Label>
-          <Input
-            type="text"
-            placeholder="e.g. My academic journey so far."
-            value={section.content.subHeading || ''}
-            onChange={handleChange("subHeading")}
+            onChange={handleChange('heading')}
           />
         </div>
 
-        {/* Items */}
+        <div className="space-y-2">
+          <Label>Section Subtitle</Label>
+          <Input
+            value={section.content.subHeading || ''}
+            onChange={handleChange('subHeading')}
+          />
+        </div>
+
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium">Education Items</h3>
             <Button
               size="sm"
+              disabled={isAdding}
               onClick={() => {
                 setIsAdding(true)
                 setEditingIndex(-1)
@@ -175,10 +189,9 @@ export default function EducationProps() {
                   institution: '',
                   year: '',
                   description: '',
-                  icon: ''
+                  icon: '',
                 })
               }}
-              disabled={isAdding}
             >
               <Plus size={16} className="mr-2" /> Add
             </Button>
@@ -190,42 +203,64 @@ export default function EducationProps() {
                 <Label>Degree*</Label>
                 <Input
                   value={newEducation.degree}
-                  onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                  placeholder="e.g. Bachelor of Technology in Computer Science"
+                  onChange={(e) =>
+                    setNewEducation({
+                      ...newEducation,
+                      degree: e.target.value,
+                    })
+                  }
                 />
               </div>
+
               <div className="space-y-2">
                 <Label>Institution*</Label>
                 <Input
                   value={newEducation.institution}
-                  onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
-                  placeholder="e.g. GCOEJ - Government College of Engineering, Jalgaon"
+                  onChange={(e) =>
+                    setNewEducation({
+                      ...newEducation,
+                      institution: e.target.value,
+                    })
+                  }
                 />
               </div>
+
               <div className="space-y-2">
                 <Label>Year</Label>
                 <Input
                   value={newEducation.year}
-                  onChange={(e) => setNewEducation({ ...newEducation, year: e.target.value })}
-                  placeholder="e.g. 2022 - 2026"
+                  onChange={(e) =>
+                    setNewEducation({
+                      ...newEducation,
+                      year: e.target.value,
+                    })
+                  }
                 />
               </div>
+
               <div className="space-y-2">
                 <Label>Description</Label>
                 <Textarea
                   value={newEducation.description}
-                  onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
-                  placeholder="Describe the course and achievements"
+                  onChange={(e) =>
+                    setNewEducation({
+                      ...newEducation,
+                      description: e.target.value,
+                    })
+                  }
                 />
               </div>
+
               <div className="space-y-2">
                 <Label>Icon (optional)</Label>
-                <Input
+                <IconChooser
                   value={newEducation.icon}
-                  onChange={(e) => setNewEducation({ ...newEducation, icon: e.target.value })}
-                  placeholder="e.g. graduationCap"
+                  onChange={(icon) =>
+                    setNewEducation({ ...newEducation, icon })
+                  }
                 />
               </div>
+
               <div className="flex justify-between gap-2">
                 <Button
                   variant="outline"
@@ -233,20 +268,17 @@ export default function EducationProps() {
                   onClick={() => {
                     setIsAdding(false)
                     setEditingIndex(-1)
-                    setNewEducation({
-                      degree: '',
-                      institution: '',
-                      year: '',
-                      description: '',
-                      icon: ''
-                    })
                   }}
                 >
                   Cancel
                 </Button>
                 <Button
                   size="sm"
-                  onClick={editingIndex !== -1 ? handleUpdateEducation : handleAddEducation}
+                  onClick={
+                    editingIndex !== -1
+                      ? handleUpdateEducation
+                      : handleAddEducation
+                  }
                 >
                   <Check size={16} className="mr-2" />
                   {editingIndex !== -1 ? 'Update' : 'Save'}
@@ -255,29 +287,42 @@ export default function EducationProps() {
             </div>
           )}
 
-          {/* Accordion list */}
           <Accordion type="single" collapsible>
             {section.content.items?.map((edu, idx) => (
               <AccordionItem key={idx} value={edu.degree + idx}>
                 <div className="flex items-center">
                   <AccordionTrigger className="flex-1">
-                    <h4 className="text-sm font-medium">{edu.degree}</h4>
+                    <h4 className="text-sm font-medium">
+                      {edu.degree}
+                    </h4>
                   </AccordionTrigger>
                   <div className="flex gap-1 pr-4">
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'up')}>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleMoveEducation(idx, 'up')}
+                    >
                       <ArrowUp size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleMoveEducation(idx, 'down')}>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleMoveEducation(idx, 'down')}
+                    >
                       <ArrowDown size={16} />
                     </Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleEditEducation(idx)}>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEditEducation(idx)}
+                    >
                       <Pencil size={16} />
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() => handleDeleteEducation(idx)}
-                      className="text-destructive hover:text-destructive"
+                      className="text-destructive"
                     >
                       <Trash2 size={16} />
                     </Button>
@@ -285,10 +330,18 @@ export default function EducationProps() {
                 </div>
                 <AccordionContent>
                   <div className="border rounded-lg p-4 space-y-3">
-                    <p className="text-muted-foreground">{edu.institution}</p>
-                    <p className="text-sm text-muted-foreground">{edu.year}</p>
+                    <p className="text-muted-foreground">
+                      {edu.institution}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {edu.year}
+                    </p>
                     <p className="text-sm">{edu.description}</p>
-                    {edu.icon && <p className="text-xs text-muted-foreground">Icon: {edu.icon}</p>}
+                    {edu.icon && (
+                      <p className="text-xs text-muted-foreground">
+                        Icon: {edu.icon}
+                      </p>
+                    )}
                   </div>
                 </AccordionContent>
               </AccordionItem>

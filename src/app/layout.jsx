@@ -5,6 +5,8 @@ import Script from "next/script";
 import { Outfit, Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader";
+import { PostHogProvider } from "@/components/PostHogProvider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,42 +30,40 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en"
-        suppressHydrationWarning
-      >
+      <html lang="en" suppressHydrationWarning>
         <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+          {/* Google Analytics */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);}  
             gtag('js', new Date());
             gtag('config', 'G-L5CNEEQRSV');
           `}
-        </Script>
-      </head>
-        <body
-          className={`${outfit.className} min-h-screen bg-background`}
-        >
-          <ThemeProvider>
-            <NextTopLoader
-              color="#2b7fff"
-              initialPosition={0.08}
-              crawlSpeed={400}
-              height={4}
-              crawl={true}
-              easing="ease"
-              showSpinner={false}
-              speed={100}
-              zIndex={1600}
-              showAtBottom={false}
-            />
-            {children}
-          </ThemeProvider>
+          </Script>
+        </head>
+        <body className={`${outfit.className} min-h-screen bg-background`}>
+          <PostHogProvider>
+            <ThemeProvider>
+              <NextTopLoader
+                color="#2b7fff"
+                initialPosition={0.08}
+                crawlSpeed={400}
+                height={4}
+                crawl={true}
+                easing="ease"
+                showSpinner={false}
+                speed={100}
+                zIndex={1600}
+                showAtBottom={false}
+              />
+              {children}
+            </ThemeProvider>
+          </PostHogProvider>
         </body>
       </html>
     </ClerkProvider>
