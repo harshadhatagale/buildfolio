@@ -1,380 +1,250 @@
 import { v4 as uuidv4 } from "uuid"
+
 export const GetDefaultContent = (type) => {
-    let content = {}
-    switch (type) {
-        case "nav":
-            content = {
-                type: "nav",
-                portfolioName: "Harsh Tech",
-                links: [
-                    {
-                        id: `link-${uuidv4()}`,
-                        title: "Home",
-                        link: ""
-                    },
-                    {
-                        id: `link-${uuidv4()}`,
-                        title: "About Me",
-                        link: ""
-                    },
-                    {
-                        id: `link-${uuidv4()}`,
-                        title: "Skills",
-                        link: ""
-                    }
-                ]
-            }
-            return content
-            break;
-        case "hero":
-            content = {
-                type: "hero",
-                primaryHeading: "Hi, I'm Harshad 👋",
-                secondaryHeading: "I'm a full-stack developer passionate about building interactive websites and mobile apps. I specialize in React, Next.js, and Tailwind CSS.",
-            }
-            return content
-            break
-        case "testimonials":
-            content = {
-                heading: "What People Say", // optional heading
-                testimonials: [
-                    {
-                        name: "Ravi Kumar",
-                        role: "CEO, TechCorp",
-                        message: "Harshad did an excellent job. Highly recommended!",
-                        image: "https://example.com/ravi.jpg"
-                    },
-                    {
-                        name: "Anjali Sharma",
-                        role: "Project Manager, InnovateX",
-                        message: "Professional, punctual, and very talented developer.",
-                        image: "https://example.com/anjali.jpg"
-                    },
-                    {
-                        name: "Rahul Verma",
-                        role: "Founder, CodeMasters",
-                        message: "Working with Harshad was a fantastic experience.",
-                        image: "https://example.com/rahul.jpg"
-                    }
-                ]
-            }
-            return content
-            break
-        case "about":
-            content = {
-                type: "about",
-                avatar: "/images/code.png",
-                heading: "About me",
-                about: "I'm Harshad, a full-stack developer with a passion for building sleek, functional UIs and solving real-world problems with code. I love working with modern tech like React, Next.js, Tailwind, and Firebase.\n When I’m not coding, you’ll find me exploring game development, reading tech blogs, or helping others learn web dev through my YouTube channel."
-            }
-            return content
-            break
-        case "projects":
-            content = {
-                type: "projects",
-                heading: "Projects",
-                subHeading: "Some of the cool things I've built recently.",
-                projects: [
-                    {
-                        title: "Portfolio Builder SaaS",
-                        description: "A platform where users can build and deploy their own developer portfolios with drag-and-drop UI.",
-                        image: "https://source.unsplash.com/600x400/?tech",
-                        github: "https://github.com/harshadhatagale",
-                        live: "https://portfolio.harshad.com",
-                        tags: ["Next.js", "Tailwind", "MongoDB", "ShadCN"]
-                    },
-                    {
-                        title: "E-commerce Store",
-                        description: "A full-stack e-commerce web app with authentication, cart, checkout, and order management.",
-                        image: "https://source.unsplash.com/600x400/?ecommerce",
-                        github: "https://github.com/harshadhatagale/ecommerce",
-                        live: "https://store.harshad.com",
-                        tags: ["React", "Node.js", "Express", "MongoDB"]
-                    },
-                    {
-                        title: "Chat App",
-                        description: "Real-time chat app with socket.io and JWT authentication.",
-                        image: "https://source.unsplash.com/600x400/?chat",
-                        github: "https://github.com/harshadhatagale/chatapp",
-                        live: "https://chat.harshad.com",
-                        tags: ["React", "Socket.io", "Node.js"]
-                    }
-                ]
-            }
-            return content
-            break
-        case "skills":
-            content = {
-                type: "skills",
-                primaryHeading: "My Skills",
-                secondaryHeading: "These are the tools and technologies I work with and love to build awesome projects.",
-                skills: ["Next.js", "React", "Tailwind CSS", "JavaScript", "TypeScript", "Node.js", "Firebase", "MongoDB", "Python", "Git & GitHub"]
-            }
-            return content
-            break
+  let content = {}
 
-        case "services":
-            content = {
-                type: "services",
-                heading: "My Services",
-                subHeading: "Here’s what I can do for you.",
-                services: [
-                    {
-                        title: "Web Development",
-                        description: "Building responsive and modern websites using Next.js, React, and Tailwind CSS.",
-                        icon: "code",
-                        link: "/services/web-development"
-                    },
-                    {
-                        title: "UI/UX Design",
-                        description: "Designing user-friendly, clean, and interactive UI experiences.",
-                        icon: "palette",
-                        link: "/services/ui-ux-design"
-                    },
-                    {
-                        title: "Mobile App Development",
-                        description: "Creating cross-platform mobile apps with React Native.",
-                        icon: "smartphone",
-                        link: "/services/mobile-development"
-                    }
-                ]
-            }
-            return content
-            break
+  switch (type) {
 
+    /* ---------------- NAV ---------------- */
+    case "nav":
+      return {
+        type: "nav",
+        portfolioName: "Creative Developer",
+        links: [
+          { id: `link-${uuidv4()}`, title: "Home", link: "" },
+          { id: `link-${uuidv4()}`, title: "About", link: "" },
+          { id: `link-${uuidv4()}`, title: "Projects", link: "" },
+          { id: `link-${uuidv4()}`, title: "Contact", link: "" }
+        ]
+      }
 
-        case "experience":
-            content = {
-                type: "experience",
-                primaryHeading: "Experience",
-                experiences: [
-                    {
-                        jobTitle: "Team Lead",
-                        companyName: "College Coding Club, GCOEJ",
-                        startDate: "Jan 2024",
-                        endDate: "May 2024",
-                        responsibillities:
-                            "Led a team of 5 developers to build web apps for college events. Managed task distribution, performed code reviews, and implemented CI/CD pipelines.",
-                        technologies: "React, TailwindCSS, Firebase, Git",
-                    },
-                    {
-                        jobTitle: "Frontend Developer Intern",
-                        companyName: "ABC Technologies",
-                        startDate: "Jun 2023",
-                        endDate: "Aug 2023",
-                        responsibillities:
-                            "Developed responsive UI components for client dashboards. Collaborated closely with designers and backend teams to deliver seamless user experiences.",
-                        technologies: "Next.js, TypeScript, TailwindCSS, Redux",
-                    },
-                    {
-                        jobTitle: "Open Source Contributor",
-                        companyName: "GSSoC 2024",
-                        startDate: "Mar 2024",
-                        endDate: "May 2024",
-                        responsibillities:
-                            "Contributed to multiple open-source projects by fixing bugs, improving documentation, and adding new features related to frontend development.",
-                        technologies: "React, Git, Markdown, GitHub Actions",
-                    },
-                    {
-                        jobTitle: "Full Stack Developer",
-                        companyName: "Freelance",
-                        startDate: "Sep 2023",
-                        endDate: "Dec 2023",
-                        responsibillities:
-                            "Built a complete e-commerce website for a local business with product listing, cart functionality, and admin dashboard.",
-                        technologies: "MERN Stack, TailwindCSS, Stripe, Cloudinary",
-                    },
-                    {
-                        jobTitle: "Technical Head",
-                        companyName: "College TechFest, GCOEJ",
-                        startDate: "Oct 2023",
-                        endDate: "Nov 2023",
-                        responsibillities:
-                            "Managed all technical aspects of the college's annual tech fest, including website development, event registrations, and technical support during the fest.",
-                        technologies: "React, Firebase, Node.js, Vercel",
-                    },
-                ]
-            }
-            return content
-            break
+    /* ---------------- HERO ---------------- */
+    case "hero":
+      return {
+        type: "hero",
+        primaryHeading: "Building Digital Experiences That Matter",
+        secondaryHeading:
+          "A modern full-stack developer crafting scalable web applications, intuitive interfaces, and high-performance digital products."
+      }
 
-        case "education":
-            content = {
-                heading: "Education",
-                subHeading: "My academic journey so far.",
-                items: [
-                    {
-                        degree: "Bachelor of Technology in Computer Science",
-                        institution: "GCOEJ - Government College of Engineering, Jalgaon",
-                        year: "2022 - 2026",
-                        description: "Learning Computer Science fundamentals, data structures, algorithms, and software development practices.",
-                        icon: "graduationCap"
-                    },
-                    {
-                        degree: "HSC - Science",
-                        institution: "XYZ Junior College",
-                        year: "2020 - 2022",
-                        description: "Physics, Chemistry, Math with Computer Science.",
-                        icon: "book"
-                    },
-                    {
-                        degree: "SSC - High School",
-                        institution: "ABC High School",
-                        year: "2010 - 2020",
-                        description: "Completed schooling with distinction.",
-                        icon: "school"
-                    }
-                ]
-            }
-            return content
-            break
+    /* ---------------- ABOUT ---------------- */
+    case "about":
+      return {
+        type: "about",
+        avatar: "/images/code.png",
+        heading: "About Me",
+        about:
+          "I’m a full-stack developer with a strong focus on clean architecture, performance, and user-centric design. I enjoy transforming complex problems into simple, elegant solutions using modern web technologies.\n\nBeyond coding, I actively explore emerging tools, experiment with product ideas, and contribute to developer communities."
+      }
 
-        case "certifications":
-            content = {
-                type: "certifications",
-                heading: "Certifications",
-                subHeading: "Here are some of the certifications I have earned.",
-                items: [
-                    {
-                        title: "Full Stack Web Development",
-                        issuer: "Coursera",
-                        year: "2023",
-                        description: "Completed a comprehensive full-stack web development course including React, Node.js, and MongoDB.",
-                        link: "https://coursera.org/certificate/xyz123",
-                        icon: "badgeCheck"
-                    },
-                    {
-                        title: "AWS Certified Cloud Practitioner",
-                        issuer: "Amazon Web Services",
-                        year: "2024",
-                        description: "Certification in basic AWS cloud concepts and services.",
-                        link: "https://aws.amazon.com/certification/",
-                        icon: "cloud"
-                    },
-                    {
-                        title: "Data Structures & Algorithms",
-                        issuer: "Coding Ninjas",
-                        year: "2023",
-                        description: "Mastered DSA in C++ with hands-on problem solving.",
-                        link: "https://codingninjas.com/certificate/abc",
-                        icon: "braces"
-                    }
-                ]
-            }
-            return content
-            break
-        case "faqs":
-            content = {
-                type: "faqs",
-                heading: "Frequently Asked Questions",
-                subHeading: "Got questions? I’ve got answers.",
-                items: [
-                    {
-                        question: "Can I customize my portfolio after publishing?",
-                        answer: "Yes! You can log in anytime to edit, add, or remove sections as you like."
-                    },
-                    {
-                        question: "Is the portfolio mobile-friendly?",
-                        answer: "Absolutely! All portfolios are fully responsive and look great on any device."
-                    },
-                    {
-                        question: "Do I need to know coding?",
-                        answer: "No coding needed. The builder is completely drag and drop with customizable sections."
-                    },
-                    {
-                        question: "Is there a free plan?",
-                        answer: "Yes, there is a basic free plan with limited features. You can upgrade anytime."
-                    }
-                ]
-            }
-            return content
-            break
-        case "achievements":
-            content = {
-                type: "achievements",
-                heading: "Achievements",
-                subHeading: "Milestones and recognitions that I'm proud of.",
-                items: [
-                    {
-                        title: "Top Performer at Hackathon 2024",
-                        issuer: "GCOEJ",
-                        year: "2024",
-                        description: "Won 1st place in a national-level hackathon organized at GCOEJ for building an AI-powered SaaS product.",
-                        icon: "award"
-                    },
-                    {
-                        title: "Google Cloud Career Readiness Scholarship",
-                        issuer: "Google Cloud",
-                        year: "2023",
-                        description: "Received a scholarship for completing the Google Cloud training program.",
-                        icon: "cloud"
-                    },
-                    {
-                        title: "Open Source Contributor",
-                        issuer: "GirlScript Summer of Code",
-                        year: "2022",
-                        description: "Contributed to multiple open-source projects including documentation, features, and bug fixes.",
-                        icon: "gitBranch"
-                    }
-                ]
-            }
-            return content
-            break
-        case "footer":
-            content = {
-                portfolioName: "Harshad's Portfolio", // Footer title or brand name
-                description: "Building beautiful and functional web experiences.", // Optional tagline or description
-                links: [
-                    {
-                        title: "Home",
-                        link: "/"
-                    },
-                    {
-                        title: "About",
-                        link: "/about"
-                    },
-                    {
-                        title: "Projects",
-                        link: "/projects"
-                    },
-                    {
-                        title: "Contact",
-                        link: "/contact"
-                    }
-                ],
+    /* ---------------- TESTIMONIALS ---------------- */
+    case "testimonials":
+      return {
+        heading: "Client Testimonials",
+        testimonials: [
+          {
+            name: "Ravi Kumar",
+            role: "Founder, TechCorp",
+            message:
+              "Exceptional attention to detail and great communication throughout the project. Delivered exactly what we needed.",
+            image: "https://source.unsplash.com/100x100/?person"
+          },
+          {
+            name: "Anjali Sharma",
+            role: "Product Manager, InnovateX",
+            message:
+              "Reliable, professional, and technically strong. A pleasure to work with.",
+            image: "https://source.unsplash.com/100x100/?woman"
+          },
+          {
+            name: "Rahul Verma",
+            role: "Startup Founder",
+            message:
+              "Turned our idea into a polished product faster than expected. Highly recommended.",
+            image: "https://source.unsplash.com/100x100/?man"
+          }
+        ]
+      }
 
-                socials: [
-                    {
-                        platform: "GitHub",
-                        link: "https://github.com/harshadhatagale",
-                        icon: "github" // For dynamic rendering with lucide-react
-                    },
-                    {
-                        platform: "LinkedIn",
-                        link: "https://linkedin.com/in/harshadhatagale",
-                        icon: "linkedin"
-                    },
-                    {
-                        platform: "Twitter",
-                        link: "https://twitter.com/harshadhatagale",
-                        icon: "twitter"
-                    },
-                    {
-                        platform: "Instagram",
-                        link: "https://instagram.com/harshadhatagale",
-                        icon: "instagram"
-                    }
-                ],
+    /* ---------------- PROJECTS ---------------- */
+    case "projects":
+      return {
+        type: "projects",
+        heading: "Featured Projects",
+        subHeading: "A selection of recent work showcasing design, performance, and scalability.",
+        projects: [
+          {
+            title: "Portfolio Builder Platform",
+            description:
+              "A no-code platform enabling users to create, customize, and deploy professional portfolios with ease.",
+            image: "https://source.unsplash.com/600x400/?website",
+            github: "#",
+            live: "#",
+            tags: ["Next.js", "Tailwind", "MongoDB", "SaaS"]
+          },
+          {
+            title: "E-commerce Web Application",
+            description:
+              "A full-stack commerce solution featuring authentication, payments, order management, and admin controls.",
+            image: "https://source.unsplash.com/600x400/?ecommerce",
+            github: "#",
+            live: "#",
+            tags: ["React", "Node.js", "Stripe", "MongoDB"]
+          },
+          {
+            title: "Real-Time Chat System",
+            description:
+              "A secure, real-time messaging application with authentication and live updates.",
+            image: "https://source.unsplash.com/600x400/?chat",
+            github: "#",
+            live: "#",
+            tags: ["React", "Socket.io", "Node.js"]
+          }
+        ]
+      }
 
-                copyright:
-                    "© 2025 Harshad Hatagale. All rights reserved."
-            }
-            return content
-        default:
-            content = {
-                type: 'section'
-            }
-            return content
-            break;
-    }
+    /* ---------------- SKILLS ---------------- */
+    case "skills":
+      return {
+        type: "skills",
+        primaryHeading: "Technical Skills",
+        secondaryHeading:
+          "Technologies and tools used to build fast, scalable, and maintainable applications.",
+        skills: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "JavaScript",
+          "Tailwind CSS",
+          "Node.js",
+          "MongoDB",
+          "Firebase",
+          "REST APIs",
+          "Git & GitHub"
+        ]
+      }
+
+    /* ---------------- SERVICES ---------------- */
+    case "services":
+      return {
+        type: "services",
+        heading: "Services",
+        subHeading: "Professional solutions tailored to your product needs.",
+        services: [
+          {
+            title: "Web Application Development",
+            description:
+              "Custom, scalable, and high-performance web applications using modern frameworks.",
+            icon: "code",
+            link: "#"
+          },
+          {
+            title: "UI/UX Engineering",
+            description:
+              "Clean, intuitive, and accessible interfaces focused on great user experience.",
+            icon: "palette",
+            link: "#"
+          },
+          {
+            title: "Mobile App Development",
+            description:
+              "Cross-platform mobile apps built with performance and usability in mind.",
+            icon: "smartphone",
+            link: "#"
+          }
+        ]
+      }
+
+    /* ---------------- EXPERIENCE ---------------- */
+    case "experience":
+      return {
+        type: "experience",
+        primaryHeading: "Professional Experience",
+        experiences: [
+          {
+            jobTitle: "Full-Stack Developer",
+            companyName: "Freelance / Contract",
+            startDate: "2023",
+            endDate: "Present",
+            responsibillities:
+              "Designed and developed complete web solutions, collaborated with clients, and delivered production-ready applications.",
+            technologies: "Next.js, React, Node.js, MongoDB"
+          },
+          {
+            jobTitle: "Frontend Developer Intern",
+            companyName: "Technology Startup",
+            startDate: "2023",
+            endDate: "2023",
+            responsibillities:
+              "Built reusable UI components and optimized application performance across devices.",
+            technologies: "React, TypeScript, TailwindCSS"
+          }
+        ]
+      }
+
+    /* ---------------- EDUCATION ---------------- */
+    case "education":
+      return {
+        heading: "Education",
+        subHeading: "Academic background and foundational learning.",
+        items: [
+          {
+            degree: "Bachelor of Technology in Computer Science",
+            institution: "Engineering University",
+            year: "2022 – 2026",
+            description:
+              "Core computer science concepts including data structures, algorithms, and software engineering.",
+            icon: "graduationCap"
+          }
+        ]
+      }
+
+    /* ---------------- FAQ ---------------- */
+    case "faqs":
+      return {
+        type: "faqs",
+        heading: "Frequently Asked Questions",
+        subHeading: "Quick answers to common questions.",
+        items: [
+          {
+            question: "Can I customize my portfolio later?",
+            answer:
+              "Yes, all sections are fully editable even after publishing."
+          },
+          {
+            question: "Is coding knowledge required?",
+            answer:
+              "No. The platform is designed to work without any coding."
+          },
+          {
+            question: "Is the portfolio mobile-responsive?",
+            answer:
+              "Absolutely. All layouts are optimized for all screen sizes."
+          }
+        ]
+      }
+
+    /* ---------------- FOOTER ---------------- */
+    case "footer":
+      return {
+        portfolioName: "Digital Portfolio",
+        description:
+          "Crafting clean, scalable, and impactful digital experiences.",
+        links: [
+          { title: "Home", link: "/" },
+          { title: "Projects", link: "/projects" },
+          { title: "Contact", link: "/contact" }
+        ],
+        socials: [
+          { platform: "GitHub", link: "#", icon: "github" },
+          { platform: "LinkedIn", link: "#", icon: "linkedin" },
+          { platform: "Twitter", link: "#", icon: "twitter" }
+        ],
+        copyright:
+          "© 2025 Digital Portfolio. All rights reserved."
+      }
+
+    default:
+      return { type: "section" }
+  }
 }
