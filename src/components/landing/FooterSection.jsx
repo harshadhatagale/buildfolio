@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex justify-start items-center gap-1">
-              <Logo/> <span className="font-bold text-xl">BuildFolio</span>
+              <Logo /> <span className="font-bold text-xl">BuildFolio</span>
             </h2>
             <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
               The easiest way to build, design and share your professional portfolio.

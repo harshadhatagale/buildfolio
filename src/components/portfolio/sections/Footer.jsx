@@ -34,7 +34,7 @@ export default function Footer({id, content}) {
             {content?.copyright ||
               `© ${new Date().getFullYear()} All rights reserved.`}
           </p>
-          <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/home`} className='text-xs text-muted-foreground'>Built with ❤️ using BuildFolio.</p>
+          <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/home`} className='text-xs text-muted-foreground'>Built with ❤️ using BuildFolio.</Link>
         </div>
 
         {/* Center Links */}

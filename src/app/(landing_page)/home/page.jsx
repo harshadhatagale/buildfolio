@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
@@ -8,6 +10,10 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text'
 import FeaturesSection from '@/components/landing/FeaturesSection'
 import Footer from '@/components/landing/FooterSection'
 import FAQSection from '@/components/landing/FaqsSection'
+import { RainbowButton } from '@/components/ui/rainbow-button'
+import { Button } from '@/components/ui/button'
+import { Rocket, Play, ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 const inter = Inter({
   subsets: ['latin'],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
@@ -15,6 +21,7 @@ const inter = Inter({
 
 
 export default function Page() {
+  const router = useRouter()
   return (
     <>
       <section className='h-full w-full pt-20 relative flex justify-center items-center flex-col'>
@@ -41,13 +48,44 @@ export default function Page() {
             </span>
           </h1>
         </div>
-        <div className='flex justify-center items-center relative md:mt-[-65px]'>
-          <Image src="/images/demo4.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
+        <div className="relative flex justify-center items-center md:mt-[-85px]">
+          {/* Image */}
+          <Image
+            src="/images/demo4.png"
+            alt="Preview"
+            width={900}
+            height={900}
+            className="rounded-tl-2xl rounded-tr-2xl border-2 border-muted"
+          />
+
+          {/* CTA Overlay */}
+          <div className="absolute -bottom-20 md:-bottom-8 flex gap-4 z-20 flex-col md:flex-row">
+            <RainbowButton
+              size="lg"
+              onClick={() => router.push("/sign-in")}
+              className="h-14 px-8 text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 group"
+            >
+              <Rocket className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Create a Portfolio
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </RainbowButton>
+
+            <Button
+              onClick={() => router.push("#")}
+              variant="outline"
+              size="lg"
+              className="h-14 px-8 text-lg font-semibold border-2 bg-background/70 backdrop-blur-md hover:bg-accent/50 hover:scale-105 transition-all duration-300 group"
+            >
+              <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              See Examples
+            </Button>
+          </div>
         </div>
+
       </section>
       <FeaturesSection />
       <PricingSection />
-      <FAQSection/>
+      <FAQSection />
       <Footer />
     </>
   )

@@ -14,12 +14,44 @@ export default function EditorLayout({ children }) {
   const theme = useSelector((state) => state.portfolio.themeId)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkScreen()
+    window.addEventListener("resize", checkScreen)
+
+    return () => window.removeEventListener("resize", checkScreen)
+  }, [])
+
+  if (isMobile) {
+  return (
+    <div className="min-h-screen flex items-center justify-center px-6 text-center">
+      <div className="max-w-sm">
+        <h2 className="text-2xl font-semibold mb-3">
+          Editor not supported on mobile
+        </h2>
+
+        <p className="text-muted-foreground mb-6">
+          Please open the editor on a laptop or tablet for the best experience.
+        </p>
+
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-md border">
+          💻 Laptop &nbsp;|&nbsp; 📱 Tablet
+        </div>
+      </div>
+    </div>
+  )
+}
 
   const fetchProjectData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
-      
+
       // Fetch project data in a single request
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`,
@@ -36,19 +68,19 @@ export default function EditorLayout({ children }) {
       }
 
       const data = await res.json()
-      
+
       if (!data || !data.myproject) {
         throw new Error('Invalid project data received')
       }
 
       // Dispatch project data
       dispatch(setProject(data.myproject))
-      
+
       // Dispatch sections
       if (data.myproject.sections) {
         dispatch(setSections(data.myproject.sections))
       }
-      
+
       // Dispatch theme if available
       if (data.myproject.theme) {
         dispatch(setTheme({ id: data.myproject.theme }))
@@ -59,7 +91,7 @@ export default function EditorLayout({ children }) {
         const themeRes = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/themes/${data.myproject.theme}`
         )
-        
+
         if (themeRes.ok) {
           const themeData = await themeRes.json()
           if (themeData.success && themeData.theme?.colors) {
@@ -77,7 +109,7 @@ export default function EditorLayout({ children }) {
 
   useEffect(() => {
     if (!params.project) return
-    
+
     fetchProjectData()
   }, [params.project, fetchProjectData])
 
@@ -90,13 +122,13 @@ export default function EditorLayout({ children }) {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/themes/${theme}`
         )
-        
+
         if (!res.ok) {
           throw new Error(`Failed to fetch theme: ${res.status}`)
         }
 
         const data = await res.json()
-        
+
         if (data.success && data.theme?.colors) {
           dispatch(setThemeColors({ colors: data.theme.colors }))
         }
@@ -130,9 +162,9 @@ export default function EditorLayout({ children }) {
     <>
       <Navbar loading={loading} />
       <Toolbar />
-      <Sidebar 
-        loading={loading} 
-        projectId={params.project} 
+      <Sidebar
+        loading={loading}
+        projectId={params.project}
         error={error}
       />
       {loading ? (
