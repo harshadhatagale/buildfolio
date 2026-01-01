@@ -68,7 +68,7 @@ export default function Navbar({ loading }) {
         <Button onClick={() => router.push("/dashboard")} className={"cursor-pointer"} variant={"secondary"}>Dashboard</Button>
         <ThemeEditor />
         <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />
-        <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} />
+        {/* <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} /> */}
         {project.visibillity === "private" ? (
           <ShimmerButton onClick={() => handlePublish("public")} className="py-1 px-3 flex gap-2 justify-between items-center">
             <Globe size={16} />
