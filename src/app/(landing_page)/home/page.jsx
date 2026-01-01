@@ -63,7 +63,7 @@ export default function Page() {
             <RainbowButton
               size="lg"
               onClick={() => router.push("/sign-in")}
-              className="h-14 px-8 text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 group"
+              className="h-14 px-8 border border-muted text-lg font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 group"
             >
               <Rocket className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Create a Portfolio
