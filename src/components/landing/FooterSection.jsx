@@ -51,16 +51,16 @@ export default function Footer() {
               Connect
             </h3>
             <div className="flex space-x-4 mt-2">
-              <Link href="https://github.com" target="_blank" className="hover:text-blue-500">
+              <Link href="#" target="_blank" className="hover:text-blue-500">
                 <Github size={20} />
               </Link>
-              <Link href="https://twitter.com" target="_blank" className="hover:text-blue-500">
+              <Link href="#" target="_blank" className="hover:text-blue-500">
                 <Twitter size={20} />
               </Link>
-              <Link href="https://linkedin.com" target="_blank" className="hover:text-blue-500">
+              <Link href="https://www.linkedin.com/company/110531212" target="_blank" className="hover:text-blue-500">
                 <Linkedin size={20} />
               </Link>
-              <Link href="/" className="hover:text-blue-500">
+              <Link href="#" className="hover:text-blue-500">
                 <Globe size={20} />
               </Link>
             </div>

@@ -42,7 +42,7 @@ export default function Page() {
           </h1>
         </div>
         <div className='flex justify-center items-center relative md:mt-[-65px]'>
-          <Image src="/images/demo3.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
+          <Image src="/images/demo4.png" alt='Preview' width={900} height={900} className='rounded-tl-2xl rounded-tr-2xl border-2 border-muted' />
         </div>
       </section>
       <FeaturesSection />

@@ -30,7 +30,7 @@ export default function FooterProps() {
   return (
     <div className='w-full flex flex-col justify-center items-center gap-4'>
       <div className='w-full flex justify-start gap-3 items-center'>
-        <HelpCircle />
+        <HelpCircle className='text-primary'/>
         <span>{section.name}</span>
       </div>
       <div className="grid w-full max-w-sm items-center gap-3">

@@ -109,7 +109,7 @@ export default function ProjectsProps() {
     return (
         <div className='w-full flex flex-col gap-4'>
             <div className='flex items-center gap-3'>
-                <Code className="w-5 h-5" />
+                <Code className='text-primary' />
                 <h3 className="font-medium">{section.name}</h3>
             </div>
             <div className="space-y-3">

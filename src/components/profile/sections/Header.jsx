@@ -89,7 +89,7 @@ export default function Header({ user }) {
                         
                         {/* Desktop Logout Button */}
                         <div className="hidden md:block">
-                            <SignOutButton>
+                            <SignOutButton className="cursor-pointer">
                                 <Button variant={"destructive"} size="sm" className={"font-sans text-xs lg:text-sm"}>
                                     Log Out
                                 </Button>
@@ -138,7 +138,7 @@ export default function Header({ user }) {
                         
                         {/* Mobile Logout Button */}
                         <div className="pt-2 border-t border-muted">
-                            <SignOutButton>
+                            <SignOutButton className="cursor-pointer">
                                 <Button 
                                     variant={"destructive"} 
                                     size="sm" 

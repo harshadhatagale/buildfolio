@@ -15,7 +15,8 @@ export const pricingCards = [
       "BuildFolio branding"
     ],
     cta: "Get Started Free",
-    recommended: false
+    recommended: false,
+    available: true, 
   },
   {
     id: "pro",
@@ -34,7 +35,8 @@ export const pricingCards = [
       "Fast publish"
     ],
     cta: "Upgrade to Pro",
-    recommended: true
+    recommended: true,
+    available: false, // 🔒 coming soon
   },
   {
     id: "lifetime",
@@ -50,7 +52,8 @@ export const pricingCards = [
       "No recurring fees"
     ],
     cta: "Get Lifetime Access",
-    recommended: false
+    recommended: false,
+    available: false,
   },
   {
     id: "enterprise",
@@ -65,6 +68,7 @@ export const pricingCards = [
       "Custom features"
     ],
     cta: "Contact Us",
-    recommended: false
+    recommended: false,
+    available: false,
   }
 ]

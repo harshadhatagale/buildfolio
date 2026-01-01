@@ -4,6 +4,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
     Github, Linkedin, Twitter, Globe, Code2, Terminal,
@@ -44,24 +45,6 @@ export default function DeveloperProfilePage() {
         );
     }
 
-    // ---------- SAFE METADATA EXTRACTION ----------
-    const metadata = user?.publicMetadata || {};
-
-    const skills =
-        metadata.skills ||
-        ["React", "TypeScript", "Node.js", "Python", "AWS", "Docker"];
-
-    const stats =
-        metadata.stats || {
-            projects: 24,
-            contributions: 128,
-            experience: "5+ years",
-            availability: "Open to work",
-        };
-
-    const socialLinks = metadata.socialLinks || {};
-
-    // ----------------------------------------------
 
     return (
         <>
@@ -98,16 +81,16 @@ export default function DeveloperProfilePage() {
                                             {user?.firstName ?? "Developer"}
                                         </CardTitle>
 
-                                        <div className="flex items-center gap-2 mt-2">
+                                        {/* <div className="flex items-center gap-2 mt-2">
                                             <Code2 className="w-4 h-4 text-cyan-600" />
                                             <p className="text-sm text-gray-600 dark:text-gray-300 font-mono">
-                                                {metadata.title ?? "Full Stack Developer"}
+                                                Full Stack Developer"}
                                             </p>
-                                        </div>
+                                        </div> */}
 
                                         <Badge className="mt-3 px-3 py-1">
                                             <Shield className="w-3 h-3 mr-1" />
-                                            {metadata.subscriptionType ?? "PRO TIER"}
+                                            FREE TIER
                                         </Badge>
                                     </div>
                                 </CardHeader>
@@ -121,37 +104,26 @@ export default function DeveloperProfilePage() {
                                         </h3>
 
                                         <div className="grid grid-cols-2 gap-3">
-                                            {socialLinks.github && (
-                                                <Button variant="outline" asChild>
-                                                    <a href={socialLinks.github} target="_blank">
-                                                        <Github className="w-4 h-4" /> GitHub
-                                                    </a>
-                                                </Button>
-                                            )}
-
-                                            {socialLinks.linkedin && (
-                                                <Button variant="outline" asChild>
-                                                    <a href={socialLinks.linkedin} target="_blank">
-                                                        <Linkedin className="w-4 h-4" /> LinkedIn
-                                                    </a>
-                                                </Button>
-                                            )}
-
-                                            {socialLinks.twitter && (
-                                                <Button variant="outline" asChild>
-                                                    <a href={socialLinks.twitter} target="_blank">
-                                                        <Twitter className="w-4 h-4" /> Twitter
-                                                    </a>
-                                                </Button>
-                                            )}
-
-                                            {socialLinks.website && (
-                                                <Button variant="outline" asChild>
-                                                    <a href={socialLinks.website} target="_blank">
-                                                        <Globe className="w-4 h-4" /> Website
-                                                    </a>
-                                                </Button>
-                                            )}
+                                            <Button variant="outline" asChild>
+                                                <Link href={"#"}>
+                                                    <Github className="w-4 h-4" /> GitHub
+                                                </Link>
+                                            </Button>
+                                            <Button variant="outline" asChild>
+                                                <Link href={"#"}>
+                                                    <Linkedin className="w-4 h-4" /> LinkedIn
+                                                </Link>
+                                            </Button>
+                                            <Button variant="outline" asChild>
+                                                <Link href={"#"}>
+                                                    <Twitter className="w-4 h-4" /> Twitter
+                                                </Link>
+                                            </Button>
+                                            <Button variant="outline" asChild>
+                                                <Link href={"#"}>
+                                                    <Globe className="w-4 h-4" /> Website
+                                                </Link>
+                                            </Button>
                                         </div>
                                     </div>
                                 </CardContent>
@@ -175,10 +147,10 @@ export default function DeveloperProfilePage() {
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="font-mono text-gray-700 dark:text-gray-300">
+                                    {/* <p className="font-mono text-gray-700 dark:text-gray-300">
                                         {metadata.bio ??
                                             "// Senior developer specializing in scalable systems."}
-                                    </p>
+                                    </p> */}
                                 </CardContent>
                             </Card>
 
@@ -195,7 +167,7 @@ export default function DeveloperProfilePage() {
 
                                 <CardContent>
                                     <div className="flex flex-wrap gap-3">
-                                        {skills.map((skill, index) => (
+                                        {/* {skills.map((skill, index) => (
                                             <motion.div
                                                 key={skill}
                                                 initial={{ opacity: 0, scale: 0.8 }}
@@ -204,7 +176,7 @@ export default function DeveloperProfilePage() {
                                             >
                                                 <Badge variant="outline">{skill}</Badge>
                                             </motion.div>
-                                        ))}
+                                        ))} */}
                                     </div>
                                 </CardContent>
                             </Card>
