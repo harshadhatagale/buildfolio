@@ -191,8 +191,7 @@ const Nav = ({ content }) => {
                 side="right"
                 className={cn(
                   "w-[85vw] sm:w-[400px] p-0 border-l",
-                  "bg-gradient-to-b from-white/95 to-white/85 dark:from-black/95 dark:to-black/85",
-                  "backdrop-blur-2xl border-white/20 dark:border-white/10",
+                  "bg-background",
                   "before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/5 before:to-transparent"
                 )}
               >
