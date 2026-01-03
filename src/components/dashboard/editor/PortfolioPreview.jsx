@@ -79,7 +79,7 @@ export default function PortfolioPreview({ sections }) {
             suppressHydrationWarning
             ref={containerRef}
             className={`mt-5 z-10 overflow-y-scroll border-2 border-border bg-background text-foreground min-w-full  rounded-[var(--radius)]`}
-            style={{...getThemeStyles(),fontFamily: `'${font}', Poppins, sans-serif`,}}
+            style={{...getThemeStyles(),fontFamily: `'${font}', sans-serif`,}}
         >
             {sections.map((section) => (
                 <div

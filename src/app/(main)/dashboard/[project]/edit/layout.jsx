@@ -7,19 +7,29 @@ import { useParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFont, setProject, setSections, setTheme, setThemeColors } from '../../../../../../features/portfolio/portfolioSlice'
 import Inspector from '@/components/dashboard/editor/Inspector'
-
+import { loadFont } from '@/lib/lazyFontLoad'
 export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
   const theme = useSelector((state) => state.portfolio.themeId)
+  const font = useSelector((state) => state.portfolio.font)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+
+  useEffect(() => {
+        if (!font) return
+
+        const applyFont = async () => {
+          await loadFont(font)
+        }
+        applyFont()
+      }, [font])
   const fetchProjectData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
-      
+
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`,
         {
@@ -35,19 +45,19 @@ export default function EditorLayout({ children }) {
       }
 
       const data = await res.json()
-      
+
       if (!data || !data.myproject) {
         throw new Error('Invalid project data received')
       }
 
       // Dispatch project data
       dispatch(setProject(data.myproject))
-      
+
       // Dispatch sections
       if (data.myproject.sections) {
         dispatch(setSections(data.myproject.sections))
       }
-      
+
       // Dispatch theme if available
       if (data.myproject.theme) {
         dispatch(setTheme({ id: data.myproject.theme }))
@@ -55,14 +65,14 @@ export default function EditorLayout({ children }) {
 
       // Dispatch theme if available
       if (data.myproject?.font) {
-        dispatch(setFont(data.myproject.font || "Roboto" ))
+        dispatch(setFont(data.myproject.font || "Roboto"))
       }
       // If we have a theme, fetch its colors immediately
       if (data.myproject.theme) {
         const themeRes = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/themes/${data.myproject.theme}`
         )
-        
+
         if (themeRes.ok) {
           const themeData = await themeRes.json()
           if (themeData.success && themeData.theme?.colors) {
@@ -80,7 +90,7 @@ export default function EditorLayout({ children }) {
 
   useEffect(() => {
     if (!params.project) return
-    
+
     fetchProjectData()
   }, [params.project, fetchProjectData])
 
@@ -92,13 +102,13 @@ export default function EditorLayout({ children }) {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/themes/${theme}`)
-        
+
         if (!res.ok) {
           throw new Error(`Failed to fetch theme: ${res.status}`)
         }
 
         const data = await res.json()
-        
+
         if (data.success && data.theme?.colors) {
           dispatch(setThemeColors({ colors: data.theme.colors }))
         }
@@ -132,9 +142,9 @@ export default function EditorLayout({ children }) {
     <>
       <Navbar loading={loading} />
       <Toolbar />
-      <Sidebar 
-        loading={loading} 
-        projectId={params.project} 
+      <Sidebar
+        loading={loading}
+        projectId={params.project}
         error={error}
       />
       {loading ? (

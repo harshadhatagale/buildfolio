@@ -15,7 +15,6 @@ export async function loadFont(
 
   const id = `font-${fontFamily.replace(/\s/g, "-")}`
 
-  // 1️⃣ Inject CSS once
   if (!document.getElementById(id)) {
     const link = document.createElement("link")
     link.id = id
@@ -35,6 +34,5 @@ export async function loadFont(
     ),
   ])
 
-  // 3️⃣ Mark as loaded (prevents re-wait)
   loadedFonts.add(fontFamily)
 }
