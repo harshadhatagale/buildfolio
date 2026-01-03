@@ -80,13 +80,16 @@ const initialState = {
   theme: defaultTheme,
   themeId: null,
   project: {},
+  font: "Roboto",
   themeMode: 'light',
+  subType: "starter",
   selectedSection: null,
   past: [],
   present: [],
   future: [],
   title: "",
   isPublished: false,
+  device: "desktop"
 };
 
 export const portfolioSlice = createSlice({
@@ -100,6 +103,12 @@ export const portfolioSlice = createSlice({
       state.present = action.payload;
       state.past = [];
       state.future = [];
+    },
+    setDevice: (state, action) => {
+      state.device = action.payload
+    },
+    setFont:(state, action)=>{
+      state.font = action.payload
     },
     setSelectedSection: (state, action) => {
       state.selectedSection = action.payload;
@@ -129,6 +138,9 @@ export const portfolioSlice = createSlice({
         };
         state.future = [];
       }
+    },
+    setSubType: (state, action) => {
+      state.subType = action.payload;
     },
     renameSection: (state, action) => {
       const { _id, name } = action.payload;
@@ -171,12 +183,15 @@ export const portfolioSlice = createSlice({
 });
 
 export const {
+  setSubType,
   setProject,
   addSection,
+  setDevice,
   removeSection,
   setSections,
   setThemeColors,
   setTheme,
+  setFont,
   setSelectedSection,
   updateSection,
   renameSection,

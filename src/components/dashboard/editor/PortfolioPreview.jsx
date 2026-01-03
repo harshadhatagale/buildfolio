@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux'
 import { defaultTheme } from '../../../../features/portfolio/portfolioSlice'
 
 export default function PortfolioPreview({ sections }) {
-    const [device, setDevice] = useState("mobile")
     const sectionRefs = useRef({})
     const containerRef = useRef(null)
     const { theme } = useTheme()
     const selectedSection = useSelector((state) => state.portfolio.selectedSection)
     const previewTheme = useSelector((state) => state.portfolio.theme)
+    const font = useSelector((state) => state.portfolio.font)
     const getThemeStyles = () => {
 
         const colors = {
@@ -78,17 +78,14 @@ export default function PortfolioPreview({ sections }) {
         <div
             suppressHydrationWarning
             ref={containerRef}
-            className={`mt-5 z-10 overflow-y-scroll border-2 border-border bg-background text-foreground
-                ${device === "mobile" ? "w-[680px] h-[667px]" : ""}
-                ${device === "desktop" ? "min-h-[600px] w-lvw" : ""} 
-                rounded-[var(--radius)]`}
-            style={getThemeStyles()}
+            className={`mt-5 z-10 overflow-y-scroll border-2 border-border bg-background text-foreground min-w-full  rounded-[var(--radius)]`}
+            style={{...getThemeStyles(),fontFamily: `'${font}', Poppins, sans-serif`,}}
         >
             {sections.map((section) => (
                 <div
                     key={section._id}
                     ref={(el) => assignSectionRef(section._id, el)}
-                    className="bg-card relative text-card-foreground"
+                    className="bg-background relative text-card-foreground"
                 >
                     <SectionRenderer
                         id={section._id}

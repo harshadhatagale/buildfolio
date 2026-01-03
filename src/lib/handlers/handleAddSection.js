@@ -16,7 +16,7 @@ export const useAddSection = () => {
     const name = `Untitled section ${untitledCount + 1}`
 
     if (existingNames.includes(name)) {
-      alert("Duplicate name. Please rename existing sections before adding new ones.")
+      toast.error("Duplicate name. Please rename existing sections before adding new ones.")
       return
     }
     const section = {
@@ -27,7 +27,7 @@ export const useAddSection = () => {
       order: sections.length > 0 ? sections.length : 0
     }
     try {
-      if (sections.length < 8 )
+      if (sections.length < 15 )
       {
         dispatch(addSection(section));
       }

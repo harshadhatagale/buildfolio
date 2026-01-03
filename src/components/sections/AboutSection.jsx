@@ -16,11 +16,6 @@ const EditableText = ({
   className,
 }) => {
   const dispatch = useDispatch();
-  const isEditing = true;
-
-  if (!isEditing) {
-    return <span className={className}>{value}</span>;
-  }
 
   return (
     <span
@@ -43,7 +38,7 @@ const EditableText = ({
           e.currentTarget.blur();
         }
       }}
-      onBlur={(e) => onChange(e.target.innerText)}
+      onBlur={(e) => onChange(e.currentTarget.innerText)}
     >
       {value}
     </span>
@@ -58,11 +53,6 @@ const EditableParagraph = ({
   className,
 }) => {
   const dispatch = useDispatch();
-  const isEditing = true;
-
-  if (!isEditing) {
-    return <p className={className}>{value}</p>;
-  }
 
   return (
     <p
@@ -79,7 +69,7 @@ const EditableParagraph = ({
         e.stopPropagation();
         dispatch(setSelectedSection({ _id: sectionId, type: "about" }));
       }}
-      onBlur={(e) => onChange(e.target.innerText)}
+      onBlur={(e) => onChange(e.currentTarget.innerText)}
     >
       {value}
     </p>
@@ -88,6 +78,7 @@ const EditableParagraph = ({
 
 export default function AboutSection({ id, content }) {
   const dispatch = useDispatch();
+  const device = useSelector((state) => state.portfolio.device);
   const selectedSection = useSelector(
     (state) => state.portfolio.selectedSection
   );
@@ -95,19 +86,54 @@ export default function AboutSection({ id, content }) {
   const [isSelected, setSelected] = useState(false);
 
   useEffect(() => {
-    if (!selectedSection) return;
-    setSelected(selectedSection._id === id);
+    setSelected(selectedSection?._id === id);
   }, [selectedSection, id]);
+
+  const layout =
+    device === "desktop"
+      ? "grid grid-cols-2 gap-12"
+      : "flex flex-col gap-8";
+
+  const imageHeight =
+    device === "mobile"
+      ? "h-64"
+      : device === "tablet"
+      ? "h-80"
+      : "h-96";
+
+  const headingSize =
+    device === "mobile"
+      ? "text-2xl"
+      : device === "tablet"
+      ? "text-3xl"
+      : "text-4xl";
+
+  const textSize =
+    device === "mobile"
+      ? "text-base"
+      : device === "tablet"
+      ? "text-lg"
+      : "text-lg";
 
   return (
     <section
-      className="relative py-10 px-5 bg-background"
+      className="relative py-16 px-6 bg-background"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: "about" }))
       }
     >
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="relative w-full flex justify-center items-center h-72 md:h-96 rounded-xl bg-transparent overflow-hidden shadow-lg">
+      <div
+        className={cn(
+          "max-w-5xl mx-auto items-center",
+          layout
+        )}
+      >
+        <div
+          className={cn(
+            "relative w-full rounded-xl overflow-hidden shadow-lg",
+            imageHeight
+          )}
+        >
           <img
             src={content.avatar}
             alt="avatar"
@@ -116,7 +142,7 @@ export default function AboutSection({ id, content }) {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+          <h2 className={cn("font-bold text-foreground", headingSize)}>
             <EditableText
               value={content.heading}
               sectionId={id}
@@ -136,7 +162,7 @@ export default function AboutSection({ id, content }) {
             value={content.about}
             sectionId={id}
             isSelected={isSelected}
-            className="text-muted-foreground text-base md:text-lg"
+            className={cn("text-muted-foreground", textSize)}
             onChange={(val) =>
               dispatch(
                 updateSection({

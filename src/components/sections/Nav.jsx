@@ -1,15 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlignRight, Plus } from "lucide-react";
+import { AlignRight, Plus, X } from "lucide-react";
 import { Button } from "../ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
 import { cn } from "@/lib/utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -26,9 +19,6 @@ const EditableText = ({
   className,
 }) => {
   const dispatch = useDispatch();
-  const isEditing = true;
-
-  if (!isEditing) return <span className={className}>{value}</span>;
 
   return (
     <span
@@ -51,59 +41,52 @@ const EditableText = ({
           e.currentTarget.blur();
         }
       }}
-      onBlur={(e) => onChange(e.target.innerText)}
+      onBlur={(e) => onChange(e.currentTarget.innerText)}
     >
       {value}
     </span>
   );
 };
 
-const Nav = ({ id, content }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Nav({ id, content }) {
   const dispatch = useDispatch();
-
+  const device = useSelector((state) => state.portfolio.device);
   const selectedSection = useSelector(
     (state) => state.portfolio.selectedSection
   );
 
   const [isSelected, setIsSelected] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!selectedSection) return;
-    setIsSelected(selectedSection._id === id);
+    setIsSelected(selectedSection?._id === id);
   }, [selectedSection, id]);
-  const deleteLink = (index) => {
-  const updatedLinks = content.links.filter((_, i) => i !== index);
 
-  dispatch(
-    updateSection({
-      _id: id,
-      content: { links: updatedLinks },
-    })
-  );
-};
   const addLink = () => {
-    const updatedLinks = [
-      ...content.links,
-      { title: "New Link", link: "#" },
-    ];
-
     dispatch(
       updateSection({
         _id: id,
-        content: { links: updatedLinks },
+        content: {
+          links: [...content.links, { title: "New Link", link: "#" }],
+        },
       })
     );
   };
 
+  const updateLinkTitle = (index, value) => {
+    const updatedLinks = [...content.links];
+    updatedLinks[index] = { ...updatedLinks[index], title: value };
+    dispatch(updateSection({ _id: id, content: { links: updatedLinks } }));
+  };
+
   return (
     <header
-      className="px-3 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="w-[92%] backdrop-blur-xl backdrop-saturate-200 mx-auto my-5 max-w-7xl rounded-2xl px-3 border bg-background"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: "nav" }))
       }
     >
-      <div className="flex h-16 items-center justify-between w-full">
+      <div className="flex h-16 items-center justify-between">
         <span className="text-lg font-semibold">
           <EditableText
             value={content.portfolioName}
@@ -120,106 +103,46 @@ const Nav = ({ id, content }) => {
           />
         </span>
 
-        <nav className="hidden md:flex items-center space-x-4">
-          {content.links.map((link, index) => (
-            <span
-              key={index}
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
+        {device !== "mobile" && (
+          <nav className="flex items-center gap-4">
+            {content.links.map((link, i) => (
               <EditableText
+                key={i}
                 value={link.title}
                 sectionId={id}
                 isSelected={isSelected}
-                onChange={(val) => {
-                  const updatedLinks = [...content.links];
-                  updatedLinks[index] = {
-                    ...updatedLinks[index],
-                    title: val,
-                  };
-
-                  dispatch(
-                    updateSection({
-                      _id: id,
-                      content: { links: updatedLinks },
-                    })
-                  );
-                }}
+                className="text-sm font-medium"
+                onChange={(val) => updateLinkTitle(i, val)}
               />
-            </span>
-          ))}
+            ))}
+            {isSelected && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addLink();
+                }}
+                className="flex items-center gap-1 px-2 py-1 text-xs border border-dashed rounded-md"
+              >
+                <Plus className="h-3 w-3" />
+                Add link
+              </button>
+            )}
+            <ModeToggle />
+          </nav>
+        )}
 
-          {isSelected && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                addLink();
-              }}
-              className="flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground border border-dashed border-muted rounded-md hover:text-primary hover:border-primary hover:bg-muted transition"
-            >
-              <Plus className="h-3 w-3" />
-              Add link
-            </button>
-          )}
-          <ModeToggle />
-        </nav>
-
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <AlignRight className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <SheetHeader>
-              <SheetTitle className="text-left">Menu</SheetTitle>
-            </SheetHeader>
-
-            <div className="flex flex-col gap-4 pt-6">
-              {content.links.map((link, index) => (
-                <span
-                  key={index}
-                  className="py-2 text-lg font-medium transition-colors hover:text-primary"
-                >
-                  <EditableText
-                    value={link.title}
-                    sectionId={id}
-                    isSelected={isSelected}
-                    onChange={(val) => {
-                      const updatedLinks = [...content.links];
-                      updatedLinks[index] = {
-                        ...updatedLinks[index],
-                        title: val,
-                      };
-
-                      dispatch(
-                        updateSection({
-                          _id: id,
-                          content: { links: updatedLinks },
-                        })
-                      );
-                    }}
-                  />
-                </span>
-              ))}
-              {isSelected && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    addLink();
-                  }}
-                  className="flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground border border-dashed border-muted rounded-md hover:text-primary hover:border-primary hover:bg-muted transition"
-                >
-                  <Plus className="h-3 w-3" />
-                  Add link
-                </button>
-              )}
-            </div>
-          </SheetContent>
-        </Sheet>
+        {device === "mobile" && (
+          <Button
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(true);
+            }}
+          >
+            <AlignRight />
+          </Button>
+        )}
       </div>
     </header>
   );
-};
-
-export default Nav;
+}

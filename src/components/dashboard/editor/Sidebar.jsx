@@ -53,7 +53,7 @@ export default function Sidebar({ loading, projectId }) {
   };
 
   return (
-    <aside className='z-15 select-none overflow-y-scroll overflow-x-hidden flex flex-col bg-background px-3 w-56 border-r-2 border-muted fixed top-14 left-0 h-[calc(100vh-56px)]'>
+    <aside className='z-15 w-[20%] select-none overflow-y-scroll overflow-x-hidden flex flex-col bg-background px-3 border-r-2 border-muted fixed top-14 left-0 h-[calc(100vh-56px)]'>
       {/* Left Panel: Section List */}
       <div
         className={`p-3 overflow-x-hidden overflow-hidden absolute top-0 left-0 w-full h-auto transition-transform duration-300 
@@ -135,6 +135,7 @@ const SectionsSkeleton = () => {
 }
 
 import toast from 'react-hot-toast';
+import TogglePreviewDevice from './TogglePreviewDevice'
 
 const SortableProjectSectionItem = ({ id, section }) => {
   const sectionId = section._id

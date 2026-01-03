@@ -1,13 +1,19 @@
 'use client'
 
-import SectionRenderer from '@/components/sections/SectionRenderer'
+import SectionRenderer from '@/components/portfolio/sections/SectionRenderer'
 import { useTheme } from 'next-themes'
 import { useEffect, useState, useRef } from 'react'
+import { Poppins, Inter, Roboto, Pixelify_Sans } from 'next/font/google'
 import { useParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
 import FloatingEditBtn from '@/components/basics/FloatingEditBtn'
 import { defaultTheme } from '../../../../../../features/portfolio/portfolioSlice'
+
+const poppins= Poppins({
+  subsets:['latin'],
+  weight:['100','200','300','400','500','600','700','800','900']
+})
 
 export default function PreviewPage() {
   const params = useParams()
@@ -146,7 +152,7 @@ export default function PreviewPage() {
   return (
     <div
       suppressHydrationWarning
-      className="space-y-8 bg-background text-foreground"
+      className={`${poppins.className} bg-background text-foreground`}
       style={getThemeStyles()}
     >
       {sections.map((section) => (

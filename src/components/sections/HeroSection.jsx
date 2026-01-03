@@ -7,6 +7,8 @@ import {
   updateSection,
   setSelectedSection,
 } from "../../../features/portfolio/portfolioSlice";
+import { Button } from "../ui/button";
+import { ArrowRight, Download } from "lucide-react";
 
 const EditableText = ({
   value,
@@ -16,11 +18,6 @@ const EditableText = ({
   className,
 }) => {
   const dispatch = useDispatch();
-  const isEditing = true;
-
-  if (!isEditing) {
-    return <span className={className}>{value}</span>;
-  }
 
   return (
     <span
@@ -43,7 +40,7 @@ const EditableText = ({
           e.currentTarget.blur();
         }
       }}
-      onBlur={(e) => onChange(e.target.innerText)}
+      onBlur={(e) => onChange(e.currentTarget.innerText)}
     >
       {value}
     </span>
@@ -58,11 +55,6 @@ const EditableParagraph = ({
   className,
 }) => {
   const dispatch = useDispatch();
-  const isEditing = true;
-
-  if (!isEditing) {
-    return <p className={className}>{value}</p>;
-  }
 
   return (
     <p
@@ -79,7 +71,7 @@ const EditableParagraph = ({
         e.stopPropagation();
         dispatch(setSelectedSection({ _id: sectionId, type: "hero" }));
       }}
-      onBlur={(e) => onChange(e.target.innerText)}
+      onBlur={(e) => onChange(e.currentTarget.innerText)}
     >
       {value}
     </p>
@@ -88,6 +80,7 @@ const EditableParagraph = ({
 
 export default function HeroSection({ id, content }) {
   const dispatch = useDispatch();
+  const device = useSelector((state) => state.portfolio.device);
   const selectedSection = useSelector(
     (state) => state.portfolio.selectedSection
   );
@@ -95,19 +88,40 @@ export default function HeroSection({ id, content }) {
   const [isSelected, setSelected] = useState(false);
 
   useEffect(() => {
-    if (!selectedSection) return;
-    setSelected(selectedSection._id === id);
+    setSelected(selectedSection?._id === id);
   }, [selectedSection, id]);
+
+  const headingSize =
+    device === "mobile"
+      ? "text-3xl"
+      : device === "tablet"
+      ? "text-5xl"
+      : "text-6xl";
+
+  const paraSize =
+    device === "mobile"
+      ? "text-base"
+      : device === "tablet"
+      ? "text-lg"
+      : "text-xl";
+
+  const buttonLayout =
+    device === "mobile" ? "flex-col w-full" : "flex-row";
 
   return (
     <section
-      className="h-[calc(80vh-40px)] relative flex items-center justify-center bg-background px-6"
+      className="relative h-full flex flex-col gap-6 items-center justify-center bg-background px-6 py-20"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: "hero" }))
       }
     >
-      <div className="max-w-3xl text-center space-y-6">
-        <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+      <div
+        className={cn(
+          "text-center space-y-6",
+          device === "mobile" ? "max-w-full" : "max-w-3xl"
+        )}
+      >
+        <h1 className={cn("font-bold text-foreground", headingSize)}>
           <EditableText
             value={content.primaryHeading}
             sectionId={id}
@@ -127,7 +141,7 @@ export default function HeroSection({ id, content }) {
           value={content.secondaryHeading}
           sectionId={id}
           isSelected={isSelected}
-          className="text-muted-foreground text-lg md:text-xl"
+          className={cn("text-muted-foreground", paraSize)}
           onChange={(val) =>
             dispatch(
               updateSection({
@@ -137,6 +151,36 @@ export default function HeroSection({ id, content }) {
             )
           }
         />
+      </div>
+
+      <div
+        className={cn(
+          "flex gap-3 items-center justify-center",
+          buttonLayout
+        )}
+      >
+        <Button
+          size="lg"
+          className={cn(
+            "capitalize flex items-center gap-2",
+            device === "mobile" && "w-full"
+          )}
+        >
+          <span>Get in touch</span>
+          <ArrowRight size={18} />
+        </Button>
+
+        <Button
+          size="lg"
+          variant="outline"
+          className={cn(
+            "capitalize flex items-center gap-2",
+            device === "mobile" && "w-full"
+          )}
+        >
+          <Download size={18} />
+          <span>Download My Resume</span>
+        </Button>
       </div>
     </section>
   );

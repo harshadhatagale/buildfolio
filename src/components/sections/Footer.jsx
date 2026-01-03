@@ -9,7 +9,7 @@ import {
   Twitter,
   Globe,
   Plus,
-  Trash
+  Trash,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -23,7 +23,7 @@ const iconMap = {
   linkedin: Linkedin,
   instagram: Instagram,
   twitter: Twitter,
-  globe: Globe
+  globe: Globe,
 }
 
 const EditableText = ({ value, onChange, isSelected, sectionId, className }) => {
@@ -84,22 +84,38 @@ const EditableParagraph = ({ value, onChange, isSelected, sectionId, className }
 
 export default function Footer({ id, content }) {
   const dispatch = useDispatch()
-  const selectedSection = useSelector(
-    (state) => state.portfolio.selectedSection
-  )
+  const device = useSelector((state) => state.portfolio.device)
+  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
 
   const [isSelected, setSelected] = useState(false)
 
   useEffect(() => {
-    if (!selectedSection) return
-    setSelected(selectedSection._id === id)
+    setSelected(selectedSection?._id === id)
   }, [selectedSection, id])
 
+  const layout =
+    device === 'mobile'
+      ? 'flex-col text-center'
+      : device === 'tablet'
+      ? 'flex-col'
+      : 'flex-row'
+
+  const justifyLinks =
+    device === 'mobile'
+      ? 'justify-center'
+      : device === 'tablet'
+      ? 'justify-center'
+      : 'justify-start'
+
+  const justifySocials =
+    device === 'mobile'
+      ? 'justify-center'
+      : device === 'tablet'
+      ? 'justify-center'
+      : 'justify-end'
+
   const addLink = () => {
-    const next = [
-      ...(content.links || []),
-      { title: 'New Link', link: '#' },
-    ]
+    const next = [...(content.links || []), { title: 'New Link', link: '#' }]
     dispatch(updateSection({ _id: id, content: { links: next } }))
   }
 
@@ -123,13 +139,18 @@ export default function Footer({ id, content }) {
 
   return (
     <footer
-      className="relative w-full border-t bg-background px-6 py-5"
+      className="relative w-full border-t bg-background px-6 py-6"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: 'footer' }))
       }
     >
-      <div className="container py-3 flex flex-col md:flex-row justify-between gap-6">
-        <div className="space-y-2 text-center md:text-left">
+      <div
+        className={cn(
+          'max-w-6xl mx-auto flex gap-6',
+          layout
+        )}
+      >
+        <div className="space-y-2">
           <h2 className="text-xl font-bold">
             <EditableText
               value={content?.portfolioName}
@@ -174,13 +195,9 @@ export default function Footer({ id, content }) {
               }))
             }
           />
-
-          <p className="text-xs text-muted-foreground">
-            Built with ❤️ using BuildFolio.
-          </p>
         </div>
 
-        <div className="flex flex-wrap justify-center md:justify-start gap-4">
+        <div className={cn('flex flex-wrap gap-4', justifyLinks)}>
           {content?.links?.map((link, index) => (
             <div key={index} className="flex flex-col items-center gap-1">
               <EditableText
@@ -222,7 +239,7 @@ export default function Footer({ id, content }) {
           )}
         </div>
 
-        <div className="flex items-center gap-4 justify-center md:justify-end">
+        <div className={cn('flex gap-4', justifySocials)}>
           {content?.socials?.map((social, index) => {
             const Icon = iconMap[social.icon?.toLowerCase()] || Globe
 

@@ -22,7 +22,7 @@ export default function ThemeEditor() {
         const fetchThemes = async () => {
             if (!userId) return;
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes?userId=${userId}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/themes`);
                 const data = await res.json();
                 if (res.ok) {
                     setThemes(data.themes || []);

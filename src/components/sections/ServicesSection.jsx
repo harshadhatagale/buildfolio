@@ -77,16 +77,35 @@ const EditableParagraph = ({ value, onChange, isSelected, sectionId, className }
 
 export default function ServicesSection({ id, content }) {
   const dispatch = useDispatch()
-  const selectedSection = useSelector(
-    (state) => state.portfolio.selectedSection
-  )
+  const device = useSelector((state) => state.portfolio.device)
+  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
 
   const [isSelected, setSelected] = useState(false)
 
   useEffect(() => {
-    if (!selectedSection) return
-    setSelected(selectedSection._id === id)
+    setSelected(selectedSection?._id === id)
   }, [selectedSection, id])
+
+  const gridCols =
+    device === 'mobile'
+      ? 'grid-cols-1'
+      : device === 'tablet'
+      ? 'grid-cols-2'
+      : 'grid-cols-3'
+
+  const headingSize =
+    device === 'mobile'
+      ? 'text-2xl'
+      : device === 'tablet'
+      ? 'text-3xl'
+      : 'text-4xl'
+
+  const iconSize =
+    device === 'mobile'
+      ? 'h-5 w-5'
+      : device === 'tablet'
+      ? 'h-6 w-6'
+      : 'h-7 w-7'
 
   const getIcon = (iconName) => {
     if (!iconName) return LucideIcons.Layout
@@ -121,14 +140,14 @@ export default function ServicesSection({ id, content }) {
 
   return (
     <section
-      className="relative w-full py-10 bg-background px-6"
+      className="relative w-full py-10 px-6 bg-background"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: 'services' }))
       }
     >
-      <div className="container space-y-8">
+      <div className="max-w-6xl mx-auto space-y-10">
         <div className="text-center space-y-2">
-          <h2 className="text-4xl font-bold tracking-tight">
+          <h2 className={cn('font-bold tracking-tight', headingSize)}>
             <EditableText
               value={content.heading}
               sectionId={id}
@@ -143,7 +162,7 @@ export default function ServicesSection({ id, content }) {
           </h2>
 
           <EditableParagraph
-            value={content.subHeading || 'What I can help you with'}
+            value={content.subHeading}
             sectionId={id}
             isSelected={isSelected}
             className="text-muted-foreground text-lg"
@@ -156,19 +175,19 @@ export default function ServicesSection({ id, content }) {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {content?.services?.map((item, index) => {
+        <div className={cn('grid gap-6', gridCols)}>
+          {content.services?.map((item, index) => {
             const Icon = getIcon(item.icon)
 
             return (
-              <Card key={index} className="relative hover:shadow-xl transition-shadow">
+              <Card key={index} className="relative hover:shadow-md transition">
                 {isSelected && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       deleteService(index)
                     }}
-                    className="absolute top-3 right-3 text-xs text-muted-foreground hover:text-destructive"
+                    className="absolute top-3 right-3 text-muted-foreground hover:text-destructive"
                   >
                     <LucideIcons.Trash size={16} />
                   </button>
@@ -176,7 +195,7 @@ export default function ServicesSection({ id, content }) {
 
                 <CardHeader className="flex flex-col gap-3 items-start">
                   <div className="p-3 rounded-xl bg-muted">
-                    <Icon className="h-6 w-6" />
+                    <Icon className={iconSize} />
                   </div>
 
                   <CardTitle>
@@ -222,7 +241,7 @@ export default function ServicesSection({ id, content }) {
               e.stopPropagation()
               addService()
             }}
-            className="mt-10 w-full py-4 rounded-xl border border-dashed text-muted-foreground hover:text-primary hover:border-primary hover:bg-muted/40 transition"
+            className="w-full py-4 rounded-xl border border-dashed text-muted-foreground hover:text-primary hover:border-primary hover:bg-muted/40 transition"
           >
             + Add Service
           </button>

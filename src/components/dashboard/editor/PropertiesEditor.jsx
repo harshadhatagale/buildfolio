@@ -23,6 +23,7 @@ import ProjectsProps from "./SectionProperties/ProjectsProps"
 import EducationProps from "./SectionProperties/EducationProps"
 import CertificationsProps from "./SectionProperties/CertificationsProps"
 import FaqsProps from "./SectionProperties/FaqsProps"
+import ServicesProps from "./SectionProperties/ServicesProps"
 
 export default function PropertiesEditor() {
   const selectedSection = useSelector(
@@ -39,6 +40,8 @@ export default function PropertiesEditor() {
         return <AboutProps />
       case "skills":
         return <SkillsProps />
+      case "services":
+        return <ServicesProps/>
       case "experience":
         return <ExperienceProps />
       case "education":
