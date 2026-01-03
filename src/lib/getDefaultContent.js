@@ -47,7 +47,7 @@ export const GetDefaultContent = (type) => {
             title: "Flowdash",
             description:
               "A lightweight internal dashboard system designed for fast-moving teams to track metrics without noise.",
-            image: "https://source.unsplash.com/600x400/?dashboard,ui",
+            image: "/images/code.png",
             github: "https://github.com/example/flowdash",
             live: "https://flowdash.app",
             tags: ["Next.js", "Design Systems", "PostgreSQL"],
@@ -56,7 +56,7 @@ export const GetDefaultContent = (type) => {
             title: "Notely",
             description:
               "A distraction-free writing app focused on clarity, offline-first usage, and thoughtful UX.",
-            image: "https://source.unsplash.com/600x400/?writing,workspace",
+            image: "/images/code.png",
             github: "https://github.com/example/notely",
             live: "https://notely.so",
             tags: ["React", "IndexedDB", "Tailwind"],
@@ -65,7 +65,7 @@ export const GetDefaultContent = (type) => {
             title: "Client Portal",
             description:
               "A secure portal for consultants to manage clients, documents, and conversations in one place.",
-            image: "https://source.unsplash.com/600x400/?saas,product",
+            image: "/images/code.png",
             github: "https://github.com/example/client-portal",
             live: "https://portal.example.com",
             tags: ["MERN", "Auth", "Cloud Storage"],

@@ -10,6 +10,8 @@ import {
   setSelectedSection,
 } from '../../../features/portfolio/portfolioSlice'
 
+/* ---------- Editable Components ---------- */
+
 const EditableText = ({ value, onChange, isSelected, sectionId, className }) => {
   const dispatch = useDispatch()
 
@@ -66,6 +68,22 @@ const EditableParagraph = ({ value, onChange, isSelected, sectionId, className }
   )
 }
 
+/* ---------- Image Fallback ---------- */
+
+const ProjectImageFallback = ({ title }) => {
+  const letter = title?.charAt(0)?.toUpperCase() || '?'
+
+  return (
+    <div className="aspect-video rounded-lg flex items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 border">
+      <span className="text-5xl font-bold text-primary/70">
+        {letter}
+      </span>
+    </div>
+  )
+}
+
+/* ---------- Main Section ---------- */
+
 export default function ProjectsSection({ id, content }) {
   const dispatch = useDispatch()
   const device = useSelector((state) => state.portfolio.device)
@@ -91,53 +109,74 @@ export default function ProjectsSection({ id, content }) {
       ? 'text-3xl'
       : 'text-4xl'
 
-  const addProject = () => {
-    const next = [
-      ...(content.projects || []),
-      {
-        title: 'Project Title',
-        description: 'Short project description',
-        tags: ['React', 'Next.js'],
-        live: '',
-        github: '',
-      },
-    ]
+  const updateContent = (partial) => {
+    dispatch(
+      updateSection({
+        _id: id,
+        content: {
+          ...content,
+          ...partial,
+        },
+      })
+    )
+  }
 
-    dispatch(updateSection({ _id: id, content: { projects: next } }))
+  const addProject = () => {
+    updateContent({
+      projects: [
+        ...(content.projects || []),
+        {
+          title: 'New Project',
+          description: 'Short project description',
+          image: null,
+          github: '',
+          live: '',
+          tags: ['React'],
+        },
+      ],
+    })
   }
 
   const deleteProject = (index) => {
-    const next = content.projects.filter((_, i) => i !== index)
-    dispatch(updateSection({ _id: id, content: { projects: next } }))
+    updateContent({
+      projects: content.projects.filter((_, i) => i !== index),
+    })
   }
 
   return (
     <section
-      className="relative bg-background py-10 px-6"
+      className="relative bg-background py-12 px-6"
       onClick={() =>
         dispatch(setSelectedSection({ _id: id, type: 'projects' }))
       }
     >
       <div className="max-w-6xl mx-auto space-y-10">
-        <h2 className={cn('font-bold text-center', headingSize)}>
-          <EditableText
-            value={content.heading}
-            sectionId={id}
-            isSelected={isSelected}
-            onChange={(val) =>
-              dispatch(updateSection({
-                _id: id,
-                content: { heading: val },
-              }))
-            }
-          />
-        </h2>
+        <div className="text-center space-y-3">
+          <h2 className={cn('font-bold', headingSize)}>
+            <EditableText
+              value={content.heading}
+              sectionId={id}
+              isSelected={isSelected}
+              onChange={(val) => updateContent({ heading: val })}
+            />
+          </h2>
+
+          {content.subHeading && (
+            <EditableParagraph
+              value={content.subHeading}
+              sectionId={id}
+              isSelected={isSelected}
+              className="text-muted-foreground max-w-2xl mx-auto"
+              onChange={(val) => updateContent({ subHeading: val })}
+            />
+          )}
+        </div>
 
         <div className={cn('grid gap-6', gridCols)}>
           {content.projects?.map((project, index) => (
             <div
               key={index}
-              className="relative bg-muted p-6 rounded-xl border border-border flex flex-col justify-between"
+              className="relative bg-muted p-6 rounded-xl border border-border flex flex-col gap-4"
             >
               {isSelected && (
                 <button
@@ -151,8 +190,18 @@ export default function ProjectsSection({ id, content }) {
                 </button>
               )}
 
-              <div>
-                <h3 className="text-xl font-semibold mb-2">
+              {project.image && project.image.trim() !== '' ? (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="rounded-lg aspect-video object-cover"
+                />
+              ) : (
+                <ProjectImageFallback title={project.title} />
+              )}
+
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold">
                   <EditableText
                     value={project.title}
                     sectionId={id}
@@ -160,7 +209,7 @@ export default function ProjectsSection({ id, content }) {
                     onChange={(val) => {
                       const next = [...content.projects]
                       next[index] = { ...next[index], title: val }
-                      dispatch(updateSection({ _id: id, content: { projects: next } }))
+                      updateContent({ projects: next })
                     }}
                   />
                 </h3>
@@ -173,14 +222,39 @@ export default function ProjectsSection({ id, content }) {
                   onChange={(val) => {
                     const next = [...content.projects]
                     next[index] = { ...next[index], description: val }
-                    dispatch(updateSection({ _id: id, content: { projects: next } }))
+                    updateContent({ projects: next })
                   }}
                 />
               </div>
 
-              <div className="flex gap-2 mt-4 pointer-events-none">
-                <Button size="sm">Live</Button>
-                <Button size="sm" variant="outline">Code</Button>
+              {project.tags?.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="text-xs px-2 py-1 rounded-md bg-background border"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex gap-2 mt-auto">
+                {project.live && (
+                  <Button size="sm" asChild>
+                    <a href={project.live} target="_blank" rel="noreferrer">
+                      Live
+                    </a>
+                  </Button>
+                )}
+                {project.github && (
+                  <Button size="sm" variant="outline" asChild>
+                    <a href={project.github} target="_blank" rel="noreferrer">
+                      Code
+                    </a>
+                  </Button>
+                )}
               </div>
             </div>
           ))}
