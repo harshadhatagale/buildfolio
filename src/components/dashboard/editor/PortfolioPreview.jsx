@@ -61,7 +61,7 @@ export default function PortfolioPreview({ sections }) {
             sectionRefs.current[id] = element
         }
     }
-
+    
     // Handle scroll to section when selected
     useEffect(() => {
         if (!selectedSection) return

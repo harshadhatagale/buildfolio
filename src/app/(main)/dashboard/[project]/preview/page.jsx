@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'
 import FloatingEditBtn from '@/components/basics/FloatingEditBtn'
 import { defaultTheme } from '../../../../../../features/portfolio/portfolioSlice'
-
+import { loadFont } from '@/lib/lazyFontLoad'
 const poppins= Poppins({
   subsets:['latin'],
   weight:['100','200','300','400','500','600','700','800','900']
@@ -23,7 +23,16 @@ export default function PreviewPage() {
   const sectionRefs = useRef({})
   const { theme } = useTheme()
   const previewTheme = useSelector((state) => state.portfolio.theme)
+  const font = useSelector((state) => state.portfolio.font)
 
+  useEffect(() => {
+  if (!font) return
+
+  const applyFont = async () => {
+    await loadFont(font)
+  }
+  applyFont()
+}, [font])
   // Apply theme styles with default theme fallback
   const getThemeStyles = () => {
     const colors = {
@@ -153,7 +162,7 @@ export default function PreviewPage() {
     <div
       suppressHydrationWarning
       className={`${poppins.className} bg-background text-foreground`}
-      style={getThemeStyles()}
+      style={{...getThemeStyles(),fontFamily: `'${font}', sans-serif`,}}
     >
       {sections.map((section) => (
         <div
