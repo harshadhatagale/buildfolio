@@ -66,6 +66,7 @@ export default function RootLayout({ children }) {
             {children}
             <Analytics/>
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
