@@ -44,7 +44,7 @@ export default function Page() {
         if (!res.ok) throw new Error("Failed to sync user");
 
         const data = await res.json();
-        setMyUser(data);
+        setMyUser(data)
       } catch (err) {
         console.error("User sync error:", err);
       } finally {
@@ -53,6 +53,7 @@ export default function Page() {
     };
 
     syncUser();
+    
   }, [isLoaded, isSignedIn, user]);
 
   
@@ -84,6 +85,7 @@ export default function Page() {
         <CreateProject
           onProjectCreated={handleProjectCreated}
           userId={myUser?._id}
+          subType={myUser?.subscriptionType}
         />
       </div>
 

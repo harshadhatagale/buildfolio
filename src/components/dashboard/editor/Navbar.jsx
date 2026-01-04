@@ -7,10 +7,11 @@ import React from 'react'
 import ThemeEditor from './ThemeEditor/ThemeEditor'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { setProject } from '../../../../features/portfolio/portfolioSlice'
+import { addSection, setProject, setSections } from '../../../../features/portfolio/portfolioSlice'
 import ShareProject from './ShareProject'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import FontEditor from './font/FontEditor'
+import ImportPortfolioModal from './ImportPortfolio'
 
 export default function Navbar({ loading }) {
   const router = useRouter()
@@ -70,6 +71,7 @@ export default function Navbar({ loading }) {
         {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <FontEditor />}
         {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <ThemeEditor />}
         {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span>: <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
+          {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span>: <ImportPortfolioModal size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
         {/* <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} /> */}
         {project.visibillity === "private" ? (
           <ShimmerButton onClick={() => handlePublish("public")} className="py-1 px-3 flex gap-2 justify-between items-center">

@@ -3,7 +3,7 @@
 import SectionRenderer from '@/components/portfolio/sections/SectionRenderer'
 import { useTheme } from 'next-themes'
 import { useEffect, useState, useRef } from 'react'
-import { Poppins, Inter, Roboto, Pixelify_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { useParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 import PreviewSkeleton from '@/components/dashboard/editor/PreviewSkeleton'

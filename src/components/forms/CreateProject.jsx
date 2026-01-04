@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { FileIcon, PlusIcon } from "lucide-react";
 
-export default function CreateProject({ onProjectCreated, userId }) {
+export default function CreateProject({ onProjectCreated,subType, userId }) {
   const [name, setName] = useState("");
   const [urlSlug, setUrlSlug] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,7 +29,7 @@ export default function CreateProject({ onProjectCreated, userId }) {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/project`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, name, urlSlug }),
+        body: JSON.stringify({ userId, sub:subType, name, urlSlug }),
       });
 
       const data = await res.json();
