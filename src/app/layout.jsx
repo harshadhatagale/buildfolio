@@ -6,6 +6,7 @@ import { Outfit, Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
             />
             {children}
             <Analytics/>
+            <SpeedInsights />
           </ThemeProvider>
         </body>
       </html>
