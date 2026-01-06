@@ -29,7 +29,7 @@ export default function HeroSection({ id, name, content }) {
   return (
     <section
       id={name}
-      className="h-screen w-full overflow-x-hidden relative flex items-center justify-center bg-background px-6"
+      className="min-h-screen w-full overflow-x-hidden relative flex items-center justify-center bg-background px-6"
     >
       <motion.div
         variants={containerVariants}
