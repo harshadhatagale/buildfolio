@@ -12,7 +12,9 @@ async function getProject(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const project = await getProject(params.portfolio)
+  const { portfolio } = await params
+
+  const project = await getProject(portfolio)
 
   if (!project) {
     return {
@@ -21,37 +23,49 @@ export async function generateMetadata({ params }) {
     }
   }
 
-  const title = project.metaTitle ||`${project.name || "Developer"} Portfolio`
+  const title =
+    project.metaTitle ||`${project.name || "Developer"} Portfolio`
 
-  const description =project.metaDescription ||`View ${project.name || "this developer"}'s professional portfolio built with BuildFolio.`
+  const description =
+    project.metaDescription ||`View ${project.name || "this developer"}'s professional portfolio built with BuildFolio.`
 
-  const ogImage = project.ogImage? project.ogImage: `https://www.buildfolio.space/og?title=${encodeURIComponent(project.name || "Developer Portfolio")}&subtitle=${encodeURIComponent( project.role || "Built with BuildFolio")}`
+  const ogImage = project.ogImage
+    ? project.ogImage
+    : `https://www.buildfolio.space/og?title=${encodeURIComponent(
+        project.name || "Developer Portfolio"
+      )}&subtitle=${encodeURIComponent(
+        project.role || "Built with BuildFolio"
+      )}`
 
   return {
     title,
     description,
+
     openGraph: {
       title,
       description,
-      url: `https://www.buildfolio.space/${params}`,
+      url: `https://www.buildfolio.space/${portfolio}`,
       siteName: "BuildFolio",
       images: [{ url: ogImage, width: 1200, height: 630 }],
       type: "website",
     },
+
     twitter: {
       card: "summary_large_image",
       title,
       description,
       images: [ogImage],
     },
+
     alternates: {
-      canonical: `https://www.buildfolio.space/${params.portfolio}`,
+      canonical: `https://www.buildfolio.space/${portfolio}`,
     },
   }
 }
 
 export default async function Page({ params }) {
-  const project = await getProject(params.portfolio)
+  const {portfolio}= await params
+  const project = await getProject(portfolio)
 
   if (!project) {
     return null // or <NotFound />
