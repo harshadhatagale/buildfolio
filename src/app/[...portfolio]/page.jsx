@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      url: `https://www.buildfolio.space/${params.portfolio}`,
+      url: `https://www.buildfolio.space/${params}`,
       siteName: "BuildFolio",
       images: [{ url: ogImage, width: 1200, height: 630 }],
       type: "website",

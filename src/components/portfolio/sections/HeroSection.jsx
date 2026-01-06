@@ -29,17 +29,17 @@ export default function HeroSection({ id, name, content }) {
   return (
     <section
       id={name}
-      className="h-svh relative flex items-center justify-center bg-background px-6"
+      className="h-screen w-full overflow-x-hidden relative flex items-center justify-center bg-background px-6"
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-3xl text-center space-y-6"
+        className="max-w-3xl pt-10 text-center space-y-6"
       >
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-6xl font-bold text-foreground"
+          className="text-4xl capitalize md:text-6xl font-bold text-foreground"
         >
           {primaryHeading}
         </motion.h1>
