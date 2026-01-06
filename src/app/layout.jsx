@@ -11,13 +11,7 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-const ogImage = project.ogImage
-  ? project.ogImage
-  : `https://www.buildfolio.space/og?title=${encodeURIComponent(
-    project.name || "Developer Portfolio"
-  )}&subtitle=${encodeURIComponent(
-    project.role || "Built with BuildFolio"
-  )}`;
+
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
