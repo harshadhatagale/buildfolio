@@ -47,7 +47,7 @@ export default function ServicesSection({ id, name, content }) {
   return (
     <section
       id={name}
-      className="relative w-full py-20 bg-background px-6"
+      className="relative w-full py-28 bg-background px-6"
     >
       <motion.div
         className="max-w-6xl mx-auto space-y-10"

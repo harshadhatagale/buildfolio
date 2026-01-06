@@ -24,7 +24,7 @@ export default function AboutSection({ id, name, content }) {
   }
 
   return (
-    <section id={name} className="relative py-20 px-5 bg-background">
+    <section id={name} className="relative py-28 px-5 bg-background">
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Image */}
         <motion.div

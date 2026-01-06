@@ -38,7 +38,7 @@ export default function ProjectsSection({ id, name, content }) {
   return (
     <section
       id={name}
-      className="relative bg-background py-20 px-6"
+      className="relative bg-background py-28 px-6"
     >
       <motion.div
         className="max-w-6xl mx-auto"

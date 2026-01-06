@@ -46,7 +46,7 @@ export default function CertificationsSection({ id, name, content }) {
   }
 
   return (
-    <section id={name} className="relative w-full py-20 bg-background px-6">
+    <section id={name} className="relative w-full py-28 bg-background px-6">
       <motion.div
         className="container space-y-8"
         variants={container}

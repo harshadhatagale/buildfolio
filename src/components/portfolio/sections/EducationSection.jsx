@@ -45,7 +45,7 @@ export default function EducationSection({ id, name, content }) {
   return (
     <section
       id={name}
-      className="relative w-full py-20 px-6 bg-background"
+      className="relative w-full py-28 px-6 bg-background"
     >
       <motion.div
         className="container space-y-8"
