@@ -11,6 +11,13 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+const ogImage = project.ogImage
+  ? project.ogImage
+  : `https://www.buildfolio.space/og?title=${encodeURIComponent(
+    project.name || "Developer Portfolio"
+  )}&subtitle=${encodeURIComponent(
+    project.role || "Built with BuildFolio"
+  )}`;
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -23,9 +30,69 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "BuildFolio - The Ultimate Portfolio Builder",
-  description:"BuildFolio helps developers to create modern, customizable portfolios in minutes. No design skills needed. Perfect for jobs, freelancing, and personal branding.",
-};
+  metadataBase: new URL("https://www.buildfolio.space"),
+
+  title: {
+    default: "BuildFolio — Create Stunning Developer Portfolios",
+    template: "%s | BuildFolio",
+  },
+
+  description:"BuildFolio helps developers create modern, customizable portfolios in minutes. No design skills needed. Perfect for jobs, freelancing, and personal branding.",
+
+  keywords: [
+    "portfolio builder",
+    "developer portfolio",
+    "resume to portfolio",
+    "portfolio website",
+    "BuildFolio",
+    "student portfolio",
+    "software developer portfolio",
+  ],
+
+  authors: [{ name: "BuildFolio Team" }],
+  creator: "BuildFolio",
+
+  openGraph: {
+    title: "BuildFolio — Create Stunning Developer Portfolios",
+    description:"Create modern, customizable developer portfolios in minutes using BuildFolio.",
+    url: "https://www.buildfolio.space",
+    siteName: "BuildFolio",
+    images: [
+      {
+        url: "/og", // 👈 place in /public
+        width: 1200,
+        height: 630,
+        alt: "BuildFolio Portfolio Builder",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "BuildFolio — Create Stunning Developer Portfolios",
+    description:
+      "Build your professional developer portfolio in minutes with BuildFolio.",
+    images: ["/og"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  alternates: {
+    canonical: "https://www.buildfolio.space",
+  },
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -34,20 +101,20 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
       >
         <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+          {/* Google Analytics */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-L5CNEEQRSV');
           `}
-        </Script>
-      </head>
+          </Script>
+        </head>
         <body
           className={`${outfit.className} min-h-screen bg-background`}
         >
@@ -65,7 +132,7 @@ export default function RootLayout({ children }) {
               showAtBottom={false}
             />
             {children}
-            <Analytics/>
+            <Analytics />
             <SpeedInsights />
           </ThemeProvider>
         </body>
