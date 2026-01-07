@@ -19,7 +19,7 @@ export default function Navbar() {
         <SignedIn>
           <ProfileBtn/>
         </SignedIn>
-        <AnimatedThemeToggler/>
+        <AnimatedThemeToggler className={"cursor-pointer"}/>
       </div>
     </div>
   )

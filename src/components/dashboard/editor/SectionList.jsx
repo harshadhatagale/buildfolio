@@ -5,10 +5,6 @@ import { useAddSection } from '@/lib/handlers/handleAddSection'
 
 const sections = [
   {
-    type: "section",
-    name: "Section"
-  },
-  {
     type: "nav",
     name: "Navbar"
   },

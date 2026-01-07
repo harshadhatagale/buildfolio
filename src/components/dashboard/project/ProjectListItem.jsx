@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { EarthIcon, Lock, PanelsTopLeft } from 'lucide-react';
 import ProjectMenu from './ProjectMenu';
 import { usePathname, useRouter } from 'next/navigation';

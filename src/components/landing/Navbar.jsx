@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { SignedIn, SignInButton, SignedOut } from '@clerk/nextjs'
 import { Roboto } from 'next/font/google'
-import { Menu } from 'lucide-react'
+import { ArrowRight, Menu } from 'lucide-react'
 import { Button } from '../ui/button'
 import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
 import ToolsDropdown from './ToolsDropdown'
@@ -18,11 +18,7 @@ export default function Navbar() {
 
     return (
         <nav className={`flex z-99 border-b border-muted sticky top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? 'h-[100vh] flex-col' : 'h-16'}`}>
-
-            {/* TOP ROW */}
             <div className={`flex justify-between items-center w-full ${isNavOpen ? 'h-16' : ''}`}>
-
-                {/* Logo */}
                 <Link href={"/home"} className="text-xl font-bold cursor-pointer flex justify-center items-center gap-1">
                     <Logo />
                     <span className='text-xl'>BuildFolio</span>
@@ -49,13 +45,13 @@ export default function Navbar() {
 
                     <SignedOut>
                         <SignInButton>
-                            <button className={`${roboto.className} bg-primary cursor-pointer text-white p-2 px-4 rounded-md hover:bg-primary/80`}>
-                                Login
+                            <button className={`${roboto.className} flex justify-center items-center gap-3 bg-primary cursor-pointer text-white p-2 px-3 rounded-md hover:bg-primary/80`}>
+                                Get Started <ArrowRight size={20} />
                             </button>
                         </SignInButton>
                     </SignedOut>
 
-                    <SignedIn><ProfileBtn/></SignedIn>
+                    <SignedIn><ProfileBtn /></SignedIn>
                     <AnimatedThemeToggler className="cursor-pointer" />
                     <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
                 </div>

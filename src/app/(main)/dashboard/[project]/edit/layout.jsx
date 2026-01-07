@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFont, setProject, setSections, setTheme, setThemeColors } from '../../../../../../features/portfolio/portfolioSlice'
 import Inspector from '@/components/dashboard/editor/Inspector'
 import { loadFont } from '@/lib/lazyFontLoad'
+import { LoaderPinwheel } from 'lucide-react'
 export default function EditorLayout({ children }) {
   const params = useParams()
   const dispatch = useDispatch()
@@ -149,8 +150,8 @@ export default function EditorLayout({ children }) {
       />
       {loading ? (
         <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="text-center flex justify-center items-center flex-col space-y-2">
+            <LoaderPinwheel className='animate-spin' size={30}/>
             <p className="mt-4 text-gray-600">Loading project data...</p>
           </div>
         </div>

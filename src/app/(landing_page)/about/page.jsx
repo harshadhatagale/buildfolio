@@ -45,20 +45,27 @@ const TeamMember = ({ name, role, bio, img, links = {} }) => (
 );
 
 export default function AboutPage() {
-  const router= useRouter()
+  const router = useRouter()
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Hero */}
       <section className="max-w-4xl mx-auto text-center">
-        <h1 className="text-3xl sm:text-4xl font-extrabold">About BuildFolio</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          BuildFolio helps creators & job-seekers ship beautiful, high-converting portfolios in minutes — using
-automated templates, AI and share-first growth loops.
-        </p>
+        <div className="flex justify-center items-center space-y-5 flex-col md:flex-row">
+          <div>
+            <img src="/Logo.png" alt="BuildFolio Logo" className="mx-auto mb-4 w-48 h-auto" />
+          </div>
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold">About BuildFolio</h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              BuildFolio helps creators & job-seekers ship beautiful, high-converting portfolios in minutes — using
+              automated templates, AI and share-first growth loops.
+            </p>
 
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button variant="secondary" onClick={()=> router.push("/sign-in")} className="px-6">Get Started</Button>
-          <Button variant="ghost" onClick={()=> router.push("/login")} className="px-6">See Templates</Button>
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Button variant="secondary" onClick={() => router.push("/sign-in")} className="px-6">Get Started</Button>
+              <Button variant="ghost" onClick={() => router.push("/login")} className="px-6">See Templates</Button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -117,7 +124,7 @@ automated templates, AI and share-first growth loops.
             links={{ linkedin: "https://linkedin.com", github: "https://github.com" }}
           /> */}
 
-          {/* <TeamMember
+      {/* <TeamMember
             name="Design Lead"
             role="Product Designer"
             bio="Design systems, templates, and delightful UX."
@@ -140,9 +147,9 @@ automated templates, AI and share-first growth loops.
             img={null}
             links={{ email: "support@buildfolio.app" }}
           /> */}
-        {/* </div>
+      {/* </div>
       </section> */}
-{/* 
+      {/* 
       <Separator className="my-8" /> */}
 
       {/* Milestones
@@ -174,10 +181,6 @@ automated templates, AI and share-first growth loops.
       <Separator className="my-8" />
 
       {/* Footer / Contact */}
-      <footer className="max-w-4xl mx-auto text-center text-sm text-muted-foreground py-8">
-        <div>Questions? Email us at <a href="mailto:hello@buildfolio.app" className="underline">hello@buildfolio.app</a></div>
-        <p className="mt-2">© {new Date().getFullYear()} BuildFolio — Built with ❤️</p>
-      </footer>
     </div>
   );
 }

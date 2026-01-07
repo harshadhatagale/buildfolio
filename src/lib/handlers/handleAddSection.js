@@ -27,7 +27,7 @@ export const useAddSection = () => {
       order: sections.length > 0 ? sections.length : 0
     }
     try {
-      if (sections.length < 15 )
+      if (sections.length < 7 )
       {
         dispatch(addSection(section));
       }

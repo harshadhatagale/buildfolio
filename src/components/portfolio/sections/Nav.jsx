@@ -42,7 +42,7 @@ const Nav = ({ content }) => {
       >
         <div className="flex h-16 items-center justify-between px-8">
           <Link
-            href="/"
+            href=""
             className="font-bold text-lg bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
           >
             {content.portfolioName}

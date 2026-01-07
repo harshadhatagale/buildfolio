@@ -70,8 +70,8 @@ export default function Navbar({ loading }) {
         <Button onClick={() => router.push("/dashboard")} className={"cursor-pointer"} variant={"secondary"}>Dashboard</Button>
         {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <FontEditor />}
         {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <ThemeEditor />}
-        {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span>: <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
-          {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span>: <ImportPortfolioModal size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
+        {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <Eye size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
+        {loading ? <span className='w-6 h-6 rounded-md animate-pulse bg-muted'></span> : <ImportPortfolioModal size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/preview`)} />}
         {/* <Settings size={20} className='cursor-pointer' onClick={() => router.replace(`/dashboard/${params.project}/settings`)} /> */}
         {project.visibillity === "private" ? (
           <ShimmerButton onClick={() => handlePublish("public")} className="py-1 px-3 flex gap-2 justify-between items-center">
@@ -83,7 +83,7 @@ export default function Navbar({ loading }) {
             <Button
               onClick={() => handlePublish("private")}  // Note: changed to "private"
               variant={"outline"}
-              className={"bg-emerald-500 hover:bg-emerald-500/50 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
+              className={"bg-emerald-500 hover:bg-emerald-500/50 hover:dark:bg-emerald-900/50 text-slate-900 dark:bg-emerald-900 dark:text-white cursor-pointer"}
             >
               <Lock size={20} />
               <span>Make Private</span>

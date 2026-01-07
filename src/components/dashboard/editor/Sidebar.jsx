@@ -1,11 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, EllipsisVertical, Plus, Trash } from 'lucide-react'
+import { ChevronLeft, Plus, Trash } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import SectionList from './SectionList'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
 import { Award, BadgeCheck, Briefcase, FolderKanban, GraduationCap, HelpCircle, Home, Layout, LayoutDashboard, Mountain, Package, Quote, Swords, UserCircle, Zap } from 'lucide-react'
 import { setSections, setSelectedSection, removeSection, renameSection } from '../../../../features/portfolio/portfolioSlice'
 import {
@@ -24,8 +23,6 @@ import {
 } from '@dnd-kit/sortable';
 
 import { CSS } from '@dnd-kit/utilities';
-import SectionMenu from '../project/section/SectionMenu'
-import { Input } from '@/components/ui/input'
 export default function Sidebar({ loading, projectId }) {
   const [side, setSide] = useState(true)
   const dispatch = useDispatch()
@@ -135,7 +132,6 @@ const SectionsSkeleton = () => {
 }
 
 import toast from 'react-hot-toast';
-import TogglePreviewDevice from './TogglePreviewDevice'
 
 const SortableProjectSectionItem = ({ id, section }) => {
   const sectionId = section._id

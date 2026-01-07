@@ -1,0 +1,28 @@
+export default function sitemap() {
+  return [
+    {
+      url: "https://www.buildfolio.space",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: "https://www.buildfolio.space/home",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: "https://www.buildfolio.space/pricing",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://www.buildfolio.space/sign-in",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ]
+}

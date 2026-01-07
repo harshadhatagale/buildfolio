@@ -2,9 +2,7 @@ import Portfolio from "@/components/portfolio/Portfolio"
 
 async function getProject(slug) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/${slug}`,
-    { cache: "no-store" }
-  )
+    `${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/${slug}`)
 
   if (!res.ok) return null
   const data = await res.json()
