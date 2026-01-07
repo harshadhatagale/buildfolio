@@ -12,6 +12,7 @@ import ShareProject from './ShareProject'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import FontEditor from './font/FontEditor'
 import ImportPortfolioModal from './ImportPortfolio'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
 export default function Navbar({ loading }) {
   const router = useRouter()
@@ -100,7 +101,7 @@ export default function Navbar({ loading }) {
             <span>Loading</span>
           </Button>
         )}
-        <ModeToggle />
+        <AnimatedThemeToggler className={"cursor-pointer"}/>
       </div>
     </nav>
   )

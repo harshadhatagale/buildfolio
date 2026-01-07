@@ -9,8 +9,11 @@ import { setFont, setProject, setSections, setTheme, setThemeColors } from '../.
 import Inspector from '@/components/dashboard/editor/Inspector'
 import { loadFont } from '@/lib/lazyFontLoad'
 import { LoaderPinwheel } from 'lucide-react'
+import { useAuth } from '@clerk/nextjs'
+
 export default function EditorLayout({ children }) {
   const params = useParams()
+  const {userId}= useAuth()
   const dispatch = useDispatch()
   const theme = useSelector((state) => state.portfolio.themeId)
   const font = useSelector((state) => state.portfolio.font)
@@ -19,20 +22,20 @@ export default function EditorLayout({ children }) {
 
 
   useEffect(() => {
-        if (!font) return
+    if (!font) return
 
-        const applyFont = async () => {
-          await loadFont(font)
-        }
-        applyFont()
-      }, [font])
+    const applyFont = async () => {
+      await loadFont(font)
+    }
+    applyFont()
+  }, [font])
   const fetchProjectData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/project/${params.project}?userId=${userId}`,
         {
           method: 'GET',
           headers: {
@@ -151,7 +154,7 @@ export default function EditorLayout({ children }) {
       {loading ? (
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center flex justify-center items-center flex-col space-y-2">
-            <LoaderPinwheel className='animate-spin' size={30}/>
+            <LoaderPinwheel className='animate-spin' size={30} />
             <p className="mt-4 text-gray-600">Loading project data...</p>
           </div>
         </div>

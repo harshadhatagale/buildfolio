@@ -1,64 +1,182 @@
-import { HelpCircle } from 'lucide-react'
+'use client'
+
 import React from 'react'
+import { HelpCircle, Plus, Trash2 } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Plus } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedSection, updateSection } from '../../../../../features/portfolio/portfolioSlice'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateSection } from '../../../../../features/portfolio/portfolioSlice'
+
 export default function FooterProps() {
   const dispatch = useDispatch()
   const sections = useSelector((state) => state.portfolio.present)
-  const selectedSection = useSelector((state) => state.portfolio.selectedSection)
-  if (!selectedSection) {
-        return null
-    }
-    const index = sections.findIndex(
-        (section) => section._id === selectedSection._id
+  const selectedSection = useSelector(
+    (state) => state.portfolio.selectedSection
+  )
+
+  if (!selectedSection) return null
+
+  const section = sections.find(
+    (s) => s._id === selectedSection._id
+  )
+  if (!section) return null
+
+  const updateContent = (newContent) => {
+    dispatch(
+      updateSection({
+        _id: section._id,
+        content: newContent,
+      })
     )
-    if (index === -1) {
-        return null
-    }
-  const section = sections[index]
-  const handleChange = (key) => (e) => {
-    const newContent = { ...section.content, [key]: e.target.value }
-    dispatch(updateSection({ _id: section._id, content: newContent }))
-    dispatch(setSelectedSection(section))
   }
+
+  /* ---------------- Links Handlers ---------------- */
+
+  const handleLinkChange = (index, key, value) => {
+    const updatedLinks = [...(section.content.links || [])]
+    updatedLinks[index] = {
+      ...updatedLinks[index],
+      [key]: value,
+    }
+
+    updateContent({
+      ...section.content,
+      links: updatedLinks,
+    })
+  }
+
+  const addLink = () => {
+    updateContent({
+      ...section.content,
+      links: [
+        ...(section.content.links || []),
+        { title: 'New Link', link: '/' },
+      ],
+    })
+  }
+
+  const removeLink = (index) => {
+    const updatedLinks = section.content.links.filter(
+      (_, i) => i !== index
+    )
+
+    updateContent({
+      ...section.content,
+      links: updatedLinks,
+    })
+  }
+
+  /* ------------------------------------------------ */
+
   return (
-    <div className='w-full flex flex-col justify-center items-center gap-4'>
-      <div className='w-full flex justify-start gap-3 items-center'>
-        <HelpCircle className='text-primary'/>
-        <span>{section.name}</span>
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-3">
-        <Label htmlFor="heading">Heading</Label>
-        <Input name="heading" type={"text"} onChange={handleChange("portfolioName")} value={section.content.portfolioName || ""} placeholder="Frequently Asked Questions" />
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-3">
-        <Label htmlFor="desc">Description</Label>
-        <Textarea name="desc" placeholder="I'm a full-stack developer passionate about building interactive websites and mobile apps. I specialize in React, Next.js, and Tailwind CSS." row="5" onChange={handleChange("description")} value={section.content.description || ""} />
+    <div className="w-full flex flex-col gap-6">
+      {/* Header */}
+      <div className="flex items-center gap-2">
+        <HelpCircle className="text-primary" />
+        <span className="font-medium">{section.name}</span>
       </div>
 
-      <div className="grid w-full max-w-sm items-center gap-3">
-        <Label htmlFor="email">Important Links</Label>
-        <div className='flx flex-wrap space-x-3 space-y-3'>
-          <TooltipProvider>
-            {section.content.links.map((link) => (
-              <Tooltip key={link.title}>
-                <TooltipTrigger asChild>
-                  <Button className={"w-[40%] cursor-pointer"} variant={"outline"}>{link.title}</Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className='dark:text-black text-white'>{link.link}</p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-            <Button className='cursor-pointer' variant={"outline"}><Plus /></Button>
-          </TooltipProvider>
-        </div>
+      {/* Heading */}
+      <div className="grid gap-2">
+        <Label>Heading</Label>
+        <Input
+          value={section.content.portfolioName || ''}
+          onChange={(e) =>
+            updateContent({
+              ...section.content,
+              portfolioName: e.target.value,
+            })
+          }
+          placeholder="Aarav Studio"
+        />
+      </div>
+
+      {/* Description */}
+      <div className="grid gap-2">
+        <Label>Description</Label>
+        <Textarea
+          rows={4}
+          value={section.content.description || ''}
+          onChange={(e) =>
+            updateContent({
+              ...section.content,
+              description: e.target.value,
+            })
+          }
+          placeholder="Thoughtful product engineering for modern teams."
+        />
+      </div>
+
+      {/* Editable Links */}
+      <div className="grid gap-3">
+        <Label>Important Links</Label>
+
+        {(section.content.links || []).map((link, index) => (
+          <div
+            key={index}
+            className="flex gap-2 items-center"
+          >
+            <Input
+              className="flex-1"
+              placeholder="Title"
+              value={link.title}
+              onChange={(e) =>
+                handleLinkChange(
+                  index,
+                  'title',
+                  e.target.value
+                )
+              }
+            />
+
+            <Input
+              className="flex-1"
+              placeholder="/contact"
+              value={link.link}
+              onChange={(e) =>
+                handleLinkChange(
+                  index,
+                  'link',
+                  e.target.value
+                )
+              }
+            />
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => removeLink(index)}
+            >
+              <Trash2 size={16} />
+            </Button>
+          </div>
+        ))}
+
+        <Button
+          variant="outline"
+          className="w-fit"
+          onClick={addLink}
+        >
+          <Plus size={16} className="mr-2" />
+          Add Link
+        </Button>
+      </div>
+
+      {/* Copyright */}
+      <div className="grid gap-2">
+        <Label>Copyright</Label>
+        <Input
+          value={section.content.copyright || ''}
+          onChange={(e) =>
+            updateContent({
+              ...section.content,
+              copyright: e.target.value,
+            })
+          }
+          placeholder="© 2025 Aarav Studio. All rights reserved."
+        />
       </div>
     </div>
   )

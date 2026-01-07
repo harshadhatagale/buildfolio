@@ -68,7 +68,6 @@ export default function Page() {
     setProjects((prev) => [newProject, ...prev]);
   };
 
-  /* ✅ Global loading state */
   if (!isLoaded || isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
