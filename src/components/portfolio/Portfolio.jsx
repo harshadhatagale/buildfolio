@@ -1,77 +1,23 @@
-'use client'
-
+"use client"
 import SectionRenderer from './sections/SectionRenderer'
-import { useEffect, useState } from 'react'
-import PreviewSkeleton from '../dashboard/editor/PreviewSkeleton'
 import {
   defaultTheme,
-  setFont,
-  setSections,
-  setTheme,
-  setThemeColors,
 } from '../../../features/portfolio/portfolioSlice'
-import { useTheme } from 'next-themes'
-import { useSelector, useDispatch } from 'react-redux'
-import React from 'react'
-import { slugify } from '../dashboard/editor/SectionProperties/NavProps'
+import React, { useEffect, useState } from 'react'
+import { slugify } from '@/lib/slugify'
 import NotFound from '@/app/not-found/page'
-import { loadFont } from '@/lib/lazyFontLoad'
+import { useTheme } from 'next-themes'
 
-export default function Portfolio({ project }) {
-  const [loading, setLoading] = useState(true)
-
-  const dispatch = useDispatch()
-
-  const themeId = useSelector((state) => state.portfolio.themeId)
-  const themeColors = useSelector((state) => state.portfolio.theme)
-  const sections = useSelector((state) => state.portfolio.present)
-  const font = useSelector((state) => state.portfolio.font)
+export default function Portfolio({ project, themeColors }) {
   const { theme } = useTheme()
-
-  // ✅ Initialize portfolio from server data
-  useEffect(() => {
-    if (!project) return
-
-    dispatch(setSections(project.sections || []))
-    dispatch(setFont(project.font || 'Roboto'))
-    dispatch(setTheme({ id: project.theme }))
-
-    setLoading(false)
-  }, [project, dispatch])
-
-  // ✅ Load selected font dynamically
-  useEffect(() => {
-    if (!font) return
-
-    const applyFont = async () => {
-      await loadFont(font)
-    }
-
-    applyFont()
-  }, [font])
-
-  // ✅ Fetch theme colors only (lightweight)
-  useEffect(() => {
-    if (!themeId) return
-
-    const fetchTheme = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/themes/${themeId}`
-      )
-      const data = await res.json()
-
-      if (data?.success) {
-        dispatch(setThemeColors({ colors: data.theme.colors }))
-      }
-    }
-
-    fetchTheme()
-  }, [themeId, dispatch])
-
+  const [mounted, setMounted]= useState(false)
+  useEffect(()=>{
+    setMounted(true)
+  },[])
   const getThemeStyles = () => {
     const colors = {
-      ...defaultTheme[theme === 'dark' ? 'dark' : 'light'], // fallback
-      ...themeColors[theme === 'dark' ? 'dark' : 'light'], // user custom
+      ...defaultTheme[theme === 'dark' ? 'dark' : 'light'],
+      ...themeColors[theme === 'dark' ? 'dark' : 'light'],
     }
 
     return {
@@ -108,29 +54,31 @@ export default function Portfolio({ project }) {
       '--sidebar-ring': colors.sidebarRing,
     }
   }
-
-  if (loading) return <PreviewSkeleton />
   if (!project) return <NotFound />
-
+  if (!mounted) return null
   return (
-    <main
-      style={{ fontFamily: `'${font}', Poppins, sans-serif` }}
-      className="h-full w-full bg-background"
-    >
-      <div className="text-foreground" style={getThemeStyles()}>
-        {sections.map((section) => (
-          <div
-            key={section._id}
-            className="bg-card h-full text-card-foreground"
-          >
-            <SectionRenderer
-              name={slugify(section.name)}
-              type={section.type}
-              content={section.content}
-            />
-          </div>
-        ))}
-      </div>
-    </main>
+    <>
+      <main
+        style={{ fontFamily: `'${project.font}', Poppins, sans-serif` }}
+        className="h-full w-full bg-background"
+      >
+        <div
+        style={getThemeStyles()}
+          className="text-foreground portfolio">
+          {project.sections.map((section) => (
+            <div
+              key={section._id}
+              className="bg-card h-full text-card-foreground"
+            >
+              <SectionRenderer
+                name={slugify(section.name)}
+                type={section.type}
+                content={section.content}
+              />
+            </div>
+          ))}
+        </div>
+      </main>
+    </>
   )
 }

@@ -69,7 +69,7 @@ export default function NavProps() {
   return (
     <div className='w-full flex flex-col justify-center items-center gap-4'>
       <div className='w-full flex justify-start gap-3 items-center'>
-        <LayoutDashboard className='text-primary'/>
+        <LayoutDashboard className='text-primary' />
         <span>{section.name}</span>
       </div>
 
