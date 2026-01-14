@@ -1,8 +1,16 @@
 import { SignUp } from '@clerk/nextjs'
-import React from 'react'
+import React, { Suspense } from 'react'
+
+
+export const metadata = {
+  title: "Sign up | BuildFolio",
+  description: "Sign up to your BuildFolio account",
+}
 
 export default function page() {
   return (
-    <SignUp/>
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUp />
+    </Suspense>
   )
 }

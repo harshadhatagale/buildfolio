@@ -1,4 +1,5 @@
 import Portfolio from "@/components/portfolio/Portfolio"
+import { Suspense } from "react"
 
 async function getProject(slug) {
   const res = await fetch(
@@ -69,5 +70,5 @@ export default async function Page({ params }) {
     return null // or <NotFound />
   }
 
-  return <Portfolio project={project} />
+  return <Suspense fallback={"Loading.."}><Portfolio project={project} /></Suspense>
 }
