@@ -44,7 +44,7 @@ export default function HomePage() {
             </span>
           </h1>
         </div>
-        <div className="relative flex justify-center items-center md:mt-[-85px]">
+        <div className="relative md:flex justify-center items-center md:mt-[-85px]">
           {/* Image */}
           <Image
             src="/images/demo4.png"

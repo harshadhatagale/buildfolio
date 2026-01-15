@@ -42,15 +42,17 @@ export default function Navbar() {
                             <Link href="/dashboard" className={roboto.className}>Dashboard</Link>
                         </Button>
                     </SignedIn>
-
-                    <SignedOut>
-                        <SignInButton>
-                            <button className={`${roboto.className} flex justify-center items-center gap-3 bg-primary cursor-pointer text-white p-2 px-3 rounded-md hover:bg-primary/80`}>
-                                Get Started <ArrowRight size={20} />
-                            </button>
-                        </SignInButton>
-                    </SignedOut>
-
+                    <div className='hidden md:block'>
+                        <SignedOut>
+                            <SignInButton>
+                                <Button
+                                    className={'text-white cursor-pointer'}
+                                >
+                                    <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
+                                </Button>
+                            </SignInButton>
+                        </SignedOut>
+                    </div>
                     <SignedIn><ProfileBtn /></SignedIn>
                     <AnimatedThemeToggler className="cursor-pointer" />
                     <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
@@ -60,10 +62,21 @@ export default function Navbar() {
             {/* MOBILE MENU */}
             <div className={`block md:hidden ${isNavOpen ? 'h-[70%] flex flex-col justify-center items-center gap-5' : 'hidden'}`}>
                 <ul className="flex flex-col justify-center items-center gap-5">
-                    <ToolsDropdown />
+                    {/* <ToolsDropdown /> */}
                     <Link href="/home#pricing" onClick={() => setIsNavOpen(false)}>Pricing</Link>
                     <Link href="/about" onClick={() => setIsNavOpen(false)}>About</Link> {/* Added */}
                     <Link href="/home#features" onClick={() => setIsNavOpen(false)}>Features</Link>
+                    <div className='flex justify-center items-center absolute bottom-20 w-full'>
+                        <SignedOut>
+                            <SignInButton>
+                                <Button
+                                    className={'text-white cursor-pointer w-[80%]'}
+                                >
+                                    <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
+                                </Button>
+                            </SignInButton>
+                        </SignedOut>
+                    </div>
                 </ul>
             </div>
         </nav>

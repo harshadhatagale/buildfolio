@@ -15,13 +15,18 @@ import { useTheme } from "next-themes"
 export function ModeToggle() {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const { setTheme } = useTheme()
+    const { theme,resolvedTheme, setTheme } = useTheme()
 
     const [isPending, startTransition] = useTransition()
 
     const mode = searchParams.get("mode")
 
     useEffect(() => {
+        if (!mode) {
+            startTransition(() => {
+                router.push(`?mode=${resolvedTheme}`)
+            })
+        }
         if (mode === "light" || mode === "dark") {
             setTheme(mode)
         }

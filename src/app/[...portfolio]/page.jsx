@@ -60,10 +60,6 @@ export async function generateMetadata({ params }) {
       description,
       images: [ogImage],
     },
-
-    alternates: {
-      canonical: `https://www.buildfolio.space/${portfolio}`,
-    },
   }
 }
 

@@ -71,15 +71,10 @@ export const metadata = {
       "max-video-preview": -1,
     },
   },
-
-  alternates: {
-    canonical: "https://www.buildfolio.space",
-  },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
       <html lang="en"
         suppressHydrationWarning
       >
@@ -121,6 +116,5 @@ export default function RootLayout({ children }) {
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
   );
 }
