@@ -39,7 +39,7 @@ export function ModeToggle() {
                 <DropdownMenuTrigger asChild>
                     {isPending ? (
                         <div className="z-50 flex items-center justify-center">
-                            <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                            <div className="h-8 w-8 animate-spin rounded-full border-2 border-foreground border-t-transparent" />
                         </div>
                     ) : (
                         <Button variant="outline" size="icon">
