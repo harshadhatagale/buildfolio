@@ -67,7 +67,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params, searchParams }) {
+  const mode= (await searchParams).mode
   const { portfolio } = await params
   const project = await getProject(portfolio)
   const themeColors = await getThemeById(project?.theme)
@@ -82,6 +83,6 @@ export default async function Page({ params }) {
       href={`https://fonts.googleapis.com/css2?family=${project?.font}:wght@100;200;300;400;500;600;700;800&display=swap`}
       rel="stylesheet"
     />
-    <Portfolio themeColors={themeColors || null} project={project} />
+    <Portfolio themeColors={themeColors || null} mode={mode} project={project} />
   </>
 }

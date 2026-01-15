@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { AlignRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/globals/ModeToggle";
+import { ModeToggle } from "../ModeToggle";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 

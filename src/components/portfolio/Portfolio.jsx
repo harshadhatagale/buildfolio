@@ -1,23 +1,16 @@
-"use client"
 import SectionRenderer from './sections/SectionRenderer'
 import {
   defaultTheme,
 } from '../../../features/portfolio/portfolioSlice'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { slugify } from '@/lib/slugify'
 import NotFound from '@/app/not-found/page'
-import { useTheme } from 'next-themes'
 
-export default function Portfolio({ project, themeColors }) {
-  const { theme } = useTheme()
-  const [mounted, setMounted]= useState(false)
-  useEffect(()=>{
-    setMounted(true)
-  },[])
+export default function Portfolio({ project,mode="light", themeColors }) {
   const getThemeStyles = () => {
     const colors = {
-      ...defaultTheme[theme === 'dark' ? 'dark' : 'light'],
-      ...themeColors[theme === 'dark' ? 'dark' : 'light'],
+      ...defaultTheme[mode === 'dark' ? 'dark' : 'light'],
+      ...themeColors[mode === 'dark' ? 'dark' : 'light'],
     }
 
     return {
@@ -55,7 +48,6 @@ export default function Portfolio({ project, themeColors }) {
     }
   }
   if (!project) return <NotFound />
-  if (!mounted) return null
   return (
     <>
       <main
