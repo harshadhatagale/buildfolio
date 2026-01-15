@@ -8,7 +8,7 @@ import Step6Preferences from "./Step6Preferences"
 import Step7AI from "./Step7AI"
 import Step8Projects from "./Step8Projects"
 import Step9Review from "./Step9Review"
-import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
+import { useOnboarding } from "@/app/(main)/ai-portfolio-builder/OnboardingProvider"
 
 export default function StepRenderer() {
   const { step } = useOnboarding()

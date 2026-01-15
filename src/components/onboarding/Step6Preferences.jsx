@@ -1,6 +1,6 @@
 // steps/Step6Preferences.tsx
 "use client"
-import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
+import { useOnboarding } from "@/app/(main)/ai-portfolio-builder/OnboardingProvider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"

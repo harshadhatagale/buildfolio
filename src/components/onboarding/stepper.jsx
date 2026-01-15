@@ -1,7 +1,7 @@
 // onboarding/Stepper.tsx
 "use client"
 import { Progress } from "@/components/ui/progress"
-import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
+import { useOnboarding } from "@/app/(main)/ai-portfolio-builder/OnboardingProvider"
 import { GradientProgress } from "../ui/gradient-progress"
 
 export default function Stepper() {

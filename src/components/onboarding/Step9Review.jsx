@@ -1,11 +1,11 @@
 // steps/Step9Review.tsx
 "use client"
-import { useOnboarding } from "@/app/ai-portfolio-builder/OnboardingProvider"
+import { useOnboarding } from "@/app/(main)/ai-portfolio-builder/OnboardingProvider"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { getSections } from "@/app/ai-portfolio-builder/portfolio/getSections"
+import { getSections } from "@/app/(main)/ai-portfolio-builder/portfolio/getSections"
 import React from "react"
 
 export default function Step9Review() {
