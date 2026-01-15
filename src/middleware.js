@@ -1,13 +1,17 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)'])
-const isPublicRoute= createRouteMatcher(['/', '/home'])
+const isProtectedRoute = createRouteMatcher(['/profile', '/dashboard(.*)'])
+const isPublicRoute = createRouteMatcher(['/', '/home', '/about'])
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) await auth.protect()
-   if (isPublicRoute(req)) {
-    return
+  const userAgent = req.headers.get("user-agent") || ""
+  if (userAgent.includes("Googlebot")) {
+    return NextResponse.next()
   }
-  return
+  if (isProtectedRoute(req)) await auth.protect()
+  if (isPublicRoute(req)) {
+    return NextResponse.next()
+  }
+  return NextResponse.next()
 });
 
 export const config = {
