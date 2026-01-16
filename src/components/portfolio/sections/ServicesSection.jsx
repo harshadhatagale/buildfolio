@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Code,
@@ -19,29 +19,42 @@ import {
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
-}
-
 export default function ServicesSection({ id, name, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const iconMap = {
     code: Code,
     palette: Palette,
     smartphone: Smartphone,
+  }
+
+  /* ✅ Server-visible variants */
+  const containerVariants = {
+    initial: {
+      opacity: 1,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  }
+
+  const itemVariants = {
+    initial: {
+      opacity: 1,
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
   }
 
   return (
@@ -52,12 +65,16 @@ export default function ServicesSection({ id, name, content }) {
       <motion.div
         className="max-w-6xl mx-auto space-y-10"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        animate={mounted ? 'animate' : 'initial'}
+        whileInView={mounted ? 'animate' : 'initial'}
         viewport={{ once: true, amount: 0.3 }}
       >
+        {/* Heading */}
         <motion.div
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
           className="text-center space-y-2"
         >
           <h2 className="text-4xl font-bold tracking-tight">
@@ -68,6 +85,7 @@ export default function ServicesSection({ id, name, content }) {
           </p>
         </motion.div>
 
+        {/* Services grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {content?.services?.map((item, index) => {
             const Icon =
@@ -77,6 +95,9 @@ export default function ServicesSection({ id, name, content }) {
               <motion.div
                 key={index}
                 variants={itemVariants}
+                initial="initial"
+                animate={mounted ? 'animate' : 'initial'}
+                whileInView={mounted ? 'animate' : 'initial'}
                 whileHover={{ y: -4 }}
               >
                 <Card className="h-full hover:shadow-xl transition-shadow">

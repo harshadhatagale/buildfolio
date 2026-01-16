@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Accordion,
@@ -9,25 +9,39 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.35, ease: 'easeOut' },
-  },
-}
-
 export default function FaqsSection({ id, name, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Detect client mount (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (server-visible) */
+  const containerVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+      y: 16,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.35, ease: 'easeOut' },
+    },
+  }
+
   return (
     <section
       id={name}
@@ -36,12 +50,18 @@ export default function FaqsSection({ id, name, content }) {
       <motion.div
         className="container space-y-8"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        animate={mounted ? 'animate' : 'initial'}
+        whileInView={mounted ? 'animate' : 'initial'}
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Heading */}
-        <motion.div variants={itemVariants} className="text-center space-y-2">
+        <motion.div
+          variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
+          className="text-center space-y-2"
+        >
           <h2 className="text-4xl font-bold tracking-tight">
             {content?.heading || 'FAQs'}
           </h2>
@@ -51,7 +71,11 @@ export default function FaqsSection({ id, name, content }) {
         </motion.div>
 
         {/* Accordion */}
-        <motion.div variants={containerVariants}>
+        <motion.div
+          variants={containerVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
+        >
           <Accordion
             type="single"
             collapsible
@@ -61,6 +85,9 @@ export default function FaqsSection({ id, name, content }) {
               <motion.div
                 key={index}
                 variants={itemVariants}
+                initial="initial"
+                animate={mounted ? 'animate' : 'initial'}
+                whileInView={mounted ? 'animate' : 'initial'}
               >
                 <AccordionItem value={`item-${index}`}>
                   <AccordionTrigger className="text-left">

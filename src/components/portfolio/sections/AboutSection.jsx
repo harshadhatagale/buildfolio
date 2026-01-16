@@ -1,12 +1,24 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
 export default function AboutSection({ id, name, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Client mount detect (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (server-visible) */
   const imageVariants = {
-    hidden: { opacity: 0, x: -40, scale: 0.95 },
-    visible: {
+    initial: {
+      opacity: 1,     // 👈 visible on server
+      x: -40,
+      scale: 0.95,
+    },
+    animate: {
       opacity: 1,
       x: 0,
       scale: 1,
@@ -15,8 +27,11 @@ export default function AboutSection({ id, name, content }) {
   }
 
   const textVariants = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
+    initial: {
+      opacity: 1,     // 👈 visible on server
+      x: 40,
+    },
+    animate: {
       opacity: 1,
       x: 0,
       transition: { duration: 0.7, ease: "easeOut", delay: 0.1 },
@@ -29,8 +44,9 @@ export default function AboutSection({ id, name, content }) {
         {/* Image */}
         <motion.div
           variants={imageVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial="initial"
+          animate={mounted ? "animate" : "initial"}
+          whileInView={mounted ? "animate" : "initial"}
           viewport={{ once: true, amount: 0.4 }}
           className="relative w-full flex justify-center items-center h-72 md:h-96 rounded-xl overflow-hidden shadow-lg"
         >
@@ -38,14 +54,16 @@ export default function AboutSection({ id, name, content }) {
             src={content.avatar}
             alt={content.name}
             className="object-contain"
+            loading="lazy"
           />
         </motion.div>
 
         {/* Text */}
         <motion.div
           variants={textVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial="initial"
+          animate={mounted ? "animate" : "initial"}
+          whileInView={mounted ? "animate" : "initial"}
           viewport={{ once: true, amount: 0.4 }}
           className="space-y-4"
         >

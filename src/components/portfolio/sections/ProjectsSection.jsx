@@ -1,26 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
-}
 
 const ProjectImageFallback = ({ title }) => {
   const letter = title?.charAt(0)?.toUpperCase() || '?'
@@ -35,6 +17,38 @@ const ProjectImageFallback = ({ title }) => {
 }
 
 export default function ProjectsSection({ id, name, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Detect client mount (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (server-visible) */
+  const containerVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  }
+
+  const itemVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
+  }
+
   return (
     <section
       id={name}
@@ -43,22 +57,30 @@ export default function ProjectsSection({ id, name, content }) {
       <motion.div
         className="max-w-6xl mx-auto"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        animate={mounted ? 'animate' : 'initial'}
+        whileInView={mounted ? 'animate' : 'initial'}
         viewport={{ once: true, amount: 0.3 }}
       >
+        {/* Heading */}
         <motion.h2
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
           className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12"
         >
           {content.heading}
         </motion.h2>
 
+        {/* Projects grid */}
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {content?.projects?.map((project, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
+              initial="initial"
+              animate={mounted ? 'animate' : 'initial'}
+              whileInView={mounted ? 'animate' : 'initial'}
               whileHover={{ y: -4 }}
               className="bg-muted p-6 rounded-xl border border-border shadow-sm flex flex-col hover:shadow-md transition-shadow"
             >
@@ -67,6 +89,7 @@ export default function ProjectsSection({ id, name, content }) {
                   src={project.image}
                   alt={project.title}
                   className="rounded-lg aspect-video object-cover mb-4"
+                  loading="lazy"
                 />
               ) : (
                 <ProjectImageFallback title={project.title} />

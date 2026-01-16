@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Github,
@@ -20,35 +20,55 @@ const iconMap = {
   globe: Globe,
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.35, ease: 'easeOut' },
-  },
-}
-
 export default function Footer({ id, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Detect client mount (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (server-visible) */
+  const containerVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+    },
+    animate: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 },
+    },
+  }
+
+  const itemVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+      y: 16,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.35, ease: 'easeOut' },
+    },
+  }
+
   return (
-    <footer className="relative w-full border-t bg-background px-6 py-5">
+    <footer
+      id={id}
+      className="relative w-full border-t bg-background px-6 py-5"
+    >
       <motion.div
         className="container py-3 flex flex-col md:flex-row justify-between gap-6"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        animate={mounted ? 'animate' : 'initial'}
+        whileInView={mounted ? 'animate' : 'initial'}
         viewport={{ once: true, amount: 0.2 }}
       >
         {/* Left Side */}
         <motion.div
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
           className="space-y-2 text-center md:text-left"
         >
           <h2 className="text-xl font-bold">
@@ -67,8 +87,8 @@ export default function Footer({ id, content }) {
           </p>
 
           <Link
-            href={`${process.env.NEXT_PUBLIC_SITE_URL}/home`}
-            className="text-xs text-muted-foreground"
+            href="/"
+            className="text-xs text-muted-foreground hover:underline"
           >
             Built with ❤️ using BuildFolio.
           </Link>
@@ -77,6 +97,8 @@ export default function Footer({ id, content }) {
         {/* Center Links */}
         <motion.div
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
           className="flex flex-wrap justify-center md:justify-start gap-4"
         >
           {content?.links?.map((link) => (
@@ -93,6 +115,8 @@ export default function Footer({ id, content }) {
         {/* Right Social Icons */}
         <motion.div
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
           className="flex items-center gap-4 justify-center md:justify-end"
         >
           {content?.socials?.map((social) => {

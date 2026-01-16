@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as LucideIcons from 'lucide-react'
 import { motion } from 'framer-motion'
 import {
@@ -14,25 +14,39 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
-}
-
 export default function CertificationsSection({ id, name, content }) {
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Detect client mount (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (server-visible) */
+  const containerVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  }
+
+  const itemVariants = {
+    initial: {
+      opacity: 1, // 👈 visible on server
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
+  }
+
   const getIcon = (iconName) => {
     if (!iconName) return LucideIcons.Layout
 
@@ -50,12 +64,18 @@ export default function CertificationsSection({ id, name, content }) {
       <motion.div
         className="container space-y-8"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial="initial"
+        animate={mounted ? 'animate' : 'initial'}
+        whileInView={mounted ? 'animate' : 'initial'}
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Heading */}
-        <motion.div variants={itemVariants} className="text-center space-y-2">
+        <motion.div
+          variants={itemVariants}
+          initial="initial"
+          animate={mounted ? 'animate' : 'initial'}
+          className="text-center space-y-2"
+        >
           <h2 className="text-4xl font-bold tracking-tight">
             {content?.heading || 'Certifications'}
           </h2>
@@ -74,6 +94,9 @@ export default function CertificationsSection({ id, name, content }) {
               <motion.div
                 key={index}
                 variants={itemVariants}
+                initial="initial"
+                animate={mounted ? 'animate' : 'initial'}
+                whileInView={mounted ? 'animate' : 'initial'}
                 whileHover={{ y: -4 }}
               >
                 <Card className="hover:shadow-xl transition-shadow">

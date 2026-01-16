@@ -1,14 +1,25 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
 export default function HeroSection({ id, name, content }) {
   const { primaryHeading, secondaryHeading, cta } = content || {}
 
+  const [mounted, setMounted] = useState(false)
+
+  /* 🔹 Detect client mount (SEO safe) */
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  /* 🔹 Variants (NO hidden opacity on server) */
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
+    initial: {
+      opacity: 1, // 👈 visible on server
+    },
+    animate: {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
@@ -18,8 +29,11 @@ export default function HeroSection({ id, name, content }) {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+    initial: {
+      opacity: 1, // 👈 visible on server
+      y: 30,
+    },
+    animate: {
       opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
@@ -33,12 +47,14 @@ export default function HeroSection({ id, name, content }) {
     >
       <motion.div
         variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        initial="initial"
+        animate={mounted ? "animate" : "initial"}
         className="max-w-3xl pt-10 text-center space-y-6"
       >
         <motion.h1
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? "animate" : "initial"}
           className="text-4xl capitalize md:text-6xl font-bold text-foreground"
         >
           {primaryHeading}
@@ -46,6 +62,8 @@ export default function HeroSection({ id, name, content }) {
 
         <motion.p
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? "animate" : "initial"}
           className="text-muted-foreground text-lg md:text-xl"
         >
           {secondaryHeading}
@@ -53,6 +71,8 @@ export default function HeroSection({ id, name, content }) {
 
         <motion.div
           variants={itemVariants}
+          initial="initial"
+          animate={mounted ? "animate" : "initial"}
           className="flex flex-col sm:flex-row justify-center gap-4 pt-4"
         >
           {cta?.getInTouchLink && (
