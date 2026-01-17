@@ -12,109 +12,48 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  metadataBase: new URL("https://www.buildfolio.space"),
-
-  title: {
-    default: "BuildFolio — Create Stunning Developer Portfolios",
-    template: "%s | BuildFolio",
-  },
-
-  description:"BuildFolio helps developers create modern, customizable portfolios in minutes. No design skills needed. Perfect for jobs, freelancing, and personal branding.",
-
-  keywords: [
-    "portfolio builder",
-    "developer portfolio",
-    "resume to portfolio",
-    "portfolio website",
-    "BuildFolio",
-    "student portfolio",
-    "software developer portfolio",
-  ],
-
-  authors: [{ name: "BuildFolio Team" }],
-  creator: "BuildFolio",
-
-  openGraph: {
-    title: "BuildFolio — Create Stunning Developer Portfolios",
-    description:"Create modern, customizable developer portfolios in minutes using BuildFolio.",
-    url: "https://www.buildfolio.space",
-    siteName: "BuildFolio",
-    images: [
-      {
-        url: "/og", // 👈 place in /public
-        width: 1200,
-        height: 630,
-        alt: "BuildFolio Portfolio Builder",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "BuildFolio — Create Stunning Developer Portfolios",
-    description:
-      "Build your professional developer portfolio in minutes with BuildFolio.",
-    images: ["/og"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-}
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="en"
-        suppressHydrationWarning
-      >
-        <head>
-          {/* Google Analytics */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
+    <html lang="en"
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-L5CNEEQRSV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-L5CNEEQRSV');
           `}
-          </Script>
-        </head>
-        <body
-          className={`${outfit.className} min-h-screen bg-background`}
-        >
-          <ThemeProvider>
-            <NextTopLoader
-              color="#2b7fff"
-              initialPosition={0.08}
-              crawlSpeed={400}
-              height={4}
-              crawl={true}
-              easing="ease"
-              showSpinner={false}
-              speed={100}
-              zIndex={1600}
-              showAtBottom={false}
-            />
-            {children}
-            <Analytics />
-            <SpeedInsights />
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-          </ThemeProvider>
-        </body>
-      </html>
+        </Script>
+      </head>
+      <body
+        className={`${outfit.className} min-h-screen bg-background`}
+      >
+        <ThemeProvider>
+          <NextTopLoader
+            color="#2b7fff"
+            initialPosition={0.08}
+            crawlSpeed={400}
+            height={4}
+            crawl={true}
+            easing="ease"
+            showSpinner={false}
+            speed={100}
+            zIndex={1600}
+            showAtBottom={false}
+          />
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

@@ -1,12 +1,12 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import React from 'react'
 
-export default function layout({children}) {
+export default function layout({ children }) {
   return (
     <>
-    <ClerkProvider>
+      <ClerkProvider>
         {children}
-    </ClerkProvider>
+      </ClerkProvider>
     </>
   )
 }

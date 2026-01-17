@@ -21,7 +21,6 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-6">
-      {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
@@ -52,11 +51,11 @@ export default function NotFound() {
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
-            transition={{ 
-              delay: 0.3, 
-              type: "spring", 
+            transition={{
+              delay: 0.3,
+              type: "spring",
               stiffness: 200,
-              damping: 15 
+              damping: 15
             }}
             className="relative mx-auto w-28 h-28 mb-6"
           >
@@ -65,14 +64,14 @@ export default function NotFound() {
               <div className="relative">
                 <Frown className="w-16 h-16 text-primary" strokeWidth={1.5} />
                 <motion.div
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.3, 0.1, 0.3]
                   }}
-                  transition={{ 
-                    duration: 2, 
+                  transition={{
+                    duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut" 
+                    ease: "easeInOut"
                   }}
                   className="absolute -inset-4 bg-primary/20 rounded-full blur-sm"
                 />
@@ -143,8 +142,8 @@ export default function NotFound() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
             <Link href="/dashboard" className="w-full sm:w-auto">
-              <Button 
-                variant="default" 
+              <Button
+                variant="default"
                 className="w-full px-8 py-6 text-base bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary transition-all duration-300"
               >
                 <Home className="mr-3 h-5 w-5" />
@@ -153,8 +152,8 @@ export default function NotFound() {
             </Link>
 
             <Link href="/templates" className="w-full sm:w-auto">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full px-8 py-6 text-base border-2 hover:border-primary/50 transition-all duration-300"
               >
                 <LayoutGrid className="mr-3 h-5 w-5" />
@@ -163,8 +162,8 @@ export default function NotFound() {
             </Link>
 
             <Link href="/dashboard/portfolios" className="w-full sm:w-auto">
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 className="w-full px-8 py-6 text-base hover:bg-secondary/50 transition-all duration-300"
               >
                 <ArrowLeft className="mr-3 h-5 w-5" />
@@ -185,7 +184,7 @@ export default function NotFound() {
                 <p className="font-medium mb-1">Need assistance?</p>
                 <p>Check our documentation or contact support</p>
               </div>
-              
+
               <div className="flex items-center gap-3">
                 <Link href="/docs/troubleshooting">
                   <Button variant="ghost" size="sm" className="gap-2">

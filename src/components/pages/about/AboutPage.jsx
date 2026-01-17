@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 export default function AboutPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mt-16 mx-auto px-4 py-8">
 
       <section className="max-w-4xl mx-auto text-center">
         <div className="flex flex-col md:flex-row items-center gap-6">

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
@@ -17,10 +16,10 @@ const inter = Inter({
 
 
 export default function HomePage() {
-  
+
   return (
     <>
-      <section className='h-full w-full pt-20 relative flex justify-center items-center flex-col'>
+      <section className='h-full mt-16 w-full pt-20 relative flex justify-center items-center flex-col'>
         <div className="z-10 flex items-center justify-center absolute top-5 text-center">
           <div
             className={cn(
@@ -53,9 +52,7 @@ export default function HomePage() {
             height={900}
             className="rounded-tl-2xl rounded-tr-2xl border-2 border-muted"
           />
-
-          {/* CTA Overlay */}
-          <CTAButton/>
+          <CTAButton />
         </div>
       </section>
       <FeaturesSection />

@@ -2,12 +2,11 @@
 import React, { useState } from 'react'
 
 import Link from 'next/link'
-import { SignedIn, SignInButton, SignedOut } from '@clerk/nextjs'
+import { SignedIn, SignInButton, SignedOut, ClerkProvider } from '@clerk/nextjs'
 import { Roboto } from 'next/font/google'
 import { ArrowRight, Menu } from 'lucide-react'
 import { Button } from '../ui/button'
 import { AnimatedThemeToggler } from '../ui/animated-theme-toggler'
-import ToolsDropdown from './ToolsDropdown'
 import Logo from '../basics/Logo'
 import ProfileBtn from '../basics/ProfileBtn'
 
@@ -17,68 +16,71 @@ export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     return (
-        <nav className={`flex z-99 border-b border-muted sticky top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? 'h-[100vh] flex-col' : 'h-16'}`}>
-            <div className={`flex justify-between items-center w-full ${isNavOpen ? 'h-16' : ''}`}>
-                <Link href={"/home"} className="text-xl font-bold cursor-pointer flex justify-center items-center gap-1">
-                    <Logo />
-                    <span className='text-xl'>BuildFolio</span>
-                </Link>
+        <ClerkProvider>
+            <nav className={`flex h-16 z-99 border-b border-muted fixed top-0 left-0 bg-background md:flex-row justify-start md:justify-between items-center md:h-16 w-full px-6 ${isNavOpen ? 'h-[100vh] flex-col' : 'h-16'}`}>
+                <div className={`flex justify-between items-center w-full ${isNavOpen ? 'h-16' : ''}`}>
+                    <Link href={"/"} className="text-xl font-bold cursor-pointer flex justify-center items-center gap-1">
+                        <Logo />
+                        <span className='text-xl'>BuildFolio</span>
+                    </Link>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:block">
-                    <ul className="flex justify-center items-center gap-8">
+                    {/* Desktop Menu */}
+                    <div className="hidden md:block">
+                        <ul className="flex justify-center items-center gap-8">
+                            {/* <ToolsDropdown /> */}
+                            <Link href={"/"}>Home</Link>
+                            <Link href={"/#pricing"}>Pricing</Link>
+                            <Link href={"/#features"}>Features</Link>
+                            <Link href={"/about"}>About</Link>
+                        </ul>
+                    </div>
+
+                    {/* Right Side Buttons */}
+                    <div className="flex justify-center items-center gap-4">
+                        <SignedIn>
+                            <Button variant="outline" className="cursor-pointer md:block hidden" asChild>
+                                <Link href="/dashboard" className={roboto.className}>Dashboard</Link>
+                            </Button>
+                        </SignedIn>
+                        <div className='hidden md:block'>
+                            <SignedOut>
+                                <SignInButton>
+                                    <Button
+                                        className={'text-white cursor-pointer'}
+                                    >
+                                        <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
+                                    </Button>
+                                </SignInButton>
+                            </SignedOut>
+                        </div>
+                        <SignedIn><ProfileBtn /></SignedIn>
+                        <AnimatedThemeToggler className="cursor-pointer" />
+                        <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
+                    </div>
+                </div>
+
+                {/* MOBILE MENU */}
+                <div className={`block md:hidden ${isNavOpen ? 'h-[70%] flex flex-col justify-center items-center gap-5' : 'hidden'}`}>
+                    <ul className="flex flex-col justify-center items-center gap-5">
                         {/* <ToolsDropdown /> */}
-                        <Link href={"/home"}>Home</Link>
-                        <Link href={"/home#pricing"}>Pricing</Link>
-                        <Link href={"/home#features"}>Features</Link>
-                        <Link href={"/about"}>About</Link>
+                        <Link href="/" onClick={() => setIsNavOpen(false)}>Home</Link>
+                        <Link href="/#pricing" onClick={() => setIsNavOpen(false)}>Pricing</Link>
+                        <Link href="/#features" onClick={() => setIsNavOpen(false)}>Features</Link>
+                        <Link href="/about" onClick={() => setIsNavOpen(false)}>About</Link> {/* Added */}
+                        <div className='flex justify-center items-center absolute bottom-20 w-full'>
+                            <SignedOut>
+                                <SignInButton>
+                                    <Button
+                                        className={'text-white cursor-pointer w-[80%]'}
+                                    >
+                                        <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
+                                    </Button>
+                                </SignInButton>
+                            </SignedOut>
+                        </div>
                     </ul>
                 </div>
-
-                {/* Right Side Buttons */}
-                <div className="flex justify-center items-center gap-4">
-                    <SignedIn>
-                        <Button variant="outline" className="cursor-pointer md:block hidden" asChild>
-                            <Link href="/dashboard" className={roboto.className}>Dashboard</Link>
-                        </Button>
-                    </SignedIn>
-                    <div className='hidden md:block'>
-                        <SignedOut>
-                            <SignInButton>
-                                <Button
-                                    className={'text-white cursor-pointer'}
-                                >
-                                    <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
-                                </Button>
-                            </SignInButton>
-                        </SignedOut>
-                    </div>
-                    <SignedIn><ProfileBtn /></SignedIn>
-                    <AnimatedThemeToggler className="cursor-pointer" />
-                    <Menu className='block md:hidden' size={25} onClick={() => setIsNavOpen(!isNavOpen)} />
-                </div>
-            </div>
-
-            {/* MOBILE MENU */}
-            <div className={`block md:hidden ${isNavOpen ? 'h-[70%] flex flex-col justify-center items-center gap-5' : 'hidden'}`}>
-                <ul className="flex flex-col justify-center items-center gap-5">
-                    {/* <ToolsDropdown /> */}
-                    <Link href="/home#pricing" onClick={() => setIsNavOpen(false)}>Pricing</Link>
-                    <Link href="/about" onClick={() => setIsNavOpen(false)}>About</Link> {/* Added */}
-                    <Link href="/home#features" onClick={() => setIsNavOpen(false)}>Features</Link>
-                    <div className='flex justify-center items-center absolute bottom-20 w-full'>
-                        <SignedOut>
-                            <SignInButton>
-                                <Button
-                                    className={'text-white cursor-pointer w-[80%]'}
-                                >
-                                    <span className='flex justify-center items-center gap-2'>Get Started<ArrowRight /></span>
-                                </Button>
-                            </SignInButton>
-                        </SignedOut>
-                    </div>
-                </ul>
-            </div>
-        </nav>
+            </nav>
+        </ClerkProvider>
     )
 }

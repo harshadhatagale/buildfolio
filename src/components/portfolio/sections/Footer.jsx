@@ -86,12 +86,12 @@ export default function Footer({ id, content }) {
               `© ${new Date().getFullYear()} All rights reserved.`}
           </p>
 
-          <Link
-            href="/"
+          <a
+            href="https://www.buildfolio.space/home"
             className="text-xs text-muted-foreground hover:underline"
           >
             Built with ❤️ using BuildFolio.
-          </Link>
+          </a>
         </motion.div>
 
         {/* Center Links */}

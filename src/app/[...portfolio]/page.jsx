@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 
   const title =
     project.metaTitle || `${project.name || "Developer"} Portfolio`
-
+    const canonical= "https://www.buildfolio.space"+`/${project.urlSlug}`
   const description =
     project.metaDescription || `View ${project.name || "this developer"}'s professional portfolio built with BuildFolio.`
 
@@ -45,6 +45,9 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
+    alternates:{
+      canonical,
+    },
     openGraph: {
       title,
       description,
@@ -64,7 +67,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params, searchParams }) {
-  const mode= (await searchParams).mode
+  const mode = (await searchParams).mode
   const { portfolio } = await params
   const project = await getProject(portfolio)
   const themeColors = await getThemeById(project?.theme)
