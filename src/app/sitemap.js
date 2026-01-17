@@ -7,7 +7,7 @@ async function getPublicPortfolios() {
 export default async function sitemap() {
   const baseUrl = 'https://www.buildfolio.space'
   const staticPages = [
-    '/home',
+    '/',
     '/about'
   ]
 
